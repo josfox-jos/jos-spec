@@ -1,7 +1,7 @@
 # .jos Spec — v1.0.0
 
-> The glue that holds the JOSFOX ecosystem together.  
-> JSON payload format · A2A native · Agent orchestration guardrails
+> JOS Object Specification — Portable, declarative, sealed AI execution contracts.  
+> MIME type: application/vnd.josfox+json | Version 1.0.0
 
 ---
 
@@ -265,7 +265,7 @@
 ```json
 {
   "persona": {
-    "language": "en_US",
+    "language": "en-US",
     "tone": "professional",
     "system_prompt": "You are a helpful assistant...",
     "max_sentences": 5,
@@ -277,7 +277,7 @@
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `language` | `string` | ❌ | BCP-47 language tag (e.g. `en_US`, `es_MX`) |
+| `language` | `string` | ❌ | BCP-47 language tag (e.g. `en-US`, `es-MX`) |
 | `tone` | `string` | ❌ | Communication style (e.g. `professional`, `friendly`, `technical`) |
 | `system_prompt` | `string` | ❌ | System prompt template or inline text |
 | `max_sentences` | `integer` | ❌ | Maximum response sentences |
@@ -454,6 +454,3 @@
 
 ---
 
-## AURORA Invariant
-
-Every .jos file MUST be < 300 lines. No exceptions.
