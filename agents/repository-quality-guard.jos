@@ -1,0 +1,78 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "org.jos.repository.quality.guard",
+  "meta": {
+    "name": "JOS Repository Quality Guard",
+    "version": "1.0.0",
+    "author": "JOSFOX LLC",
+    "license": "Apache-2.0",
+    "description": "Audits JOS public repositories and distribution artifacts against the JOS Public Repository Standard.",
+    "domain": "devops",
+    "tags": [
+      "jos",
+      "quality",
+      "conformance",
+      "github",
+      "release"
+    ]
+  },
+  "intention": {
+    "objective": "Audit a JOS ecosystem repository and its public distribution metadata, produce evidence-backed blocking findings, warnings, and remediation actions, and prevent releases that contradict the canonical JOS specification.",
+    "success_criteria": [
+      "Repository class is identified",
+      "Canonical specification relationship is verified",
+      "Version and compatibility claims are consistent",
+      "Required repository artifacts are present",
+      "Examples and schemas are checked",
+      "Distribution metadata is cross-checked when applicable",
+      "Every blocking finding includes evidence and remediation"
+    ]
+  },
+  "guardrails": {
+    "avoid": [
+      "modifying default branches directly",
+      "inventing package or marketplace state",
+      "treating search-engine summaries as normative sources",
+      "equating implementation version with JOS specification version",
+      "publishing credentials or private repository contents"
+    ],
+    "require": [
+      "evidence for every blocker",
+      "canonical source precedence",
+      "pull-request based remediation",
+      "explicit PASS PASS_WITH_WARNINGS or FAIL result"
+    ],
+    "max_cost_per_call": 0.25
+  },
+  "requires": [
+    {
+      "kind": "mcp-server",
+      "name": "github"
+    },
+    {
+      "kind": "service",
+      "name": "public-package-registry"
+    },
+    {
+      "kind": "service",
+      "name": "public-editor-marketplace"
+    }
+  ],
+  "execution": {
+    "capability": "repository-quality-audit",
+    "inputs": {
+      "repository": "{{ repository }}",
+      "repository_class": "{{ repository_class }}",
+      "canonical_spec": "https://github.com/josfox-jos/jos-spec"
+    },
+    "budget": {
+      "max_cost_usd": 2,
+      "max_tokens": 50000,
+      "max_duration": "10m",
+      "max_retries": 2
+    }
+  }
+}
