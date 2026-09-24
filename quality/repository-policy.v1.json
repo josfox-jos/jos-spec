@@ -1,0 +1,110 @@
+{
+  "policy_version": "1.0.0",
+  "canonical_spec": "https://github.com/josfox-jos/jos-spec",
+  "classes": {
+    "SPEC": {
+      "required_files": [
+        "README.md",
+        "LICENSE",
+        "SECURITY.md",
+        "CONTRIBUTING.md",
+        "CHANGELOG.md",
+        "GOVERNANCE.md"
+      ],
+      "required_capabilities": [
+        "normative_spec",
+        "versioned_schema",
+        "valid_examples",
+        "invalid_examples",
+        "conformance_kit",
+        "iana_material",
+        "migration",
+        "ci"
+      ]
+    },
+    "REFERENCE": {
+      "required_files": [
+        "README.md",
+        "LICENSE",
+        "SECURITY.md",
+        "CONTRIBUTING.md",
+        "CHANGELOG.md"
+      ],
+      "required_capabilities": [
+        "canonical_spec_link",
+        "compatibility_matrix",
+        "validated_examples",
+        "enterprise_example",
+        "ci"
+      ]
+    },
+    "SDK": {
+      "required_files": [
+        "README.md",
+        "LICENSE",
+        "SECURITY.md",
+        "CONTRIBUTING.md",
+        "CHANGELOG.md"
+      ],
+      "required_capabilities": [
+        "canonical_spec_link",
+        "spec_compatibility_range",
+        "tests",
+        "conformance",
+        "release_automation",
+        "registry_source_metadata"
+      ]
+    },
+    "INTEGRATION": {
+      "required_files": [
+        "README.md",
+        "LICENSE",
+        "SECURITY.md",
+        "CHANGELOG.md"
+      ],
+      "required_capabilities": [
+        "canonical_spec_link",
+        "upstream_version",
+        "mapping",
+        "e2e_example",
+        "compatibility_matrix",
+        "conformance"
+      ]
+    },
+    "TOOL": {
+      "required_files": [
+        "README.md",
+        "LICENSE",
+        "SECURITY.md",
+        "CHANGELOG.md"
+      ],
+      "required_capabilities": [
+        "canonical_spec_link",
+        "spec_compatibility_range",
+        "fixtures",
+        "tests",
+        "versioned_releases"
+      ]
+    },
+    "SAMPLE": {
+      "required_files": [
+        "README.md",
+        "LICENSE"
+      ],
+      "required_capabilities": [
+        "non_normative_status",
+        "pinned_versions",
+        "setup_instructions"
+      ]
+    }
+  },
+  "blocking_checks": [
+    "canonical_links_resolve",
+    "version_claims_consistent",
+    "supported_spec_declared",
+    "examples_parse",
+    "examples_validate",
+    "release_tag_matches_distribution",
+    "no_public_secret_material"
+  ]
+}

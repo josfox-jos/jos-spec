@@ -283,7 +283,7 @@
     },
     "model_policy": {
       "type": "object",
-      "description": "Model requirements — runtime remaps to cheapest available",
+      "description": "Model preferences and constraints; runtimes MAY remap according to availability and policy",
       "properties": {
         "preferred": { "type": "string", "description": "Specific model key" },
         "tier": {
@@ -310,7 +310,7 @@
       "type": "object",
       "description": "AI agent personality (for kind=persona)",
       "properties": {
-        "language": { "type": "string", "description": "BCP-47 language tag", "examples": ["en_US", "es_MX"] },
+        "language": { "type": "string", "description": "BCP-47 language tag", "examples": ["en-US", "es-MX"] },
         "tone": { "type": "string", "description": "Communication style", "examples": ["professional", "friendly", "technical"] },
         "system_prompt": { "type": "string", "description": "System prompt template or inline text" },
         "max_sentences": { "type": "integer", "minimum": 1 },
@@ -434,10 +434,10 @@
       "properties": {
         "hash": {
           "type": "string",
-          "description": "SHA-256 hash of the artifact (computed with this field empty)",
+          "description": "SHA-256 over the RFC 8785-canonicalized document after removing integrity.hash, as defined by the JOS specification",
           "pattern": "^sha256:[a-f0-9]{64}$"
         },
-        "signed_by": { "type": "string", "description": "Publisher key ID" },
+        "signed_by": { "type": "string", "description": "Publisher key identifier hint; not a cryptographic signature in JOS 1.0.0" },
         "timestamp": { "type": "string", "format": "date-time", "description": "When the artifact was sealed" }
       },
       "additionalProperties": false
