@@ -1,0 +1,6 @@
+{
+  "jos": { "version": "1.0.0", "kind": "atom" },
+  "id": "example.invalid.additional-root-property",
+  "meta": { "name": "root property not in the schema", "version": "1.0.0" },
+  "krmen": { "anything": true }
+}

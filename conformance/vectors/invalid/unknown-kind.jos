@@ -1,0 +1,5 @@
+{
+  "jos": { "version": "1.0.0", "kind": "spaceship" },
+  "id": "example.invalid.unknown-kind",
+  "meta": { "name": "unknown kind", "version": "1.0.0" }
+}

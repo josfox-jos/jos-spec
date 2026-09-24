@@ -131,3 +131,9 @@ Logs and telemetry SHOULD redact secrets and sensitive values.
 JOS documents transmitted over untrusted networks SHOULD use an authenticated, integrity-protected transport such as HTTPS/TLS.
 
 Transport security does not replace document authorization or integrity verification.
+
+## Reporting a vulnerability
+
+Report exploitable problems in the specification, the schema, or the reference material privately through GitHub's private vulnerability reporting for this repository: https://github.com/josfox-jos/jos-spec/security/advisories/new. Machine-readable contact details are in `.well-known/security.txt` (RFC 9116). Do not open a public issue for an exploitable problem.
+
+Maintainers acknowledge reports within 7 days, agree a disclosure timeline with the reporter, and publish a security advisory with the fix. Reports about implementations (runtimes, SDKs, editors) go to the implementation's own repository; this repository only covers the specification.

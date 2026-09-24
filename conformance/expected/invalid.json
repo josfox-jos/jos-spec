@@ -1,0 +1,7 @@
+{
+  "$comment": "Each vector under conformance/vectors/invalid/ MUST be rejected by a conforming validator. `reason` is the schema rule that rejects it.",
+  "missing-jos.jos": { "rejected": true, "reason": "required: jos" },
+  "unknown-kind.jos": { "rejected": true, "reason": "jos.kind: not in enum" },
+  "bad-version.jos": { "rejected": true, "reason": "jos.version: pattern ^\\d+\\.\\d+\\.\\d+$" },
+  "additional-root-property.jos": { "rejected": true, "reason": "additionalProperties: false at root" }
+}

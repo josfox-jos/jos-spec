@@ -1,0 +1,5 @@
+{
+  "jos": { "version": "one", "kind": "atom" },
+  "id": "example.invalid.bad-version",
+  "meta": { "name": "version is not semver", "version": "1.0.0" }
+}
