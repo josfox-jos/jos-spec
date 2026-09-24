@@ -1,0 +1,10 @@
+# Code owners: every change needs review from a maintainer (see MAINTAINERS.md).
+*                       @josfox-jos
+/schema/                @josfox-jos
+/SPECIFICATION.md       @josfox-jos
+/jos.v1.0.0.md          @josfox-jos
+/CONFORMANCE.md         @josfox-jos
+/IANA.md                @josfox-jos
+/SECURITY.md            @josfox-jos
+/quality/               @josfox-jos
+/scripts/               @josfox-jos

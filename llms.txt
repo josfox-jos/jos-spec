@@ -1,0 +1,26 @@
+# JOS Object Specification
+
+> JOS (`.jos`) is a portable, declarative JSON format for AI execution contracts: intent, success criteria, guardrails, capabilities, dependencies, security tier and metering. Documents are data, never executable code. Current version: 1.0.0. Media type: application/vnd.jos+json.
+
+## Normative
+
+- [Specification](SPECIFICATION.md): the normative JOS 1.0.0 definition
+- [JSON Schema](schema/jos.schema.json): machine-readable validation, JSON Schema Draft 2020-12
+- [Conformance](CONFORMANCE.md): document and runtime conformance requirements
+- [Security](SECURITY.md): threat model and implementation requirements
+- [IANA registration](IANA.md): media type registration material
+
+## Informative
+
+- [README](README.md): overview and minimal document
+- [Version history](jos.v1.0.0.md): 1.0.0 in prose, with the migration table from earlier drafts
+- [Changelog](CHANGELOG.md)
+- [Governance](GOVERNANCE.md), [Contributing](CONTRIBUTING.md), [Maintainers](MAINTAINERS.md), [Code of conduct](CODE_OF_CONDUCT.md)
+- [Repository standard](docs/REPOSITORY-STANDARD.md) and [Ecosystem](docs/ECOSYSTEM.md)
+- [Quality gates](QUALITY-GATES.md): what CI checks on every pull request
+
+## Examples
+
+- [examples/minimal.jos](examples/minimal.jos)
+- [examples/flow.jos](examples/flow.jos)
+- [examples/persona.jos](examples/persona.jos)

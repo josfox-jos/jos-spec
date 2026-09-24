@@ -1,0 +1,5 @@
+Contact: https://github.com/josfox-jos/jos-spec/security/advisories/new
+Expires: 2027-09-24T00:00:00.000Z
+Preferred-Languages: en, es
+Canonical: https://raw.githubusercontent.com/josfox-jos/jos-spec/main/.well-known/security.txt
+Policy: https://github.com/josfox-jos/jos-spec/blob/main/SECURITY.md
