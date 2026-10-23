@@ -1,0 +1,1744 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/josfox-jos/jos-spec/v2.0.0/schema/jos.schema.json",
+  "title": ".jos Object Specification 2.0.0 — core schema",
+  "description": "A .jos document: the minimum unit of intention. Core members only; vendor and product vocabulary lives in profiles.",
+  "type": "object",
+  "required": [
+    "jos",
+    "meta"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "jos": {
+      "type": "object",
+      "description": "Format header — identifies version and kind",
+      "required": [
+        "version",
+        "kind"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Specification version (semver). 1.0.0 and 2.0.0 documents are accepted; jos.version is authoritative (§2.1)",
+          "examples": [
+            "2.0.0"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "atom",
+            "flow",
+            "service",
+            "persona",
+            "template",
+            "crystal",
+            "directory",
+            "engine"
+          ],
+          "description": "Document kind (§4): atom, flow, service, persona (1.0.0) and template, crystal, directory, engine (2.0)"
+        },
+        "schema": {
+          "type": "string",
+          "description": "URL to JSON Schema for validation",
+          "format": "uri"
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*/[0-9]+$"
+          },
+          "uniqueItems": true,
+          "description": "Profiles the document uses, each name/MAJOR (§10); a kernel validates the profiles it knows and ignores members of unknown ones"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "id": {
+      "type": "string",
+      "description": "Reverse-DNS identifier (e.g. com.example.service.revenue-report)",
+      "pattern": "^[a-z][a-z0-9.\\-_]*$",
+      "examples": [
+        "com.example.service.revenue-report",
+        "com.example.flow.churn-predictor",
+        "com.example.persona.support-agent"
+      ]
+    },
+    "meta": {
+      "type": "object",
+      "description": "Artifact metadata — name, version, author, description",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable artifact name",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "version": {
+          "type": "string",
+          "description": "Artifact version (semver)",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author name or handle"
+        },
+        "license": {
+          "type": "string",
+          "description": "SPDX license identifier",
+          "examples": [
+            "Apache-2.0",
+            "MIT",
+            "proprietary"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of what this artifact does",
+          "maxLength": 500
+        },
+        "domain": {
+          "type": "string",
+          "description": "Business domain",
+          "examples": [
+            "ai",
+            "devops",
+            "finance",
+            "legal",
+            "security"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "Searchable tags for discovery",
+          "items": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "maxItems": 20,
+          "uniqueItems": true
+        },
+        "labels": {
+          "type": "object",
+          "description": "Key-value labels (Kubernetes-style)",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "intention": {
+      "type": "object",
+      "description": "Behavioral contract — what this artifact aims to accomplish",
+      "properties": {
+        "objective": {
+          "type": "string",
+          "description": "What is intended; never overridden by use (§3.2)",
+          "maxLength": 1000
+        },
+        "success_criteria": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/criterion"
+              }
+            }
+          ],
+          "description": "When it is done (SPEC-2.0 §3.3-§3.4). A string alone is a one-element list"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "description": "Execution boundaries — what the artifact must avoid or require",
+      "properties": {
+        "avoid": {
+          "type": "array",
+          "description": "Things to avoid during execution",
+          "items": {
+            "type": "string"
+          }
+        },
+        "require": {
+          "type": "array",
+          "description": "Things that must be present in output",
+          "items": {
+            "type": "string"
+          }
+        },
+        "max_cost_per_call": {
+          "type": "number",
+          "description": "Maximum USD cost per LLM call",
+          "minimum": 0,
+          "examples": [
+            0.1,
+            1.0
+          ]
+        },
+        "limit": {
+          "type": "object",
+          "description": "Hard limits enforced by the supervisor (SPEC-2.0 §3.5)",
+          "properties": {
+            "seconds": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Wall-clock limit; exceeded -> killed, code 124"
+            },
+            "output_bytes": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Per-stream output limit; exceeded -> truncated and killed, code 137"
+            },
+            "tokens": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "cost_usd": {
+              "type": "number",
+              "minimum": 0
+            },
+            "retries": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Correction-loop re-runs when ok is false (SPEC-2.0 §3.4)"
+            },
+            "context_tokens": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Anti-overflow cap for context handed to a model (§3.5)"
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        "inherit": {
+          "type": "string",
+          "description": "Inheritance through a .jos/ chain (§9.2); intersect is the default and only restricts",
+          "enum": [
+            "intersect"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "description": "What this artifact provides to the runtime",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Capability name"
+          },
+          "version": {
+            "type": "string",
+            "description": "Capability version (semver)"
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {
+            "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+          }
+        }
+      }
+    },
+    "requires": {
+      "type": "array",
+      "description": "What this artifact needs from the runtime",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "name"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "mcp-server",
+              "artifact",
+              "service"
+            ],
+            "description": "Dependency kind (the kinds of 1.0.0; SPEC-2.0 §6.6 says which ones a runtime satisfies)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Dependency name"
+          },
+          "version": {
+            "type": "string",
+            "description": "Semver constraint"
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^art_[a-f0-9]{64}$",
+            "description": "Content identifier pinning the dependency (SPEC-2.0 §6.6)"
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {
+            "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+          }
+        }
+      }
+    },
+    "tool_policy": {
+      "type": "object",
+      "description": "Controls which tools this artifact can access",
+      "properties": {
+        "allowed": {
+          "type": "array",
+          "description": "Whitelisted tool names",
+          "items": {
+            "type": "string"
+          }
+        },
+        "denied": {
+          "type": "array",
+          "description": "Blacklisted tool names",
+          "items": {
+            "type": "string"
+          }
+        },
+        "require_approval": {
+          "type": "boolean",
+          "description": "Require human-in-the-loop approval for tool calls",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "description": "Execution bindings — how the runtime should run this artifact",
+      "properties": {
+        "capability": {
+          "type": "string",
+          "description": "Primary capability to invoke"
+        },
+        "inputs": {
+          "type": "object",
+          "description": "Named inputs (§6.8). 1.0.0: a string per input; 2.0 widens the value to any JSON so a template can declare its slots as a JSON Schema (§5.7) and a flow can pass structured values (§5.2).",
+          "additionalProperties": {
+            "description": "Any JSON value (string in 1.0.0; widened in 2.0)"
+          }
+        },
+        "bindings": {
+          "type": "object",
+          "description": "Protocol bindings",
+          "properties": {
+            "mcp": {
+              "type": "object",
+              "properties": {
+                "server_url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "tools": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "patternProperties": {
+                "^x-": {
+                  "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+                }
+              }
+            },
+            "a2a": {
+              "type": "object",
+              "properties": {
+                "payload_format": {
+                  "type": "string",
+                  "const": ".jos"
+                },
+                "agent_card": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "additionalProperties": false,
+              "patternProperties": {
+                "^x-": {
+                  "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+                }
+              }
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        "flow": {
+          "type": "array",
+          "description": "Flow invocations for kind=flow",
+          "items": {
+            "type": "object",
+            "required": [
+              "invoke"
+            ],
+            "properties": {
+              "invoke": {
+                "type": "string",
+                "description": "Artifact ID to invoke"
+              }
+            },
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {
+                "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+              }
+            }
+          }
+        },
+        "budget": {
+          "type": "object",
+          "description": "Execution budget caps",
+          "properties": {
+            "max_cost_usd": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Max USD spend"
+            },
+            "max_tokens": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Max total tokens"
+            },
+            "max_duration": {
+              "type": "string",
+              "description": "Max wall-clock time (e.g. '2m', '30s')"
+            },
+            "max_retries": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Max retry attempts"
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        "engine": {
+          "type": "string",
+          "enum": [
+            "shell",
+            "function",
+            "jos",
+            "llm",
+            "judge",
+            "decompose",
+            "human"
+          ],
+          "description": "Engine class (§6.1), never a vendor"
+        },
+        "run": {
+          "oneOf": [
+            {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              },
+              "description": "argv; argv[0] is the program"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "description": "Command line; requires shell: true"
+            }
+          ],
+          "description": "For shell: argv (array) or a command line (string, requires shell: true)"
+        },
+        "shell": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run through /bin/sh -c. Default false"
+        },
+        "cwd": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative to the document location; it MUST resolve inside the document directory (code 3); the processes of a step are confined only under SPEC-2.0 §6.5"
+        },
+        "env": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+          },
+          "description": "Allow-list of environment variable names passed to the engine (default [\"PATH\"])"
+        },
+        "outputs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Names the output(s) of the step"
+        },
+        "on_error": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "fail",
+                "continue",
+                "retry"
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "use"
+              ],
+              "properties": {
+                "use": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "patternProperties": {
+                "^x-": {
+                  "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+                }
+              }
+            }
+          ],
+          "description": "§6.8"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "orchestration": {
+      "type": "object",
+      "description": "Multi-step flow orchestration",
+      "properties": {
+        "definitions": {
+          "type": "object",
+          "description": "Named step definitions",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "shell",
+                  "jos",
+                  "http"
+                ]
+              },
+              "command": {
+                "type": "string"
+              },
+              "artifact": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "description": {
+                "type": "string"
+              },
+              "needs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true,
+                "description": "Dependency edges; the graph MUST be acyclic (§5.4)"
+              },
+              "with": {
+                "type": "object",
+                "description": "Input mapping rendered with {{ }} over the flow context (§5.2)"
+              },
+              "as": {
+                "type": "string",
+                "description": "Name the output of this step in the flow context (§5.2)"
+              },
+              "use": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9.\\-_]*(@[^@\\s]+)?$",
+                "description": "Reference to an artifact by id[@semver] (§5.3)"
+              },
+              "engine": {
+                "type": "string",
+                "enum": [
+                  "shell",
+                  "function",
+                  "jos",
+                  "llm",
+                  "judge",
+                  "decompose",
+                  "human"
+                ]
+              },
+              "run": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "argv; argv[0] is the program"
+                  },
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Command line; requires shell: true"
+                  }
+                ],
+                "description": "For shell: argv (array) or a command line (string, requires shell: true)"
+              },
+              "shell": {
+                "type": "boolean"
+              },
+              "jos": {
+                "$ref": "#/properties/jos"
+              },
+              "id": {
+                "$ref": "#/properties/id"
+              },
+              "meta": {
+                "$ref": "#/properties/meta"
+              },
+              "intention": {
+                "$ref": "#/properties/intention"
+              },
+              "guardrails": {
+                "$ref": "#/properties/guardrails"
+              },
+              "execution": {
+                "$ref": "#/properties/execution"
+              },
+              "model_policy": {
+                "$ref": "#/properties/model_policy"
+              },
+              "persona": {
+                "$ref": "#/properties/persona"
+              },
+              "tool_policy": {
+                "$ref": "#/properties/tool_policy"
+              },
+              "security": {
+                "$ref": "#/properties/security"
+              },
+              "capabilities": {
+                "$ref": "#/properties/capabilities"
+              },
+              "requires": {
+                "$ref": "#/properties/requires"
+              },
+              "lifecycle": {
+                "$ref": "#/properties/lifecycle"
+              },
+              "reproducibility": {
+                "$ref": "#/properties/reproducibility"
+              },
+              "integrity": {
+                "$ref": "#/properties/integrity"
+              },
+              "orchestration": {
+                "$ref": "#/properties/orchestration"
+              }
+            },
+            "additionalProperties": false,
+            "description": "A step definition (§5.1): a 1.0.0 step (type + command|artifact|url), a reference (use + with/as/needs/overrides), an inline shell atom (engine shell + run) or an inline document (jos + meta ...). Exactly one form applies.",
+            "anyOf": [
+              {
+                "required": [
+                  "type"
+                ]
+              },
+              {
+                "required": [
+                  "use"
+                ]
+              },
+              {
+                "required": [
+                  "run"
+                ]
+              },
+              {
+                "required": [
+                  "jos",
+                  "meta"
+                ]
+              }
+            ],
+            "patternProperties": {
+              "^x-": {}
+            }
+          }
+        },
+        "flows": {
+          "type": "object",
+          "description": "Named flows composed of steps",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "steps"
+            ],
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "gates": {
+                "type": "object",
+                "additionalProperties": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "kind"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "enum": [
+                            "auto",
+                            "human"
+                          ]
+                        },
+                        "expr": {
+                          "type": "string"
+                        },
+                        "on_fail": {
+                          "type": "string",
+                          "pattern": "^(halt|continue|retry|goto:[A-Za-z0-9_.-]+)$"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "if": {
+                        "properties": {
+                          "kind": {
+                            "const": "auto"
+                          }
+                        }
+                      },
+                      "then": {
+                        "required": [
+                          "expr"
+                        ]
+                      },
+                      "patternProperties": {
+                        "^x-": {
+                          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+                        }
+                      }
+                    }
+                  ],
+                  "description": "Gate per step name or name#n (§5.5)"
+                }
+              },
+              "parallel": {
+                "type": "boolean",
+                "description": "false forces the steps order; default lets independent steps run concurrently (§5.4)"
+              },
+              "on_error": {
+                "type": "string",
+                "enum": [
+                  "halt",
+                  "continue"
+                ]
+              },
+              "outputs": {
+                "type": "string",
+                "description": "Name of the step whose output is the flow output (§5.2)"
+              }
+            },
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {
+                "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "model_policy": {
+      "type": "object",
+      "description": "Model requirements — runtime remaps to cheapest available",
+      "properties": {
+        "preferred": {
+          "type": "string",
+          "description": "Specific model key"
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "economy",
+            "mid",
+            "flagship",
+            "reasoning"
+          ],
+          "description": "Model quality tier"
+        },
+        "vendor": {
+          "type": "string",
+          "description": "Preferred vendor; open enumeration (§1.3). 1.0.0 values google, openai, anthropic, any remain valid",
+          "examples": [
+            "google",
+            "openai",
+            "anthropic",
+            "any"
+          ]
+        },
+        "fallbacks": {
+          "type": "array",
+          "description": "Ordered fallback model list",
+          "items": {
+            "type": "string"
+          }
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "task_class": {
+          "type": "string",
+          "enum": [
+            "extract",
+            "transform",
+            "generate",
+            "reason",
+            "judge",
+            "plan",
+            "code",
+            "chat",
+            "embed"
+          ],
+          "description": "Routing key (§6.2)"
+        },
+        "model_id": {
+          "type": "string",
+          "pattern": "^(?!.*\\blatest\\b).+$",
+          "description": "Exact model identifier when pinned; latest and aliases are invalid (§6.2)"
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "max_cost_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "per_step": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "preferred": {
+                "type": "string",
+                "description": "Specific model key"
+              },
+              "tier": {
+                "type": "string",
+                "enum": [
+                  "economy",
+                  "mid",
+                  "flagship",
+                  "reasoning"
+                ],
+                "description": "Model quality tier"
+              },
+              "vendor": {
+                "type": "string",
+                "description": "Preferred vendor; open enumeration (§1.3). 1.0.0 values google, openai, anthropic, any remain valid",
+                "examples": [
+                  "google",
+                  "openai",
+                  "anthropic",
+                  "any"
+                ]
+              },
+              "fallbacks": {
+                "type": "array",
+                "description": "Ordered fallback model list",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "temperature": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 2
+              },
+              "max_output_tokens": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "task_class": {
+                "type": "string",
+                "enum": [
+                  "extract",
+                  "transform",
+                  "generate",
+                  "reason",
+                  "judge",
+                  "plan",
+                  "code",
+                  "chat",
+                  "embed"
+                ],
+                "description": "Routing key (§6.2)"
+              },
+              "model_id": {
+                "type": "string",
+                "pattern": "^(?!.*\\blatest\\b).+$",
+                "description": "Exact model identifier when pinned; latest and aliases are invalid (§6.2)"
+              },
+              "seed": {
+                "type": "integer"
+              },
+              "max_cost_usd": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {
+                "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+              }
+            }
+          },
+          "description": "Per-step model policy keyed by step name (§6.2)"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "persona": {
+      "type": "object",
+      "description": "AI agent personality (for kind=persona)",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "BCP-47 language tag",
+          "examples": [
+            "en-US",
+            "es-MX"
+          ]
+        },
+        "tone": {
+          "type": "string",
+          "description": "Communication style",
+          "examples": [
+            "professional",
+            "friendly",
+            "technical"
+          ]
+        },
+        "system_prompt": {
+          "type": "string",
+          "description": "System prompt template or inline text"
+        },
+        "max_sentences": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "greeting": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "description": "UI hints — runtime OWNS rendering, artifact declares preferences — profile member (ui/1); accepted by the core for 1.0.0 compatibility (§2.3)",
+      "properties": {
+        "icon": {
+          "type": "string",
+          "description": "Emoji or URL"
+        },
+        "color": {
+          "type": "string",
+          "description": "Hex color for card",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "category": {
+          "type": "string"
+        },
+        "card": {
+          "type": "object",
+          "properties": {
+            "layout": {
+              "type": "string",
+              "enum": [
+                "compact",
+                "detailed",
+                "hero"
+              ]
+            },
+            "show_metrics": {
+              "type": "boolean"
+            },
+            "show_cost": {
+              "type": "boolean"
+            },
+            "badge": {
+              "type": "string",
+              "examples": [
+                "NEW",
+                "PRO",
+                "BETA"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        "widget": {
+          "type": "object",
+          "properties": {
+            "position": {
+              "type": "string",
+              "enum": [
+                "bottom-right",
+                "bottom-left",
+                "top-right",
+                "top-left"
+              ]
+            },
+            "auto_open": {
+              "type": "boolean"
+            },
+            "greeting": {
+              "type": "string"
+            },
+            "placeholder": {
+              "type": "string"
+            },
+            "badge_text": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "description": "Metrics the runtime should collect — profile member (observability/1); accepted by the core for 1.0.0 compatibility (§2.3)",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "help"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "counter",
+              "gauge",
+              "histogram"
+            ]
+          },
+          "help": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": {
+            "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+          }
+        }
+      }
+    },
+    "billing": {
+      "type": "object",
+      "description": "Marketplace pricing model — profile member (commerce/1); accepted by the core for 1.0.0 compatibility (§2.3)",
+      "properties": {
+        "model": {
+          "type": "string",
+          "enum": [
+            "free",
+            "usage",
+            "subscription"
+          ],
+          "description": "Pricing model"
+        },
+        "tiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "price_usd",
+              "quota"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "price_usd": {
+                "type": "number",
+                "minimum": 0
+              },
+              "quota": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Calls per month (0=unlimited)"
+              }
+            },
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": {
+                "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+              }
+            }
+          }
+        },
+        "wallet": {
+          "type": "string",
+          "description": "Revenue wallet address"
+        },
+        "cost_cap_daily_usd": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "security": {
+      "type": "object",
+      "description": "Scoped access control",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": [
+            "sandbox",
+            "standard",
+            "privileged"
+          ],
+          "description": "Security tier"
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Required permissions",
+          "items": {
+            "type": "string"
+          },
+          "examples": [
+            [
+              "file:read",
+              "net:outbound",
+              "llm:call"
+            ]
+          ]
+        },
+        "data_class": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "pii"
+          ],
+          "description": "Data classification level"
+        },
+        "require_auth": {
+          "type": "boolean",
+          "default": false
+        },
+        "require_admin": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "description": "Health probes and lifecycle hooks",
+      "properties": {
+        "health_path": {
+          "type": "string"
+        },
+        "ready_path": {
+          "type": "string"
+        },
+        "interval": {
+          "type": "string"
+        },
+        "on_install": {
+          "type": "string",
+          "description": "Artifact to invoke on install"
+        },
+        "on_remove": {
+          "type": "string",
+          "description": "Artifact to invoke on removal"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "description": "Cryptographic sealing for tamper detection",
+      "properties": {
+        "hash": {
+          "type": "string",
+          "description": "SHA-256 over the canonical document (JCS) with integrity.hash and integrity.signature set to the empty string. Format sha256:<64 hex>. See SPEC-2.0 §8.1.",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "signed_by": {
+          "type": "string",
+          "description": "Publisher key ID"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the artifact was sealed"
+        },
+        "signature": {
+          "type": "string",
+          "description": "Detached signature over hash (§8.1); ed25519 recommended"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "reproducibility": {
+      "type": "object",
+      "description": "Execution determinism classification",
+      "properties": {
+        "class": {
+          "type": "string",
+          "enum": [
+            "deterministic",
+            "bounded",
+            "stochastic"
+          ],
+          "description": "How reproducible are the results?"
+        },
+        "tolerance": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "object",
+              "required": [
+                "metric",
+                "value"
+              ],
+              "properties": {
+                "metric": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false,
+              "patternProperties": {
+                "^x-": {
+                  "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+                }
+              }
+            }
+          ]
+        },
+        "n_runs": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    },
+    "crystal": {
+      "type": "object",
+      "description": "Sealed execution record (SPEC-2.0 §8.3). Required for kind crystal.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "artifact": {
+          "type": "string"
+        },
+        "inputs_hash": {
+          "type": "string"
+        },
+        "ctx_class": {
+          "type": "string"
+        },
+        "engine": {
+          "type": "string"
+        },
+        "model_id": {
+          "type": "string"
+        },
+        "temperature": {
+          "type": "number"
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "output_hash": {
+          "type": "string"
+        },
+        "output_ref": {
+          "type": "string"
+        },
+        "receipt": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "expires": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "key",
+        "artifact",
+        "output_hash"
+      ],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+        }
+      }
+    }
+  },
+  "$comment": "Document schema of the media type application/vnd.jos+json (version parameter 2.0.0; IANA.md). Version 2.0.0 (Draft 1, 2026-10-14). Additive superset of 1.0.0: every 1.0.0 document validates. Profiles (jos.profiles) add members in separate schemas under schema/profiles/.",
+  "patternProperties": {
+    "^x-": {
+      "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+    }
+  },
+  "$defs": {
+    "criterion": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Descriptive criterion (SPEC-2.0 §3.3): recorded, never evaluated, never affects ok"
+        },
+        {
+          "type": "object",
+          "description": "Process exit status equals n",
+          "required": [
+            "exit"
+          ],
+          "properties": {
+            "exit": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "stdout contains the substring",
+          "required": [
+            "stdout_contains"
+          ],
+          "properties": {
+            "stdout_contains": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "stdout matches the regular expression",
+          "required": [
+            "stdout_matches"
+          ],
+          "properties": {
+            "stdout_matches": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "stderr is empty",
+          "required": [
+            "stderr_empty"
+          ],
+          "properties": {
+            "stderr_empty": {
+              "const": true
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "A path relative to the run cwd exists",
+          "required": [
+            "file_exists"
+          ],
+          "properties": {
+            "file_exists": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "SHA-256 of a file relative to the run cwd",
+          "required": [
+            "file_sha256"
+          ],
+          "properties": {
+            "file_sha256": {
+              "type": "object",
+              "required": [
+                "path",
+                "hash"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "hash": {
+                  "type": "string",
+                  "pattern": "^(sha256:)?[a-f0-9]{64}$"
+                }
+              },
+              "additionalProperties": false,
+              "patternProperties": {
+                "^x-": {
+                  "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+                }
+              }
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Engine structured output validates against a JSON Schema (object) or a schema reference (string)",
+          "required": [
+            "json_schema"
+          ],
+          "properties": {
+            "json_schema": {
+              "type": [
+                "object",
+                "string",
+                "boolean"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "SHA-256 of the engine output bytes",
+          "required": [
+            "sha256"
+          ],
+          "properties": {
+            "sha256": {
+              "type": "string",
+              "pattern": "^(sha256:)?[a-f0-9]{64}$"
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Graded by a judge engine (SPEC-2.0 §6.1)",
+          "required": [
+            "judge"
+          ],
+          "properties": {
+            "judge": {
+              "type": "object",
+              "required": [
+                "rubric"
+              ],
+              "properties": {
+                "rubric": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "task_class": {
+                  "const": "judge"
+                },
+                "threshold": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "additionalProperties": false,
+              "patternProperties": {
+                "^x-": {
+                  "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+                }
+              }
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Every child passes",
+          "required": [
+            "all"
+          ],
+          "properties": {
+            "all": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/criterion"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "At least one child passes",
+          "required": [
+            "any"
+          ],
+          "properties": {
+            "any": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/criterion"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "The child does not pass",
+          "required": [
+            "not"
+          ],
+          "properties": {
+            "not": {
+              "$ref": "#/$defs/criterion"
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": {
+              "description": "Extension data (SPEC-2.0 §2.5): preserved, hashed, never interpreted by the core"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

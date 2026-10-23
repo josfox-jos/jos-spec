@@ -1,0 +1,24 @@
+{
+  "description": "An atom without success_criteria is a wish: ok is the engine success signal (exit 0); exit 1 gives code 1.",
+  "promises": [
+    "P17"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.2",
+    "§3.4"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 1,
+  "artifact": "art_fa5be9530b61e2b2afede05e6418159b8683226c35634ffe22b96bd7fa90be0d",
+  "result": {
+    "ok": false,
+    "receipts": [
+      {
+        "exit": 1,
+        "criteria": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "description": "security.integrity_ref is not a member of 2.0 security: the document is invalid (code 2).",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/v2-field/ref.jos",
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/security: additional property 'integrity_ref'"
+    ]
+  },
+  "code": 2,
+  "result": {
+    "errors": [
+      "/security: additional property 'integrity_ref'"
+    ]
+  }
+}

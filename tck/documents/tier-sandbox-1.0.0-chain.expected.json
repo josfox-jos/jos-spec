@@ -1,0 +1,32 @@
+{
+  "description": "A 1.0.0 document below a folder that asks for a sandbox inherits it like a 2.0 document; it stays valid and is unexecutable here (SPEC-2.0 §6.5, §9.2, Appendix C, code 5).",
+  "promises": [
+    "P3",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5",
+    "SPEC-2.0 §9.2"
+  ],
+  "validate": {
+    "valid": true,
+    "input_version": "1.0.0"
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "../../.jos/manifest.jos: /security/tier: sandbox not available (SPEC-2.0 §6.5)"
+  },
+  "document": "fixtures/dirs/sandbox-deep/mid/leaf/old.jos",
+  "alternatives": [
+    {
+      "code": 0,
+      "result": {
+        "ok": true,
+        "code": 0
+      },
+      "claim": "sandbox"
+    }
+  ]
+}

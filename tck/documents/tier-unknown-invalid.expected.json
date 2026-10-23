@@ -1,0 +1,17 @@
+{
+  "description": "security.tier is sandbox, standard or privileged; any other value makes the document invalid (code 2) and nothing runs.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5"
+  ],
+  "validate": {
+    "valid": false
+  },
+  "code": 2,
+  "result": {
+    "ok": false,
+    "code": 2
+  }
+}

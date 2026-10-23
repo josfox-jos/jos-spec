@@ -1,0 +1,25 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "id": "lib.loop-a",
+  "meta": {
+    "name": "loop-a",
+    "version": "1.0.0"
+  },
+  "orchestration": {
+    "definitions": {
+      "next": {
+        "use": "lib.loop-b"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "next"
+        ]
+      }
+    }
+  }
+}

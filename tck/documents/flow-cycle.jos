@@ -1,0 +1,52 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "cycle"
+  },
+  "orchestration": {
+    "definitions": {
+      "a": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "a"
+        ],
+        "needs": [
+          "c"
+        ]
+      },
+      "b": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "b"
+        ],
+        "needs": [
+          "a"
+        ]
+      },
+      "c": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "c"
+        ],
+        "needs": [
+          "b"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    }
+  }
+}

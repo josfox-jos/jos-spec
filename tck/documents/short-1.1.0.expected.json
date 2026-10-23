@@ -1,0 +1,58 @@
+{
+  "description": "1.1.0 short form without a jos header: intent, done (object), avoid (string), limit.time, retries, on_error.",
+  "promises": [
+    "P1",
+    "P14",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.5",
+    "§4.2"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "short",
+    "input_version": "1.1.0",
+    "document": {
+      "jos": {
+        "version": "2.0.0",
+        "kind": "atom"
+      },
+      "id": "greet.v11",
+      "meta": {
+        "name": "greet.v11"
+      },
+      "intention": {
+        "objective": "Greet in the 1.1.0 vocabulary",
+        "success_criteria": [
+          {
+            "stdout_contains": "hi"
+          }
+        ]
+      },
+      "guardrails": {
+        "avoid": [
+          "rm -rf"
+        ],
+        "limit": {
+          "seconds": 2,
+          "retries": 0
+        }
+      },
+      "execution": {
+        "on_error": "fail",
+        "run": [
+          "echo",
+          "hi"
+        ]
+      }
+    }
+  },
+  "code": 0,
+  "artifact": "art_e3a82e91629a8bb75419c41369b6ee64b3de169c879ef23ba21cd588003cfc3b",
+  "result": {
+    "ok": true,
+    "input_version": "1.1.0"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "atom"
+  },
+  "id": "tier-sandbox-1-0-0",
+  "meta": {
+    "name": "tier-sandbox-1.0.0"
+  },
+  "intention": {
+    "objective": "A valid 1.0.0 document that asks for a sandbox",
+    "success_criteria": [
+      "Prints ok"
+    ]
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "ok"
+    ]
+  },
+  "security": {
+    "tier": "sandbox"
+  }
+}

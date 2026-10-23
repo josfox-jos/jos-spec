@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sandbox-mid-a",
+  "meta": {
+    "name": "sandbox-mid-a",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A middle folder asks for a sandbox"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "level": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sandbox-mid-a.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "level"
+        ]
+      }
+    }
+  },
+  "security": {
+    "tier": "sandbox"
+  }
+}

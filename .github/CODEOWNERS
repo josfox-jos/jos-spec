@@ -1,0 +1,9 @@
+# Owners by path. A review by the owner is required on every pull request that touches the path.
+*                   @josfox-jos
+/SPECIFICATION.md        @josfox-jos
+/schema/            @josfox-jos
+/tests/             @josfox-jos
+/IANA.md            @josfox-jos
+/SECURITY.md        @josfox-jos
+/GOVERNANCE.md      @josfox-jos
+/.github/           @josfox-jos

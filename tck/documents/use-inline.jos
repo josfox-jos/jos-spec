@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "use-inline"
+  },
+  "orchestration": {
+    "definitions": {
+      "greeter": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "id": "local.greeter",
+        "meta": {
+          "name": "greeter",
+          "version": "1.0.0"
+        },
+        "intention": {
+          "objective": "Greet"
+        },
+        "execution": {
+          "run": [
+            "echo",
+            "hi from inline"
+          ]
+        }
+      },
+      "main": {
+        "use": "local.greeter@1.0.0"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "main"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "avoid.regex",
+  "meta": {
+    "name": "avoid.regex",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "avoid.regex"
+  },
+  "guardrails": {
+    "avoid": [
+      "/\\b(curl|wget)\\b/"
+    ]
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "fetch",
+      "via",
+      "wget"
+    ]
+  }
+}

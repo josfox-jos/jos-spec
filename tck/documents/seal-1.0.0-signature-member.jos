@@ -1,0 +1,35 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "seal.one.signed",
+  "meta": {
+    "name": "seal.one.signed",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A 1.0.0 document sealed as 1.0.0 seals"
+  },
+  "orchestration": {
+    "definitions": {
+      "a": {
+        "type": "shell",
+        "command": "echo sealed"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "a"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:8883a3477c18ce8d301e0ed420bc06d4a0c979084e845eb4805f146f912203f3",
+    "signed_by": "publisher-key-id",
+    "timestamp": "2026-06-27T00:00:00Z",
+    "signature": "c2lnbmF0dXJl"
+  }
+}

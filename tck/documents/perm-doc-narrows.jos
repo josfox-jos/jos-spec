@@ -1,0 +1,19 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "narrow-self"
+  },
+  "security": {
+    "permissions": [
+      "engine:shell"
+    ]
+  },
+  "execution": {
+    "engine": "shell",
+    "run": "echo hi",
+    "shell": true
+  }
+}

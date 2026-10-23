@@ -1,0 +1,7 @@
+{
+  "jos": { "version": "2.0.0", "kind": "atom" },
+  "meta": { "name": "first" },
+  "intention": { "objective": "Say hello", "objective": "Say goodbye" },
+  "execution": { "run": ["echo", "hello"] },
+  "meta": { "name": "second" }
+}

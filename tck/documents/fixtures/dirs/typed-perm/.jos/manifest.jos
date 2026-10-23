@@ -1,0 +1,24 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "typed-perm",
+  "meta": {
+    "name": "typed-perm",
+    "labels": {
+      "dotjos": "0.2.0",
+      "parent": "jos.monorepo"
+    }
+  },
+  "orchestration": {
+    "flows": {
+      "main": {
+        "steps": []
+      }
+    }
+  },
+  "security": {
+    "permissions": "engine:jos"
+  }
+}

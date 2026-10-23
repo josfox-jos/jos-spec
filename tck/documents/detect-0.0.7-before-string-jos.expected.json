@@ -1,0 +1,31 @@
+{
+  "description": "rc.7 R2, detection order rows (1) before (2): a root orchestration_contract beside a string `jos` is a 0.0.7 legacy document, not the 1.1.0 short form; the string header moves to x-legacy-jos and the flow runs.",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "document": {
+      "jos": {
+        "version": "2.0.0",
+        "kind": "flow"
+      },
+      "x-legacy-jos": "jos run atom"
+    }
+  },
+  "code": 0,
+  "artifact": "art_c03c2d1a90a2499b7b49cd9a043e8f5b958ccb5ca27ccfb7ba05a1edabaab2b6",
+  "result": {
+    "ok": true,
+    "code": 0,
+    "output": {
+      "stdout": "ok\n",
+      "stderr": ""
+    }
+  }
+}

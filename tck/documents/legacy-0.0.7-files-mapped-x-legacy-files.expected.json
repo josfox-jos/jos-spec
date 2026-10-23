@@ -1,0 +1,55 @@
+{
+  "description": "readiness rc.7 pass 5 F-14b: a mapped files list is not kept, so a root x-legacy-files that the document writes is extension data kept as written (Section 2.5), not a collision.",
+  "promises": [
+    "P3",
+    "P5",
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§2.5"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "document": {
+      "x-legacy-files": {
+        "note": "written by the author"
+      },
+      "orchestration": {
+        "definitions": {
+          "main_task": {
+            "type": "shell",
+            "description": "step",
+            "command": "echo ok"
+          },
+          "file_1": {
+            "type": "jos",
+            "artifact": "child.jos"
+          }
+        },
+        "flows": {
+          "main": {
+            "steps": [
+              "main_task"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "code": 0,
+  "artifact": "art_48dbf22dd86b21d1f4fdb0cc9adf1732aaaacc7b43532b715916d76003883851",
+  "result": {
+    "ok": true,
+    "code": 0,
+    "steps": [
+      {
+        "step": "main_task",
+        "status": "ok",
+        "code": 0
+      }
+    ]
+  }
+}

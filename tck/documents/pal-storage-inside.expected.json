@@ -1,0 +1,31 @@
+{
+  "description": "execution.inputs names jos://storage/fixtures/data.txt: the local adapter reads it under the run's cwd, hands it to the engine on stdin and records a `pal` ledger entry (URI and blob_, never the bytes).",
+  "promises": [
+    "P38"
+  ],
+  "spec": [
+    "PAL 0.1.0 §2",
+    "§4",
+    "Ledger 0.1.0 §3"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "{\"inputs\":{\"data\":\"jos fixture\\n\"}}\n",
+      "stderr": ""
+    }
+  },
+  "ledger_kinds": [
+    "admit",
+    "pal",
+    "start",
+    "receipt",
+    "end"
+  ]
+}

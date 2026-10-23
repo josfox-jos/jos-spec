@@ -1,0 +1,34 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "id": "seal.two",
+  "meta": {
+    "name": "seal.two",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A 2.0.0 document sealed as 1.0.0 seals"
+  },
+  "orchestration": {
+    "definitions": {
+      "a": {
+        "type": "shell",
+        "command": "echo sealed"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "a"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:8a8b846d2db8dd854c9e136db655cf279ad620bf898c0355805bfb8e92d7dfb2",
+    "signed_by": "publisher-key-id",
+    "timestamp": "2026-06-27T00:00:00Z"
+  }
+}

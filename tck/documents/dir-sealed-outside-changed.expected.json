@@ -1,0 +1,17 @@
+{
+  "description": "Content of D outside .jos/ is not covered: files added next to .jos/ after sealing do not change the directory hash; the folder runs and its artifact is the sealed one.",
+  "promises": [
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.3"
+  ],
+  "validate": null,
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  },
+  "run_document": "fixtures/dirs/sealed-outside-changed",
+  "artifact": "art_9c2f72a761055e71fe1a8ed884dba76661b86d0283243da290bba47879686fc7"
+}

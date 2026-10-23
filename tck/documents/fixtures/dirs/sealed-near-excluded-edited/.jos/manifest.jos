@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-near-excluded-edited",
+  "meta": {
+    "name": "sealed-near-excluded-edited",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sealed folder: Only whole segments logs, replays and dev are excluded: a covered file under log"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sealed-near-excluded-edited.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "say"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:737f3c9a2b825b4be63c04e1d3cbbc72b0f30c4e5dae902771b78e9921f72436"
+  }
+}

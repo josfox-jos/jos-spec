@@ -1,0 +1,35 @@
+{
+  "description": "readiness rc.7 pass 5 F-17c: a missing meta.name is id_jos as written (here a non-empty string); id_jos itself is kept as x-legacy-id_jos. art_ pinned.",
+  "promises": [
+    "P3",
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "document": {
+      "meta": {
+        "version": "1.0.0",
+        "name": "legacy-0.0.7-name-from-id-jos"
+      },
+      "x-legacy-id_jos": "legacy-0.0.7-name-from-id-jos"
+    }
+  },
+  "code": 0,
+  "artifact": "art_b07d4e3635c1e4c0bc33d9b9302f192363388dc6a7acc1bb13fb68ba19c68697",
+  "result": {
+    "ok": true,
+    "code": 0,
+    "steps": [
+      {
+        "step": "main_task",
+        "status": "ok",
+        "code": 0
+      }
+    ]
+  }
+}

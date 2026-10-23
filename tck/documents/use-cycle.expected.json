@@ -1,0 +1,30 @@
+{
+  "description": "lib.loop-a uses lib.loop-b which uses lib.loop-a: the second entry of the same art_ in one run is refused (code 2), never an endless recursion.",
+  "run_args": [
+    "--library",
+    "fixtures/library"
+  ],
+  "promises": [
+    "P10"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.3",
+    "§5.4"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 2,
+  "result": {
+    "ok": false,
+    "steps": [
+      {
+        "step": "main",
+        "status": "failed",
+        "code": 2
+      }
+    ]
+  }
+}

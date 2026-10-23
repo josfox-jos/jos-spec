@@ -1,0 +1,29 @@
+{
+  "description": "A program that does not exist: the launch fails, ok false, code 1, spawn_error ENOENT.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.1"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 1,
+  "artifact": "art_398fe7f6ebde7a6030cc0b3a07ef4b4e6af9aeb13a8bf1b3656532ca0afb30b6",
+  "result": {
+    "receipts": [
+      {
+        "spawn_error": "ENOENT",
+        "exit": null,
+        "criteria": [
+          {
+            "check": "exit",
+            "pass": false,
+            "detail": "exit none (want 0)"
+          }
+        ]
+      }
+    ]
+  }
+}

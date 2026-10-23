@@ -1,0 +1,21 @@
+{
+  "description": "A crystal validates (crystal member present) and is unexecutable in F0 (code 5).",
+  "promises": [
+    "P14",
+    "P30"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 5,
+  "result": {
+    "code": 5
+  },
+  "artifact": "art_d8335f8f517b277de3c6e7f0a0988c8876a21a7b3eb3d15d0beaf7bc2e545630"
+}

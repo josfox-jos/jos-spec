@@ -1,0 +1,53 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "flow.alias",
+  "meta": {
+    "name": "flow.alias",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "Run two steps named by execution.flow",
+    "success_criteria": [
+      {
+        "stdout_contains": "second"
+      }
+    ]
+  },
+  "execution": {
+    "flow": [
+      {
+        "invoke": "first"
+      },
+      {
+        "invoke": "lib.second"
+      }
+    ]
+  },
+  "orchestration": {
+    "definitions": {
+      "first": {
+        "type": "shell",
+        "command": "echo first"
+      },
+      "lib-second": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "id": "lib.second",
+        "meta": {
+          "name": "lib.second"
+        },
+        "execution": {
+          "run": [
+            "echo",
+            "second"
+          ]
+        }
+      }
+    }
+  }
+}

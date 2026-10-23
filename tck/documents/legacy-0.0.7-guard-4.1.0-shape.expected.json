@@ -1,0 +1,47 @@
+{
+  "description": "readiness rc.7 pass 5 F-15: the guard members jos init of 4.1.0 writes (guardrails.avoid and max_retries, security.permissions) have the 2.0 shapes and are kept as written, so they apply: here an avoid pattern blocks the touch step before it starts (3). security.type, health_check and integrity, which the schema does not define, move to security.x-legacy-*.",
+  "promises": [
+    "P3",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.5"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "document": {
+      "guardrails": {
+        "avoid": [
+          "touch"
+        ],
+        "limit": {
+          "retries": 1
+        }
+      },
+      "security": {
+        "x-legacy-type": "open",
+        "permissions": [],
+        "x-legacy-integrity_ref": null,
+        "x-legacy-health_check": null,
+        "x-legacy-integrity": null
+      }
+    }
+  },
+  "code": 3,
+  "artifact": "art_03096ee14dd34219e74cea925fd6afa828b626ac1cf25ede7099c34487eda4f7",
+  "result": {
+    "ok": false,
+    "code": 3,
+    "steps": [
+      {
+        "step": "main_task",
+        "status": "failed",
+        "code": 3
+      }
+    ],
+    "reason": "avoid: pattern \"touch\" matched the engine input"
+  }
+}

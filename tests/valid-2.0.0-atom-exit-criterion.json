@@ -1,0 +1,24 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "hello"
+  },
+  "intention": {
+    "objective": "Print a greeting",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "hello"
+    ]
+  }
+}

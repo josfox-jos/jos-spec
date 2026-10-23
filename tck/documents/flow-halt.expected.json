@@ -1,0 +1,41 @@
+{
+  "description": "Same graph with on_error: halt on the flow: after b fails nothing else runs.",
+  "promises": [
+    "P12",
+    "P18"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.4"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 1,
+  "result": {
+    "ok": false,
+    "steps": [
+      {
+        "step": "a",
+        "status": "ok",
+        "code": 0
+      },
+      {
+        "step": "b",
+        "status": "failed",
+        "code": 1
+      },
+      {
+        "step": "c",
+        "status": "skipped",
+        "reason": "the flow halted"
+      },
+      {
+        "step": "d",
+        "status": "skipped",
+        "reason": "the flow halted"
+      }
+    ]
+  }
+}

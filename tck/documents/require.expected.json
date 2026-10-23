@@ -1,0 +1,30 @@
+{
+  "description": "guardrails.require: a required pattern absent from the output makes ok false even when exit is 0.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 1,
+  "artifact": "art_ad7c0cbb58c3f7d4194d5da4421805649ec3938afc75d687fafba043921bec89",
+  "result": {
+    "ok": false,
+    "receipts": [
+      {
+        "exit": 0,
+        "criteria": [
+          {
+            "check": "require",
+            "verdict": "fail",
+            "pass": false,
+            "detail": "not found \"hello\""
+          }
+        ]
+      }
+    ]
+  }
+}

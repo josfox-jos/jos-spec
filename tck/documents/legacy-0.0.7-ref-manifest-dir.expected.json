@@ -1,0 +1,28 @@
+{
+  "description": "integrity_ref names a directory: refused.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/manifest-dir/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 3,
+  "result": {
+    "reason": "integrity_ref: manifest is not a regular file",
+    "output": null,
+    "receipts": [
+      {
+        "ok": false,
+        "code": 3,
+        "reason": "integrity_ref: manifest is not a regular file"
+      }
+    ]
+  }
+}

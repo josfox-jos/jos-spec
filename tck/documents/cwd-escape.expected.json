@@ -1,0 +1,17 @@
+{
+  "description": "execution.cwd that resolves outside the document directory is refused before launch (code 3).",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.8"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 3,
+  "artifact": "art_b699fd29f5a96b23cdc5ae3f7944bbb9bafff0dec3590a7a0b469bc58cc64275",
+  "result": {
+    "reason": "cwd: \"../../..\" resolves outside the base directory"
+  }
+}

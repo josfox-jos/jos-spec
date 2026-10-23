@@ -1,0 +1,19 @@
+{
+  "description": "A 2.0 document that declares only engine:shell narrows its own Capability (Capability 0.1.0 §3: intersection of document, chain and runtime grants): shell: true needs shell:enable, code 3.",
+  "promises": [
+    "P21"
+  ],
+  "spec": [
+    "Capability 0.1.0 §3",
+    "SPEC-2.0 §6.5"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 3,
+  "result": {
+    "reason": "capability: permission shell:enable not granted"
+  }
+}

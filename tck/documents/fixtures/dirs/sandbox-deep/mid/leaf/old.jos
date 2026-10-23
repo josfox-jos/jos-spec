@@ -1,0 +1,23 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "atom"
+  },
+  "id": "sandbox-deep-old",
+  "meta": {
+    "name": "sandbox-deep-old"
+  },
+  "intention": {
+    "objective": "A 1.0.0 atom below a sandbox folder",
+    "success_criteria": [
+      "Prints ok"
+    ]
+  },
+  "execution": {
+    "run": [
+      "sh",
+      "-c",
+      "echo effect > sandbox-deep-old.effect.txt"
+    ]
+  }
+}

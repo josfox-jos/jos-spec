@@ -1,0 +1,82 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "dbl"
+  },
+  "orchestration": {
+    "definitions": {
+      "tf": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "template"
+        },
+        "id": "t.f",
+        "meta": {
+          "name": "tf",
+          "version": "1.0.0"
+        },
+        "intention": {
+          "objective": "tpl"
+        },
+        "execution": {
+          "inputs": {
+            "type": "object",
+            "properties": {
+              "q": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "orchestration": {
+          "definitions": {
+            "secret": {
+              "engine": "shell",
+              "run": [
+                "echo",
+                "SIBLING-SECRET"
+              ],
+              "as": "sec"
+            },
+            "s": {
+              "engine": "shell",
+              "run": [
+                "cat"
+              ],
+              "needs": [
+                "secret"
+              ],
+              "with": {
+                "user": "{{ q }}"
+              }
+            }
+          },
+          "flows": {
+            "main": {
+              "steps": [
+                "secret",
+                "s"
+              ]
+            }
+          }
+        }
+      },
+      "go": {
+        "use": "t.f",
+        "with": {
+          "q": "{{ input }}"
+        }
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "go"
+        ]
+      }
+    }
+  }
+}

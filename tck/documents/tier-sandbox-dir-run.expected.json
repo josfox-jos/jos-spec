@@ -1,0 +1,27 @@
+{
+  "description": "Running a folder whose manifest asks for a sandbox: the steps of its flow are sandbox, and a runtime that cannot confine them refuses before the first (SPEC-2.0 §9.1, §6.5, code 5).",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5",
+    "SPEC-2.0 §9.1"
+  ],
+  "validate": null,
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false
+  },
+  "run_document": "fixtures/dirs/sandbox-dir",
+  "alternatives": [
+    {
+      "code": 0,
+      "result": {
+        "ok": true,
+        "code": 0
+      },
+      "claim": "sandbox"
+    }
+  ]
+}

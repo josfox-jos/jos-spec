@@ -1,0 +1,47 @@
+{
+  "orchestration_contract": {
+    "version": "0.0.7",
+    "mode": "sync"
+  },
+  "id_jos": "legacy-0.0.7-file-n-collision",
+  "meta": {
+    "name": "legacy-0.0.7-file-n-collision",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "legacy-0.0.7-file-n-collision",
+    "success_criteria": "the step runs"
+  },
+  "guardrails": {
+    "avoid": []
+  },
+  "orchestration": {
+    "definitions": {
+      "main_task": {
+        "type": "shell",
+        "description": "step",
+        "command": "echo ok"
+      },
+      "file_1": {
+        "type": "shell",
+        "description": "the author's own file_1",
+        "command": "echo mine"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "main_task"
+        ]
+      }
+    }
+  },
+  "security": {
+    "type": "open",
+    "permissions": [],
+    "integrity_ref": null
+  },
+  "files": [
+    "child.jos"
+  ]
+}

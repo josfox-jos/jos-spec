@@ -1,0 +1,26 @@
+{
+  "description": "3000 occurrences of a step that needs a step listed 3000 times (9,000,000 expanded edges, 24 KB): planning is linear in the declared needs (Kahn over step names, no recursion), graph and run --dry-run finish in well under 2 s in both engines.",
+  "run_args": [
+    "--dry-run"
+  ],
+  "promises": [
+    "P12"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.4"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "max_duration_ms": 2000,
+  "graph": {
+    "code": 0,
+    "max_ms": 2000
+  },
+  "result": {
+    "dry_run": true
+  }
+}

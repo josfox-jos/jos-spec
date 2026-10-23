@@ -1,0 +1,22 @@
+{
+  "description": "Mixing short-form and canonical spellings of the same field is invalid (code 2).",
+  "promises": [
+    "P14"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/avoid: mixed spellings 'avoid' and 'guardrails.avoid'"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/avoid: mixed spellings 'avoid' and 'guardrails.avoid'"
+    ]
+  }
+}

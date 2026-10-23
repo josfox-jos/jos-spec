@@ -1,0 +1,25 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "env.default",
+  "meta": {
+    "name": "env.default",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "env.default",
+    "success_criteria": [
+      {
+        "exit": 1
+      }
+    ]
+  },
+  "execution": {
+    "run": [
+      "printenv",
+      "JOS_VECTOR_SECRET"
+    ]
+  }
+}

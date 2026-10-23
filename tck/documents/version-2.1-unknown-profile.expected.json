@@ -1,0 +1,17 @@
+{
+  "description": "A profile adds optional members only and imposes no obligation (SPEC-2.0 §10.1): an unknown profile is ignored and the document runs.",
+  "promises": [
+    "P5"
+  ],
+  "spec": [
+    "SPEC-2.0 §10.1"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  }
+}

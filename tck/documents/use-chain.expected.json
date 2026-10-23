@@ -1,0 +1,26 @@
+{
+  "description": "use resolved through the .jos/ chain: chain.greet@^1.0.0 is found in fixtures/dirs/chain/.jos/flows/greet.jos (version 1.2.0).",
+  "document": "fixtures/dirs/chain/app/use-chain.jos",
+  "promises": [
+    "P10",
+    "P28",
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.3",
+    "§9.2"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "hi from the chain\n",
+      "stderr": ""
+    }
+  }
+}

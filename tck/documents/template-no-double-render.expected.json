@@ -1,0 +1,27 @@
+{
+  "description": "A slot value is data: the input \"{{ sec }}\" rendered into a template flow's with is not rendered again when the instantiated flow runs (it reaches the step as the literal text, not the sibling's output).",
+  "run_args": [
+    "--input",
+    "\"{{ sec }}\""
+  ],
+  "promises": [
+    "P29"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.2",
+    "§5.7"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "{\"input\":{\"user\":\"{{ sec }}\"}}\n",
+      "stderr": ""
+    }
+  }
+}

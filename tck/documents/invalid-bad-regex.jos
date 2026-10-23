@@ -1,0 +1,24 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "bad.regex",
+  "meta": {
+    "name": "bad.regex",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "bad.regex",
+    "success_criteria": [
+      {
+        "stdout_matches": "(unclosed"
+      }
+    ]
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "requires-digest-malformed-invalid",
+  "meta": {
+    "name": "requires-digest-malformed-invalid",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A digest that is not a content identifier",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "ok"
+    ]
+  },
+  "requires": [
+    {
+      "kind": "artifact",
+      "name": "lib.helper",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ]
+}

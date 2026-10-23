@@ -1,0 +1,15 @@
+{
+  "jos": "2.0.0",
+  "intent": "Mixed",
+  "avoid": [
+    "curl"
+  ],
+  "guardrails": {
+    "avoid": [
+      "wget"
+    ]
+  },
+  "run": [
+    "true"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "description": "A 1.0.0 document is read unchanged (identity normalization) and is valid; with no execution.run it is unexecutable (code 5), not invalid.",
+  "promises": [
+    "P2",
+    "P3",
+    "P4"
+  ],
+  "spec": [
+    "SPEC-2.0 §1.2",
+    "§2.4",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "1.0.0",
+    "input_version": "1.0.0"
+  },
+  "code": 5,
+  "artifact": "art_069a897e6c54dc915d90f9097ab08a7d13f2d544db68ce3b913d683453941e11",
+  "result": {
+    "ok": false,
+    "unexecutable": "no engine input: execution.run is absent",
+    "receipts": [
+      {
+        "code": 5,
+        "ok": false,
+        "criteria": [],
+        "engine": null
+      }
+    ]
+  }
+}

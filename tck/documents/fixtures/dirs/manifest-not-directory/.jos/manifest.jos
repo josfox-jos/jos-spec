@@ -1,0 +1,25 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "manifest-not-directory",
+  "meta": {
+    "name": "manifest-not-directory",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A .jos/ manifest of kind atom: the folder is not a .jos, so neither validate nor run accepts it",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "manifest ran"
+    ]
+  }
+}

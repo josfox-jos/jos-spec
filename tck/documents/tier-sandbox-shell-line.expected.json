@@ -1,0 +1,33 @@
+{
+  "description": "A sandbox step run through a shell command line is refused before the shell starts; it leaves no file (SPEC-2.0 §6.5, code 5).",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/security/tier: sandbox not available (SPEC-2.0 §6.5)"
+  },
+  "alternatives": [
+    {
+      "code": 0,
+      "result": {
+        "ok": true,
+        "code": 0,
+        "receipts": [
+          {
+            "isolation": "sandbox"
+          }
+        ]
+      },
+      "claim": "sandbox"
+    }
+  ]
+}

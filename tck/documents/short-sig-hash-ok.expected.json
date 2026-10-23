@@ -1,0 +1,32 @@
+{
+  "description": "A 1.1.0 sig.hash seals the short form itself (1.1.0 §14.3): valid and runs.",
+  "promises": [
+    "P6",
+    "P1"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "short",
+    "input_version": "1.1.0"
+  },
+  "code": 0,
+  "result": {
+    "code": 0,
+    "receipts": [
+      {
+        "attempt": 1,
+        "code": 0,
+        "ok": true,
+        "timeout": false,
+        "truncated": false,
+        "exit": 0
+      }
+    ],
+    "ok": true
+  },
+  "artifact": "art_56ad79aba97553e251ff5bb9f4d75dc2d07628154284ff304daf5da78bdf6e6f"
+}

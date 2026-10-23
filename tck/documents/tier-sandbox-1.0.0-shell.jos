@@ -1,0 +1,23 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "atom"
+  },
+  "id": "tier-sandbox-1-0-0-shell",
+  "meta": {
+    "name": "tier-sandbox-1.0.0-shell"
+  },
+  "intention": {
+    "objective": "A 1.0.0 shell line that asks for a sandbox",
+    "success_criteria": [
+      "Prints ok"
+    ]
+  },
+  "security": {
+    "tier": "sandbox"
+  },
+  "execution": {
+    "run": "echo ok > tier-sandbox-1.0.0-shell.effect.txt",
+    "shell": true
+  }
+}

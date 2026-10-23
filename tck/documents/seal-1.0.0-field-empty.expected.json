@@ -1,0 +1,25 @@
+{
+  "description": "A 1.0.0 document without integrity.signature whose integrity.hash was computed as 1.0.0 specifies it (\"computed with this field empty\": integrity.hash \"\", no signature member) runs (rc.8). The art_ is unchanged: SHA-256 with integrity.hash and integrity.signature \"\" (SPEC-2.0 §8.1); the kernel accepts either seal for such a document, and both cover the whole content. rc.7 refused it with code 3.",
+  "promises": [
+    "P3",
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §8.1",
+    "§2.4",
+    "1.0.0 Integrity"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "1.0.0",
+    "input_version": "1.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0,
+    "output": {
+      "stdout": "sealed\n"
+    }
+  }
+}

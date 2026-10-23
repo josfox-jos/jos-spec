@@ -1,0 +1,22 @@
+{
+  "description": "Unknown non-x- root keys make the document invalid (code 2).",
+  "promises": [
+    "P5"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.3"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/: additional property 'supports'"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/: additional property 'supports'"
+    ]
+  }
+}

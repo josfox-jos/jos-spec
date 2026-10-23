@@ -1,0 +1,27 @@
+{
+  "description": "An integer literal outside ±2^53 is invalid (code 2) in both engines, with its JSON Pointer (rc.8). rc.7 read 9007199254740993 as the double 9007199254740992, so this document and one with 2^53 had the same art_.",
+  "promises": [
+    "P4",
+    "P6"
+  ],
+  "spec": [
+    "SECURITY.md Section 2 item 6",
+    "SPEC-2.0 §2.1",
+    "§8.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/x-n: integer value 9007199254740993 is outside ±2^53 and below 10^21 (not representable in canonical form)"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/x-n: integer value 9007199254740993 is outside ±2^53 and below 10^21 (not representable in canonical form)"
+    ],
+    "receipts": []
+  }
+}

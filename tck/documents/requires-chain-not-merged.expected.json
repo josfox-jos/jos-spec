@@ -1,0 +1,19 @@
+{
+  "description": "requires[] is not merged along the .jos/ chain: the unsatisfied entry of the folder manifest does not bind the child, which runs (SPEC-2.0 §9.2, §6.6).",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6",
+    "SPEC-2.0 §9.2"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  },
+  "document": "fixtures/dirs/requires-parent/child.jos"
+}

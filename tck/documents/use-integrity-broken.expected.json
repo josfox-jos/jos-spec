@@ -1,0 +1,29 @@
+{
+  "description": "The resolved document declares an integrity.hash that does not match its content: refused at the step, code 3.",
+  "document": "fixtures/dirs/chain/app/use-broken.jos",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.3",
+    "§8.1",
+    "§12.2"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 3,
+  "result": {
+    "ok": false,
+    "steps": [
+      {
+        "step": "main",
+        "status": "failed",
+        "code": 3
+      }
+    ],
+    "reason": "integrity: use \"chain.broken@1.0.0\" resolved to \"../.jos/flows/broken.jos\" whose declared hash does not match the computed hash"
+  }
+}

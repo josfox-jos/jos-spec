@@ -1,0 +1,20 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "number.underflow",
+  "meta": {
+    "name": "number.underflow",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "number.underflow"
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  },
+  "x-n": {"tiny": 1e-400}
+}

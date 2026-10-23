@@ -1,0 +1,37 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "root",
+  "meta": {
+    "name": "root",
+    "labels": {
+      "dotjos": "0.2.0",
+      "parent": ""
+    }
+  },
+  "guardrails": {
+    "avoid": [
+      "rm -rf"
+    ],
+    "limit": {
+      "seconds": 60
+    },
+    "inherit": "intersect"
+  },
+  "orchestration": {
+    "definitions": {
+      "hello": {
+        "use": "hello@1.0.0"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "hello"
+        ]
+      }
+    }
+  }
+}

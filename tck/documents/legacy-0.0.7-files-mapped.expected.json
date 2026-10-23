@@ -1,0 +1,67 @@
+{
+  "description": "readiness rc.7 pass 5 F-14b, F-17b: a non-empty files list maps entry by entry to orchestration.definitions.file_<i+1> of type jos, and the list itself is not kept (no x-legacy-files). A string entry is the artifact; an object entry gives artifact from its path, else its artifact, else its name, and is kept whole as x-legacy-file of the definition. The flow does not name the file_<n> definitions, so only main_task runs. art_ pinned.",
+  "promises": [
+    "P3",
+    "P6",
+    "P9"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "document": {
+      "orchestration": {
+        "definitions": {
+          "main_task": {
+            "type": "shell",
+            "description": "step",
+            "command": "echo ok"
+          },
+          "file_1": {
+            "type": "jos",
+            "artifact": "child.jos"
+          },
+          "file_2": {
+            "type": "jos",
+            "artifact": "b.jos",
+            "x-legacy-file": {
+              "path": "b.jos",
+              "role": "helper"
+            }
+          },
+          "file_3": {
+            "type": "jos",
+            "artifact": "d.jos",
+            "x-legacy-file": {
+              "name": "c.jos",
+              "artifact": "d.jos"
+            }
+          }
+        },
+        "flows": {
+          "main": {
+            "steps": [
+              "main_task"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "code": 0,
+  "artifact": "art_0435d6dc465631d6e17d641c1b8201987d6282bc0d36cbdb321f7f7e2296a153",
+  "result": {
+    "ok": true,
+    "code": 0,
+    "steps": [
+      {
+        "step": "main_task",
+        "status": "ok",
+        "code": 0
+      }
+    ]
+  }
+}

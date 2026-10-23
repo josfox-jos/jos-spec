@@ -1,0 +1,19 @@
+{
+  "description": "A privileged step needs a signature this runtime cannot verify: it does not run the document, before step one (SPEC-2.0 §6.5, §5.3, code 5).",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5",
+    "SPEC-2.0 §5.3"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/orchestration/definitions/two/security/tier: signature verification not available (SPEC-2.0 §5.3)"
+  }
+}

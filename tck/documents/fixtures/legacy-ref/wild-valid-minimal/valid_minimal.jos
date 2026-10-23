@@ -1,0 +1,66 @@
+{
+  "id_jos": "valid-minimal-v1",
+  "jos": {
+    "open": "jos run valid_minimal.jos",
+    "supports": ["@josfox/jos"]
+  },
+  "orchestration_contract": {
+    "version": "0.0.7",
+    "mode": "sync"
+  },
+  "meta": {
+    "name": "Valid Minimal JOS Artifact",
+    "version": "1.0.0",
+    "type": "atom",
+    "description": "The minimum valid .jos artifact with ALL required keys",
+    "author": "Example Author",
+    "license": "MIT",
+    "created": "2026-01-03"
+  },
+  "intention": {
+    "objective": "Demonstrate the minimum valid .jos artifact structure",
+    "success_criteria": "Artifact passes strict validation with all 13 required keys",
+    "context": "Reference for developers learning the .jos format"
+  },
+  "guardrails": {
+    "avoid": ["incomplete_keys", "missing_required_fields"],
+    "max_retries": 1,
+    "require_confirmation": false
+  },
+  "capabilities": [
+    "shell_execution",
+    "demonstration"
+  ],
+  "artifacts": {
+    "description": "Minimal valid .jos example"
+  },
+  "orchestration": {
+    "definitions": {
+      "greet": {
+        "type": "shell",
+        "command": "echo 'Hello from valid_minimal.jos!'",
+        "description": "Simple greeting to demonstrate execution"
+      }
+    },
+    "flows": {
+      "main": {
+        "description": "Default execution flow",
+        "steps": ["greet"]
+      }
+    }
+  },
+  "security": {
+    "type": "open",
+    "permissions": [],
+    "integrity_ref": "./valid_minimal.jos.sig.json"
+  },
+  "files": [],
+  "x_run_params": {
+    "timeout": 5000,
+    "retry_on_failure": false
+  },
+  "adaptive_ai": {
+    "learning_enabled": false,
+    "feedback_collection": false
+  }
+}

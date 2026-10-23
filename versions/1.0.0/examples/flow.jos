@@ -1,0 +1,44 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "ai.example.flow.summarize-and-review",
+  "meta": {
+    "name": "Summarize and Review"
+  },
+  "intention": {
+    "objective": "Summarize an input document and then review the summary",
+    "success_criteria": [
+      "A summary is produced",
+      "The summary is reviewed"
+    ]
+  },
+  "execution": {
+    "budget": {
+      "max_cost_usd": 1,
+      "max_tokens": 20000,
+      "max_duration": "2m",
+      "max_retries": 2
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "summarize": {
+        "type": "jos",
+        "artifact": "ai.example.atom.summarize",
+        "description": "Create a summary"
+      },
+      "review": {
+        "type": "jos",
+        "artifact": "ai.example.atom.review",
+        "description": "Review the summary"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": ["summarize", "review"]
+      }
+    }
+  }
+}

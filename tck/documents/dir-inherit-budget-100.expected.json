@@ -1,0 +1,22 @@
+{
+  "description": "A 1.0.0 .jos/ manifest bounds time with execution.budget.max_duration (1.0.0 alias of guardrails.limit, SPEC-2.0 §2.4, §6.8): the chain manifest is normalized before the merge, sleep 3 is killed at 1 s (code 124).",
+  "document": "fixtures/dirs/budget100/c/sleep.jos",
+  "promises": [
+    "P20",
+    "P21"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§6.8",
+    "§9.2"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 124,
+  "result": {
+    "ok": false
+  }
+}

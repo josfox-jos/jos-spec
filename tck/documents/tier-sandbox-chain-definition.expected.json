@@ -1,0 +1,35 @@
+{
+  "description": "A definition resolved from the .jos/ chain (flows/) that declares sandbox is known before the run; the run is refused before step one (SPEC-2.0 §6.5, §9.2, code 5).",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5",
+    "SPEC-2.0 §9.2"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "receipts": [
+      {
+        "code": 5,
+        "isolation": "none"
+      }
+    ]
+  },
+  "document": "fixtures/dirs/chain-defs/use-boxed.jos",
+  "alternatives": [
+    {
+      "code": 0,
+      "result": {
+        "ok": true,
+        "code": 0
+      },
+      "claim": "sandbox"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "description": "rc.8 (F-03): a root member `version` in a 0.0.7 document would move to x-legacy-version, which the mapping writes from orchestration_contract.version: code 2 (mixed spellings) instead of overwriting the recorded legacy version.",
+  "promises": [
+    "P3",
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§2.5"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/version: mixed spellings \"version\" and \"x-legacy-version\""
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/version: mixed spellings \"version\" and \"x-legacy-version\""
+    ],
+    "receipts": []
+  }
+}

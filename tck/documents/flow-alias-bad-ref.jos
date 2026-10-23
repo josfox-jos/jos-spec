@@ -1,0 +1,17 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "flow.alias.bad",
+  "meta": {
+    "name": "flow.alias.bad"
+  },
+  "execution": {
+    "flow": [
+      {
+        "invoke": "Not A Ref"
+      }
+    ]
+  }
+}

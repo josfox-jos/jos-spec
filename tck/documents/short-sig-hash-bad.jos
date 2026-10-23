@@ -1,0 +1,17 @@
+{
+  "jos": "1.1.0",
+  "id": "sealed",
+  "intent": "say sealed",
+  "done": [
+    {
+      "exit": 0
+    }
+  ],
+  "run": [
+    "echo",
+    "sealed"
+  ],
+  "sig": {
+    "hash": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+  }
+}

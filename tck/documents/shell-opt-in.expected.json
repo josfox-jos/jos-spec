@@ -1,0 +1,20 @@
+{
+  "description": "execution.shell: true runs a command line through /bin/sh -c (explicit opt-in).",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.1",
+    "§6.8"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_6bc08fbe60f27a95ae58768acf69ff565808965c872131c2438e0aa45fb485cf",
+  "result": {
+    "output": {
+      "stdout": "b"
+    }
+  }
+}

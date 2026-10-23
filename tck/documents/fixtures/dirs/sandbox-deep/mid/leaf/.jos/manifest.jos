@@ -1,0 +1,40 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sandbox-deep-leaf",
+  "meta": {
+    "name": "sandbox-deep-leaf",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A leaf folder that declares nothing"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "level": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sandbox-deep-leaf.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "level"
+        ]
+      }
+    }
+  }
+}

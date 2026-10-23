@@ -1,0 +1,29 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "gate.after.twice",
+  "meta": {
+    "name": "gate.after.twice"
+  },
+  "orchestration": {
+    "definitions": {
+      "step1": {
+        "type": "shell",
+        "command": "true"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "step1"
+        ],
+        "gates": {
+          "step1": "exit 0",
+          "after-step1": "exit 0"
+        }
+      }
+    }
+  }
+}

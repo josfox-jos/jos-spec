@@ -1,0 +1,36 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "template"
+  },
+  "id": "prompt.greet",
+  "meta": {
+    "name": "greet",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "Greet {{ name }} in {{ lang }}"
+  },
+  "execution": {
+    "engine": "llm",
+    "inputs": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string",
+          "default": "en-US"
+        }
+      }
+    }
+  },
+  "persona": {
+    "language": "en-US",
+    "system_prompt": "You greet people. Name: {{ name }}"
+  }
+}

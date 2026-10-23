@@ -1,0 +1,23 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "descriptive",
+  "meta": {
+    "name": "descriptive",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "descriptive",
+    "success_criteria": [
+      "The greeting is friendly",
+      "No profanity"
+    ]
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  }
+}

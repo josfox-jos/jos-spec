@@ -1,0 +1,13 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "crystal"
+  },
+  "meta": {
+    "name": "Crystal without its required members"
+  },
+  "crystal": {
+    "engine": "llm",
+    "ctx_class": "prod"
+  }
+}

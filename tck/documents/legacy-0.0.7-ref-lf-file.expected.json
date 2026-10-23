@@ -1,0 +1,29 @@
+{
+  "description": "The file has LF line ends and the manifest was computed over its CRLF form (git normalized the line ends of a document sealed on Windows): verified (decision D1, eol crlf).",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/lf-file/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "Hello from ref\n",
+      "stderr": ""
+    },
+    "integrity_ref": {
+      "manifest": "./ref.jos.sig.json",
+      "sha256": "6d8be6cfd7196d2baf3bad8b34c019ea660b08bbd5b8ec6731b115913516edbe",
+      "eol": "crlf"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "description": "A step needs a name that no definition has: invalid (code 2).",
+  "promises": [
+    "P12"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.4"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/orchestration/definitions/b/needs/0: unknown step \"zzz\""
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/orchestration/definitions/b/needs/0: unknown step \"zzz\""
+    ]
+  },
+  "semantic": true
+}

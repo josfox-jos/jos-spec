@@ -1,0 +1,53 @@
+{
+  "description": "A flow of two shell steps where b needs a: F1 runs it (rc.3; F0 reported code 5). One receipt per step plus the flow receipt listing their hashes.",
+  "promises": [
+    "P9"
+  ],
+  "spec": [
+    "SPEC-2.0 §4.1",
+    "§5.1"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_9131b3c89c8eb2c70c04bdc75ff5f24a71e972343d54ed63cc40c42c06df17b5",
+  "result": {
+    "ok": true,
+    "flow": "main",
+    "steps": [
+      {
+        "step": "a",
+        "status": "ok",
+        "code": 0
+      },
+      {
+        "step": "b",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "b\n",
+      "stderr": ""
+    },
+    "receipts": [
+      {
+        "step": "a",
+        "code": 0,
+        "engine": "shell"
+      },
+      {
+        "step": "b",
+        "code": 0,
+        "engine": "shell"
+      },
+      {
+        "step": "two.steps",
+        "flow": "main",
+        "engine": "jos",
+        "code": 0
+      }
+    ]
+  }
+}

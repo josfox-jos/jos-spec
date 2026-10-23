@@ -1,0 +1,34 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "seal.one.tampered",
+  "meta": {
+    "name": "seal.one.tampered",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A 1.0.0 document sealed as 1.0.0 seals"
+  },
+  "orchestration": {
+    "definitions": {
+      "a": {
+        "type": "shell",
+        "command": "echo changed"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "a"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:d8af45acf8201005cba50c20c050db9230044d5ead976c5bc61e9ab5087288e3",
+    "signed_by": "publisher-key-id",
+    "timestamp": "2026-06-27T00:00:00Z"
+  }
+}

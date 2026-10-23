@@ -1,0 +1,133 @@
+{
+  "description": "The output contract of a decompose engine, written by hand (the decomposer itself is an engine, F2, never the kernel): a flow whose steps are atoms, each with its own success_criteria, guardrails.limit and model_policy.task_class, edges in needs, the parent's criteria kept as the flow's, step limits (3 + 3 s) within the flow's 10 s. Both engines validate it as a flow and run every nano-intention on its own with one receipt and per-criterion verdicts each, then the flow receipt.",
+  "promise": "P16: \"Write in intentions; the engine decomposes vague intent into nano-intentions, each independently executable and metered\" (nano-intentions v1, crystallization v1). 2.0: decomposition produces a flow whose steps are atoms; the format defines the output (a flow of atoms with `success_criteria` and `limit` each); the decomposer is an engine (`engine: decompose`), never the kernel. Phase F2 engine, F1 format.",
+  "promises": [
+    "P16"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.6",
+    "§5.4",
+    "§7.2",
+    "PROMISES.md P16"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0",
+    "document": {
+      "jos": {
+        "kind": "flow"
+      },
+      "intention": {
+        "success_criteria": [
+          {
+            "stdout_contains": "notes ready"
+          }
+        ]
+      },
+      "guardrails": {
+        "limit": {
+          "seconds": 10
+        }
+      },
+      "orchestration": {
+        "definitions": {
+          "collect": {
+            "jos": {
+              "kind": "atom"
+            },
+            "guardrails": {
+              "limit": {
+                "seconds": 3
+              }
+            },
+            "model_policy": {
+              "task_class": "extract"
+            }
+          },
+          "draft": {
+            "jos": {
+              "kind": "atom"
+            },
+            "guardrails": {
+              "limit": {
+                "seconds": 3
+              }
+            },
+            "model_policy": {
+              "task_class": "generate"
+            },
+            "needs": [
+              "collect"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "code": 0,
+  "artifact": "art_f29e528ad6453e72e460182553bded103444dda984c0380cd427468e06e8328a",
+  "result": {
+    "ok": true,
+    "flow": "main",
+    "steps": [
+      {
+        "step": "collect",
+        "status": "ok",
+        "code": 0
+      },
+      {
+        "step": "draft",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "notes ready\n",
+      "stderr": ""
+    },
+    "receipts": [
+      {
+        "step": "collect",
+        "engine": "shell",
+        "code": 0,
+        "artifact": "art_49bc9147b733f6de65e411cac35c3b899296f5a5ec4662ae77bf7f331748774c",
+        "criteria": [
+          {
+            "check": "stdout_contains",
+            "verdict": "pass"
+          }
+        ]
+      },
+      {
+        "step": "draft",
+        "engine": "shell",
+        "code": 0,
+        "artifact": "art_796b93d63277e16d52c993ebdc3d9d429efa4fa474f830e1169bd568217f70b7",
+        "criteria": [
+          {
+            "check": "exit",
+            "verdict": "pass"
+          },
+          {
+            "check": "stdout_contains",
+            "verdict": "pass"
+          }
+        ]
+      },
+      {
+        "step": "release-notes.decomposed",
+        "flow": "main",
+        "engine": "jos",
+        "code": 0,
+        "ok": true,
+        "criteria": [
+          {
+            "check": "stdout_contains",
+            "verdict": "pass"
+          }
+        ]
+      }
+    ]
+  }
+}

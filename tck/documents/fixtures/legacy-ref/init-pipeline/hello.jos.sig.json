@@ -1,0 +1,10 @@
+{
+  "$schema": "https://josfox.ai/schemas/jos-manifest-0.0.7.json",
+  "manifest_version": "1.0.0",
+  "artifact_ref": "hello.jos",
+  "artifact_sha256": "3245579c70fd2a78374d60cf53cc4a08ebe8752929b2652e580262d3a6716575",
+  "artifact_size_bytes": 1808,
+  "timestamp": "2026-10-21T01:27:01.717Z",
+  "generated_by": "jos init command",
+  "canonical_version": "Format version v0.0.7 — Specification maturity v0.1.0 (Alpha)"
+}

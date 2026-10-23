@@ -1,0 +1,17 @@
+{
+  "description": "Running a folder D runs D/.jos/manifest.jos as the document (SPEC-2.0 §9.1, kind directory). This is how the reference kernels treat a folder argument; it is not a crystallized directory (§9.4, a later phase), and every step executes.",
+  "run_document": "fixtures/dirs/runnable",
+  "promises": [
+    "P9",
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.1"
+  ],
+  "validate": null,
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "tier-sandbox-shell-line",
+  "meta": {
+    "name": "tier-sandbox-shell-line",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sandbox step given as a command line",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": "echo ok > tier-sandbox-shell-line.effect.txt",
+    "shell": true
+  },
+  "security": {
+    "tier": "sandbox"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "description": "rc.8 (F-05): from 10^21 on, RFC 8785 writes an integer value with an exponent (1e+21), so 1e21, 1E21, 1000000000000000000000 and 1e22 are valid and all three spellings of 10^21 share one canonical form; 2^53, written out or with an exponent, stays valid.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.1",
+    "§8.1"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_ebfa1056cea80026179dbd5dd5952935d2d5d5e6337052dd120d03294ef236ff",
+  "result": {
+    "ok": true
+  }
+}

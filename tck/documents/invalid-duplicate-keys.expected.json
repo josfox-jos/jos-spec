@@ -1,0 +1,24 @@
+{
+  "description": "Duplicate member names at two levels: invalid (code 2) in both engines; JSON.parse would keep the last value silently, so the JS engine scans the text before accepting it (rc.3, SPEC-2.0 §2.1).",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/: duplicate key \"meta\"",
+      "/: duplicate key \"objective\""
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/: duplicate key \"meta\"",
+      "/: duplicate key \"objective\""
+    ]
+  }
+}

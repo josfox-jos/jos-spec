@@ -1,0 +1,42 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-outside-changed",
+  "meta": {
+    "name": "sealed-outside-changed",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sealed folder: Content of D outside .jos/ is not covered: files added next to .jos/ after seali"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "sealed ran"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "say"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:9c2f72a761055e71fe1a8ed884dba76661b86d0283243da290bba47879686fc7"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "group"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 1
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "shell": true,
+    "run": "sh -c \"sleep 30\" ; echo never"
+  }
+}

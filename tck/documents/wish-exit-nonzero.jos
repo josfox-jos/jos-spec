@@ -1,0 +1,19 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "wish",
+  "meta": {
+    "name": "wish",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "wish"
+  },
+  "execution": {
+    "run": [
+      "false"
+    ]
+  }
+}

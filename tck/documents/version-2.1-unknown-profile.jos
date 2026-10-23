@@ -1,0 +1,36 @@
+{
+  "jos": {
+    "version": "2.1.0",
+    "kind": "atom",
+    "profiles": [
+      "sandbox/1"
+    ]
+  },
+  "id": "version-2-1-unknown-profile",
+  "meta": {
+    "name": "version-2-1-unknown-profile",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "An unknown profile carries no obligation and is ignored",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "ok"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "tpl-with"
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "template"
+        },
+        "id": "local.say",
+        "meta": {
+          "name": "say",
+          "version": "1.0.0"
+        },
+        "intention": {
+          "objective": "Say one word",
+          "success_criteria": [
+            {
+              "exit": 0
+            }
+          ]
+        },
+        "execution": {
+          "inputs": {
+            "type": "object",
+            "required": [
+              "word"
+            ],
+            "properties": {
+              "word": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "run": [
+            "echo",
+            "{{ word }}"
+          ]
+        }
+      },
+      "main": {
+        "use": "local.say@1.0.0",
+        "with": {
+          "word": "lego"
+        }
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "main"
+        ]
+      }
+    }
+  }
+}

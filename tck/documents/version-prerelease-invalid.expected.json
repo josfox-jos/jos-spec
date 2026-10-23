@@ -1,0 +1,22 @@
+{
+  "description": "jos.version is a format version MAJOR.MINOR.PATCH; a prerelease string is invalid.",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.2"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/jos/version: pattern"
+    ]
+  },
+  "code": 2,
+  "result": {
+    "errors": [
+      "/jos/version: pattern"
+    ]
+  },
+  "artifact": null
+}

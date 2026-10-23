@@ -1,0 +1,52 @@
+{
+  "description": "Short form of SPEC-2.0 §3.1: normalized to the canonical atom before validation and hashing.",
+  "promises": [
+    "P1",
+    "P14"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.1",
+    "§4.2"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "short",
+    "input_version": "2.0.0",
+    "document": {
+      "jos": {
+        "version": "2.0.0",
+        "kind": "atom"
+      },
+      "meta": {
+        "name": "Print a greeting"
+      },
+      "intention": {
+        "objective": "Print a greeting",
+        "success_criteria": [
+          {
+            "exit": 0
+          },
+          {
+            "stdout_contains": "hello"
+          }
+        ]
+      },
+      "execution": {
+        "run": [
+          "echo",
+          "hello, .jos"
+        ]
+      }
+    }
+  },
+  "code": 0,
+  "artifact": "art_fb6769e9ac1a118fc0c33e75c7d7d8be843f3f0914eff9b74ce3d654e8c6600f",
+  "result": {
+    "ok": true,
+    "input_version": "2.0.0",
+    "output": {
+      "stdout": "hello, .jos\n"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "description": "hello.jos preceded by a UTF-8 byte order mark: invalid (code 2) in both engines; SPEC-2.0 §2.1 forbids the BOM.",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/: document starts with a byte order mark"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/: document starts with a byte order mark"
+    ]
+  }
+}

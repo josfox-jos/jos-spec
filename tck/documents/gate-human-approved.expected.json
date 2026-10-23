@@ -1,0 +1,53 @@
+{
+  "description": "The same flow with --approve build: the approval is an event in the ledger before the next step, deploy runs, done.",
+  "document": "gate-human.jos",
+  "run_args": [
+    "--approve",
+    "build"
+  ],
+  "promises": [
+    "P27",
+    "P34"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.5",
+    "§7.3"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "steps": [
+      {
+        "step": "build",
+        "status": "ok",
+        "code": 0
+      },
+      {
+        "step": "deploy",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "deployed\n",
+      "stderr": ""
+    }
+  },
+  "ledger_kinds": [
+    "admit",
+    "derive",
+    "start",
+    "receipt",
+    "approval",
+    "derive",
+    "start",
+    "receipt",
+    "receipt",
+    "end"
+  ]
+}

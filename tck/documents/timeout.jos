@@ -1,0 +1,30 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "timeout",
+  "meta": {
+    "name": "timeout",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "timeout",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 0.3
+    }
+  },
+  "execution": {
+    "run": [
+      "sleep",
+      "5"
+    ]
+  }
+}

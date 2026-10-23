@@ -1,0 +1,27 @@
+{
+  "description": "readiness rc.7 pass 5 F-15: in a 0.0.7 document a guard member the schema defines but with another shape is code 2, as in a 2.0 document, and is never moved: guardrails.limit with cost_usd \"0.01\" beside seconds 1. Before the fix the whole limit moved to guardrails.x-legacy-limit and the 3 s step ran to completion (0).",
+  "promises": [
+    "P3",
+    "P19",
+    "P20"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.5"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/guardrails/limit/cost_usd: type"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/guardrails/limit/cost_usd: type"
+    ],
+    "receipts": []
+  }
+}

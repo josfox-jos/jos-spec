@@ -1,0 +1,63 @@
+{
+  "$schema": "https://josfox.ai/schemas/jos-0.0.7.json",
+  "id_jos": "atom-legacy-demo",
+  "jos": {
+    "open": "jos run atom",
+    "supports": [
+      "@josfox/jos"
+    ]
+  },
+  "orchestration_contract": {
+    "version": "0.0.7",
+    "mode": "sync"
+  },
+  "meta": {
+    "name": "legacy-demo",
+    "version": "1.0.0",
+    "type": "atom"
+  },
+  "intention": {
+    "objective": "Prove a v0.0.7 artifact is read by the 2.0 kernel.",
+    "success_criteria": "Prints the legacy greeting."
+  },
+  "guardrails": {
+    "avoid": [],
+    "max_retries": 1,
+    "timeout_ms": 5000
+  },
+  "capabilities": [],
+  "artifacts": {
+    "description": "Legacy 13-key artifact."
+  },
+  "orchestration": {
+    "definitions": {
+      "greet": {
+        "type": "shell",
+        "description": "Legacy greeting",
+        "command": "echo 'hello from v0.0.7'"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          {
+            "step": "greet"
+          }
+        ]
+      }
+    }
+  },
+  "security": {
+    "type": "open",
+    "permissions": [],
+    "integrity_ref": null
+  },
+  "files": [],
+  "x_run_params": {
+    "timeout": 5000,
+    "retry_on_failure": false
+  },
+  "adaptive_ai": {
+    "learning_enabled": false
+  }
+}

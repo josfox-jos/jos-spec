@@ -1,0 +1,17 @@
+{
+  "description": "Nesting deeper than 64 levels is code 2, never a crash.",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": false
+  },
+  "code": 2,
+  "result": {
+    "code": 2
+  }
+}

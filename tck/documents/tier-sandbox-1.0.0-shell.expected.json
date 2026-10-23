@@ -1,0 +1,35 @@
+{
+  "description": "A document that declares jos.version 1.0.0, asks for a sandbox and runs a shell command line (`execution.run` with `shell: true`, 2.0 members, SPEC-2.0 §6.8; valid under SPEC-2.0, not under the 1.0.0 schema). It is refused before the shell starts and leaves no file (§6.5, Appendix C).",
+  "promises": [
+    "P3",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5"
+  ],
+  "validate": {
+    "valid": true,
+    "input_version": "1.0.0"
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/security/tier: sandbox not available (SPEC-2.0 §6.5)"
+  },
+  "alternatives": [
+    {
+      "code": 0,
+      "result": {
+        "ok": true,
+        "code": 0,
+        "receipts": [
+          {
+            "isolation": "sandbox"
+          }
+        ]
+      },
+      "claim": "sandbox"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# test fixture: excluded entries (SPEC-2.0 9.3) are part of the vector
+!logs/
+!replays/
+!dev/

@@ -1,0 +1,22 @@
+{
+  "description": "A regular expression that does not compile is invalid (code 2), checked before any launch.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.3"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/intention/success_criteria/0/stdout_matches: regex"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/intention/success_criteria/0/stdout_matches: regex"
+    ]
+  }
+}

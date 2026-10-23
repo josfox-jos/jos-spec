@@ -1,0 +1,18 @@
+{
+  "description": "A non-positive effective limit is a budget exceeded before start (code 4).",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 4,
+  "artifact": "art_a9fd27def551b2b2de32d0ff725e0cd5ebaaf9c70b4f4cdcd2b681500d19d3fe",
+  "result": {
+    "reason": "budget: limit.seconds is not positive"
+  }
+}

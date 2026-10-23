@@ -1,0 +1,17 @@
+{
+  "description": "requires[].kind is one of mcp-server, artifact, service: any other kind makes the document invalid (code 2) and nothing runs.",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": {
+    "valid": false
+  },
+  "code": 2,
+  "result": {
+    "ok": false,
+    "code": 2
+  }
+}

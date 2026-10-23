@@ -1,0 +1,34 @@
+{
+  "description": "The same template with with {word: lego}: the instantiated document has a deterministic art_ (recomputed by the runner's independent serializer when this vector was written) and runs.",
+  "promises": [
+    "P29"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.7",
+    "§8.2"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "lego\n",
+      "stderr": ""
+    },
+    "receipts": [
+      {
+        "step": "main",
+        "artifact": "art_6cb538a3ddbb1e319e048fccc281dbb8c2794f56cbffe2d40203396596060c00",
+        "code": 0
+      },
+      {
+        "flow": "main",
+        "code": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "d"
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "RAN"
+    ]
+  }
+}

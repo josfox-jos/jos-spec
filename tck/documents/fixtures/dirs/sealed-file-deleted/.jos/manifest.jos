@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-file-deleted",
+  "meta": {
+    "name": "sealed-file-deleted",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sealed folder: A covered file deleted after sealing: the directory hash no longer matches and n"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sealed-file-deleted.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "say"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:66e2d060d8d833c05869ef0fee5ff17b5ebb991bd05386f8d056969a41d47643"
+  }
+}

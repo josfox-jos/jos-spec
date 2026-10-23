@@ -1,0 +1,22 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "x.extension",
+  "meta": {
+    "name": "x.extension",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "x.extension"
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  },
+  "x-origin": {
+    "tool": "vector"
+  }
+}

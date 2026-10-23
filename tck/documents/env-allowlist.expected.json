@@ -1,0 +1,19 @@
+{
+  "description": "execution.env allow-list: a listed variable reaches the process.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.8"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_ba48894ba2c3d2a498d3de69b11812d58ce48f7e041fc1600749fd62c5072eeb",
+  "result": {
+    "output": {
+      "stdout": "allowed\n"
+    }
+  }
+}

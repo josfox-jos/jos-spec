@@ -1,0 +1,42 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-excluded-changed",
+  "meta": {
+    "name": "sealed-excluded-changed",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sealed folder: Entries under logs, replays and dev at any depth, and under ai/cache, written af"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "sealed ran"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "say"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:df647ead8eb2b924016d2f756cf118ac6387512ea5e386a9bc7a9d42dfb1c4b6"
+  }
+}

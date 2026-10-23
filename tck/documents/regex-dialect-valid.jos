@@ -1,0 +1,32 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "rxok"
+  },
+  "guardrails": {
+    "avoid": [
+      "/rm\\s+-rf/",
+      "/^(?:curl|wget)\\b/"
+    ]
+  },
+  "intention": {
+    "success_criteria": [
+      {
+        "stdout_matches": "^b{1,3}"
+      },
+      {
+        "stdout_matches": "[a-c]+"
+      }
+    ]
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "bb"
+    ]
+  }
+}

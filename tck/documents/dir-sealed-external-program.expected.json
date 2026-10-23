@@ -1,0 +1,18 @@
+{
+  "description": "The directory hash covers D/.jos/ only (SPEC-2.0 §9.3). A sealed folder whose step runs a program outside D/.jos/ (tool.sh, written after the folder was sealed) runs, and its artifact is the art_ of D/.jos/: it identifies the folder's documents, not the programs they run. A program is pinned with requires[].digest (§6.6), not by the seal.",
+  "promises": [
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.3",
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": null,
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  },
+  "run_document": "fixtures/dirs/sealed-external-program",
+  "artifact": "art_1084a95374ead8546f135da673e7670a8827637b3384f0f9f20c9a2fa2653084"
+}

@@ -1,0 +1,412 @@
+{
+  "spec": "Capability 0.1.0",
+  "status": "Draft",
+  "date": "2026-10-14",
+  "phase": "F0 (trust local-trusted)",
+  "description": "Conformance vectors for specs/kernel/capability/0.1.0/SPEC.md §1-§4 and §7 as implemented in F0. Each case builds a Capability (source local = Capability.localTrusted in the same process; source json = a plain object), runs the document in dry-run mode (no process starts) and compares the exit code, the denial reason and the effective limits.",
+  "cases": [
+    {
+      "name": "local-trusted-default",
+      "document": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "cap.vector"
+        },
+        "execution": {
+          "run": [
+            "true"
+          ]
+        }
+      },
+      "capability": {
+        "source": "local"
+      },
+      "expect": {
+        "code": 0,
+        "limits": {
+          "seconds": 60,
+          "output_bytes": 1048576,
+          "retries": 0
+        }
+      },
+      "note": "Capability.localTrusted with default permissions admits a shell atom; F0 default limits apply (60 s, 1 MiB, 0 retries)."
+    },
+    {
+      "name": "local-trusted-from-json",
+      "document": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "cap.vector"
+        },
+        "execution": {
+          "run": [
+            "true"
+          ]
+        }
+      },
+      "capability": {
+        "source": "json",
+        "value": {
+          "cap": "cap_01JA5Z7Q8X9K2M4N6P8R0T2V4W",
+          "trust": "local-trusted",
+          "subject": {
+            "id": "local"
+          },
+          "object": {
+            "artifact": "art_f854b2aeb789d616b26acff4df9ff7741d09d5f7a63add238201880e5b10bf2b"
+          },
+          "context": {},
+          "permissions": [
+            "engine:shell"
+          ],
+          "budget": {},
+          "issued": "2026-10-14T00:00:00Z",
+          "expires": "2099-01-01T00:00:00Z"
+        }
+      },
+      "expect": {
+        "code": 3,
+        "reason": "capability: not issued in this process (local-trusted does not cross a process boundary)"
+      },
+      "note": "§2 and §8: a local-trusted Capability received as data (file, JSON, another process) MUST be rejected."
+    },
+    {
+      "name": "signed-without-signature",
+      "document": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "cap.vector"
+        },
+        "execution": {
+          "run": [
+            "true"
+          ]
+        }
+      },
+      "capability": {
+        "source": "json",
+        "value": {
+          "cap": "cap_01JA5Z7Q8X9K2M4N6P8R0T2V4W",
+          "trust": "signed",
+          "object": {
+            "artifact": "art_f854b2aeb789d616b26acff4df9ff7741d09d5f7a63add238201880e5b10bf2b"
+          }
+        }
+      },
+      "expect": {
+        "code": 3,
+        "reason": "capability: trust signed without a signature"
+      },
+      "note": "§9: unsigned-but-signed MUST fail."
+    },
+    {
+      "name": "signed-in-f0",
+      "document": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "cap.vector"
+        },
+        "execution": {
+          "run": [
+            "true"
+          ]
+        }
+      },
+      "capability": {
+        "source": "json",
+        "value": {
+          "cap": "cap_01JA5Z7Q8X9K2M4N6P8R0T2V4W",
+          "trust": "signed",
+          "object": {
+            "artifact": "art_f854b2aeb789d616b26acff4df9ff7741d09d5f7a63add238201880e5b10bf2b"
+          },
+          "signature": "AAAA"
+        }
+      },
+      "expect": {
+        "code": 3,
+        "reason": "capability: signature verification is not available in F0"
+      },
+      "note": "F0 has no signature verification; a signed Capability is refused, never accepted unverified."
+    },
+    {
+      "name": "expired",
+      "document": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "cap.vector"
+        },
+        "execution": {
+          "run": [
+            "true"
+          ]
+        }
+      },
+      "capability": {
+        "source": "local",
+        "expires_in": -60
+      },
+      "expect": {
+        "code": 3,
+        "reason": "capability: expired"
+      },
+      "note": "§2 and §7: an expired Capability is invalid."
+    },
+    {
+      "name": "artifact-mismatch",
+      "document": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "cap.vector"
+        },
+        "execution": {
+          "run": [
+            "true"
+          ]
+        }
+      },
+      "capability": {
+        "source": "local",
+        "object": "mismatch"
+      },
+      "expect": {
+        "code": 3,
+        "reason": "capability: object.artifact does not match the document"
+      },
+      "note": "§7: object.artifact MUST equal art_(document)."
+    },
+    {
+      "name": "missing-engine-permission",
+      "document": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "cap.vector"
+        },
+        "execution": {
+          "run": [
+            "true"
+          ]
+        }
+      },
+      "capability": {
+        "source": "local",
+        "permissions": [
+          "net:none"
+        ]
+      },
+      "expect": {
+        "code": 3,
+        "reason": "capability: permission engine:shell not granted"
+      },
+      "note": "§4 and §7: deny by default; engine:shell is required."
+    },
+    {
+      "name": "missing-shell-enable",
+      "document": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "cap.shell"
+        },
+        "execution": {
+          "run": "true",
+          "shell": true
+        }
+      },
+      "capability": {
+        "source": "local",
+        "permissions": [
+          "engine:shell"
+        ]
+      },
+      "expect": {
+        "code": 3,
+        "reason": "capability: permission shell:enable not granted"
+      },
+      "note": "§4: shell:enable is required for execution.shell: true."
+    },
+    {
+      "name": "budget-minimum",
+      "document": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "cap.limits"
+        },
+        "guardrails": {
+          "limit": {
+            "seconds": 10,
+            "retries": 3
+          }
+        },
+        "execution": {
+          "run": [
+            "true"
+          ]
+        }
+      },
+      "capability": {
+        "source": "local",
+        "limits": {
+          "seconds": 5,
+          "output_bytes": 2048,
+          "retries": 1
+        }
+      },
+      "expect": {
+        "code": 0,
+        "limits": {
+          "seconds": 5,
+          "output_bytes": 2048,
+          "retries": 1
+        }
+      },
+      "note": "§3: effective budget is the element-wise minimum of document limits and the Capability budget."
+    },
+    {
+      "name": "budget-never-widens",
+      "document": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "cap.small"
+        },
+        "guardrails": {
+          "limit": {
+            "seconds": 2
+          }
+        },
+        "execution": {
+          "run": [
+            "true"
+          ]
+        }
+      },
+      "capability": {
+        "source": "local",
+        "limits": {
+          "seconds": 30
+        }
+      },
+      "expect": {
+        "code": 0,
+        "limits": {
+          "seconds": 2,
+          "output_bytes": 1048576,
+          "retries": 0
+        }
+      },
+      "note": "A Capability budget larger than the document limit does not widen it."
+    },
+    {
+      "name": "budget-non-positive",
+      "document": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "cap.vector"
+        },
+        "execution": {
+          "run": [
+            "true"
+          ]
+        }
+      },
+      "capability": {
+        "source": "local",
+        "limits": {
+          "seconds": 0
+        }
+      },
+      "expect": {
+        "code": 4,
+        "reason": "capability: budget.seconds is not positive"
+      },
+      "note": "§3 and §7: a non-positive budget is denied before start (code 4)."
+    }
+  ],
+  "single_call_site": {
+    "rule": "§1 and K1: exactly one function starts a process; it takes a Capability as its first parameter and verifies it before the launch.",
+    "js": {
+      "file": "kernel/js/jos-core.js",
+      "function": "spawnWith",
+      "first_parameter": "capability",
+      "launch_calls": [
+        "spawnSync"
+      ],
+      "forbidden_elsewhere": [
+        "child_process",
+        "spawnSync",
+        "spawn(",
+        "execSync",
+        "execFile",
+        "exec(",
+        "fork("
+      ]
+    },
+    "py": {
+      "package": "kernel/py/jos_core",
+      "function": "spawn_with",
+      "first_parameter": "capability",
+      "launch_calls": [
+        "subprocess.Popen"
+      ],
+      "forbidden_elsewhere": [
+        "subprocess",
+        "os.system",
+        "os.popen",
+        "os.exec*",
+        "os.spawn*",
+        "os.fork",
+        "pty"
+      ]
+    }
+  },
+  "deferred": [
+    {
+      "group": "admission policies (§5, four example rules)",
+      "phase": "F2"
+    },
+    {
+      "group": "intersection of document, directory chain, subject and runtime permissions (§3)",
+      "phase": "F2"
+    },
+    {
+      "group": "derivation for flows and clones that attempts to widen (§6)",
+      "phase": "F1/F2"
+    },
+    {
+      "group": "signature verification of trust signed (§2, §8)",
+      "phase": "F2"
+    }
+  ]
+}

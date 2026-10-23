@@ -1,0 +1,32 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "nested-ref"
+  },
+  "orchestration": {
+    "definitions": {
+      "before": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "before ran"
+        ]
+      },
+      "child": {
+        "type": "jos",
+        "artifact": "child/ref.jos"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "before",
+          "child"
+        ]
+      }
+    }
+  }
+}

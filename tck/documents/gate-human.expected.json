@@ -1,0 +1,45 @@
+{
+  "description": "A human gate after build and no approval event: the flow stops before deploy, waiting (code 1); the ledger has no approval entry.",
+  "promises": [
+    "P27",
+    "P34"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.5",
+    "§7.3"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 1,
+  "result": {
+    "ok": false,
+    "waiting": {
+      "step": "build",
+      "gate": "human"
+    },
+    "reason": "gate human: waiting for an approval of \"build\"",
+    "steps": [
+      {
+        "step": "build",
+        "status": "waiting",
+        "code": 1
+      },
+      {
+        "step": "deploy",
+        "status": "skipped",
+        "reason": "the flow halted"
+      }
+    ]
+  },
+  "ledger_kinds": [
+    "admit",
+    "derive",
+    "start",
+    "receipt",
+    "receipt",
+    "end"
+  ]
+}

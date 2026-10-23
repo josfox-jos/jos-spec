@@ -1,0 +1,20 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "invalid.number.1e20",
+  "meta": {
+    "name": "invalid.number.1e20",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "invalid.number.1e20"
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  },
+  "x-n": 1e20
+}

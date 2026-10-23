@@ -1,0 +1,18 @@
+{
+  "description": "integrity.hash is recomputed by the kernel; a mismatch is refused (code 3).",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §8.1",
+    "JOSID §5.5"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 3,
+  "artifact": "art_3047992e8bf96b41d4d5dc6e65d4bd3c1226b80a2eb723bb01a331adb119c987",
+  "result": {
+    "reason": "integrity: declared hash does not match the computed hash"
+  }
+}

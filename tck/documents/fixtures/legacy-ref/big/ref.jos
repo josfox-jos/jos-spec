@@ -1,0 +1,71 @@
+{
+  "$schema": "https://josfox.ai/schemas/jos-0.0.7.json",
+  "$comment": "Format version v0.0.7 \u2014 Specification maturity v0.1.0 (Alpha)",
+  "jos": {
+    "open": "jos run atom",
+    "supports": [
+      "@josfox/jos",
+      "josctl"
+    ],
+    "canonical": "Format version v0.0.7 \u2014 Specification maturity v0.1.0 (Alpha)"
+  },
+  "orchestration_contract": {
+    "version": "0.0.7",
+    "mode": "sync"
+  },
+  "id_jos": "atom-ref-1792539837287",
+  "adaptive_ai": {
+    "learning_mode": "frozen",
+    "llm_friendly_sentence": "This atom artifact performs the ref task."
+  },
+  "security": {
+    "type": "open",
+    "permissions": [],
+    "health_check": null,
+    "integrity": null,
+    "integrity_ref": "./ref.jos.sig.json"
+  },
+  "files": [],
+  "orchestration": {
+    "definitions": {
+      "main_task": {
+        "type": "shell",
+        "description": "Main task - replace with your command",
+        "command": "echo 'Hello from ref'"
+      }
+    },
+    "flows": {
+      "main": {
+        "description": "Main execution flow",
+        "steps": [
+          "main_task"
+        ]
+      }
+    }
+  },
+  "x_run_params": {
+    "timeout": 300,
+    "retry_on_failure": false
+  },
+  "meta": {
+    "version": "1.0.0",
+    "type": "atom",
+    "name": "ref",
+    "provider": "local",
+    "author": "JOS Developer",
+    "canonical_version": "Format version v0.0.7 \u2014 Specification maturity v0.1.0 (Alpha)"
+  },
+  "artifacts": {
+    "description": "Auto-generated atom artifact. Update this description.",
+    "outputs": []
+  },
+  "guardrails": {
+    "avoid": [],
+    "max_retries": 1
+  },
+  "intention": {
+    "objective": "Define your objective here",
+    "success_criteria": "Define success criteria here"
+  },
+  "capabilities": []
+}

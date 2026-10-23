@@ -1,0 +1,42 @@
+{
+  "orchestration_contract": {
+    "version": "0.0.7",
+    "mode": "sync"
+  },
+  "id_jos": "legacy-0.0.7-guard-avoid-shape",
+  "meta": {
+    "name": "legacy-0.0.7-guard-avoid-shape",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "legacy-0.0.7-guard-avoid-shape",
+    "success_criteria": "the step runs"
+  },
+  "guardrails": {
+    "avoid": [
+      "touch",
+      5
+    ]
+  },
+  "orchestration": {
+    "definitions": {
+      "main_task": {
+        "type": "shell",
+        "description": "step",
+        "command": "touch avoid-shape-ran"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "main_task"
+        ]
+      }
+    }
+  },
+  "security": {
+    "type": "open",
+    "permissions": [],
+    "integrity_ref": null
+  }
+}

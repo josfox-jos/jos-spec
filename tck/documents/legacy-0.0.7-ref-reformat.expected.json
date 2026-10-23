@@ -1,0 +1,28 @@
+{
+  "description": "The same JSON value written with other whitespace: refused, the hash is over octets, not over canonical JSON (as 4.1.0).",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/reformat/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 3,
+  "result": {
+    "reason": "integrity_ref: declared hash does not match the document octets",
+    "output": null,
+    "receipts": [
+      {
+        "ok": false,
+        "code": 3,
+        "reason": "integrity_ref: declared hash does not match the document octets"
+      }
+    ]
+  }
+}

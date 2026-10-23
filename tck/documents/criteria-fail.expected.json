@@ -1,0 +1,37 @@
+{
+  "description": "A criterion fails: ok is false and the code is 1, every verdict is reported.",
+  "promises": [
+    "P17",
+    "P18"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.4",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 1,
+  "artifact": "art_0471d794e9fbcf81b66bda0f2a07fde4605402d1156485b115e265e0316de766",
+  "result": {
+    "ok": false,
+    "receipts": [
+      {
+        "code": 1,
+        "criteria": [
+          {
+            "check": "exit",
+            "verdict": "pass",
+            "pass": true
+          },
+          {
+            "check": "stdout_contains",
+            "verdict": "fail",
+            "pass": false,
+            "detail": "not found"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "file.outside",
+  "meta": {
+    "name": "file.outside",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "file.outside",
+    "success_criteria": [
+      {
+        "file_exists": "../hello.jos"
+      }
+    ]
+  },
+  "execution": {
+    "cwd": "fixtures",
+    "run": [
+      "true"
+    ]
+  }
+}

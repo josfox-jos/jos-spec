@@ -1,0 +1,19 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "stderr-overflow"
+  },
+  "guardrails": {
+    "limit": {
+      "output_bytes": 1000
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "shell": true,
+    "run": "head -c 1001 /dev/zero >&2"
+  }
+}

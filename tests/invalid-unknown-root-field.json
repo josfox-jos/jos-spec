@@ -1,0 +1,10 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "Unknown root field"
+  },
+  "intent": "1.1.0 flat word used at the root"
+}

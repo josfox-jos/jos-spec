@@ -1,0 +1,83 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "id": "tier-sandbox-on-error-retry",
+  "meta": {
+    "name": "tier-sandbox-on-error-retry",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sandbox step that would be retried",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 2
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "one": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > tier-sandbox-on-error-retry.effect.txt"
+        ]
+      },
+      "two": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "id": "two",
+        "meta": {
+          "name": "two",
+          "version": "1.0.0"
+        },
+        "intention": {
+          "objective": "A sandbox step with retries",
+          "success_criteria": [
+            {
+              "exit": 0
+            }
+          ]
+        },
+        "guardrails": {
+          "limit": {
+            "seconds": 5,
+            "output_bytes": 65536,
+            "retries": 0
+          }
+        },
+        "execution": {
+          "engine": "shell",
+          "run": [
+            "echo",
+            "ok"
+          ],
+          "on_error": "retry"
+        },
+        "security": {
+          "tier": "sandbox"
+        }
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "one",
+          "two"
+        ]
+      }
+    }
+  }
+}

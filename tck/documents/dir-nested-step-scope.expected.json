@@ -1,0 +1,31 @@
+{
+  "description": "A flow runs sub/child.jos as a type: jos step; sub/.jos/ grants only engine:jos and fs:read:. and avoids SECRET. The step runs under its own chain intersected with the caller's: engine:shell is not granted (code 3), nothing is launched; run directly, the child is code 3 as well (K11, SPEC-2.0 §9.1-9.2).",
+  "document": "fixtures/dirs/nested/parent.jos",
+  "promises": [
+    "P15",
+    "P21"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.1",
+    "§9.2",
+    "Capability 0.1.0 §3",
+    "§6"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 3,
+  "result": {
+    "ok": false,
+    "steps": [
+      {
+        "step": "s",
+        "status": "failed",
+        "code": 3,
+        "reason": "capability: permission engine:shell not granted"
+      }
+    ]
+  }
+}

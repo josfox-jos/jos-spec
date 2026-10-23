@@ -1,0 +1,19 @@
+{
+  "description": "An extension member of an entry is not an authoritative source: the entry stays unsatisfied (SPEC-2.0 §6.6, §2.5, code 5).",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6",
+    "SPEC-2.0 §2.5"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/requires/0: not satisfied by this runtime (service \"payments\") (SPEC-2.0 §6.6)"
+  }
+}

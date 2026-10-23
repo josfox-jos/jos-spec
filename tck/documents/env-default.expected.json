@@ -1,0 +1,20 @@
+{
+  "description": "Default env allow-list is [\"PATH\"]: a variable of the caller environment does not reach the process (printenv exits 1).",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.8"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_d5818a14b4d71d00ac86fa9d8d690ff40a949096563f3d6317481425ff0df383",
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": ""
+    }
+  }
+}

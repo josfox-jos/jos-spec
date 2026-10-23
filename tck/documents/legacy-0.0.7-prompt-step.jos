@@ -1,0 +1,32 @@
+{
+  "id_jos": "test-executable",
+  "orchestration_contract": {
+    "version": "0.0.7"
+  },
+  "intention": {
+    "objective": "Demonstrate Level 3 conformance with executable flow",
+    "success_criteria": "Artifact can be executed by a conforming runtime"
+  },
+  "guardrails": {
+    "max_retries": 2,
+    "timeout_ms": 10000
+  },
+  "orchestration": {
+    "definitions": {
+      "greet": {
+        "type": "prompt",
+        "template": "Say hello to the user"
+      },
+      "confirm": {
+        "type": "prompt",
+        "template": "Confirm the greeting was received"
+      }
+    },
+    "flows": {
+      "main": {
+        "description": "Simple greeting flow",
+        "steps": ["greet", "confirm"]
+      }
+    }
+  }
+}

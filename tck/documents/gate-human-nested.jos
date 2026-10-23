@@ -1,0 +1,65 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "nested-gates"
+  },
+  "orchestration": {
+    "definitions": {
+      "deploy": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "flow"
+        },
+        "meta": {
+          "name": "deploy"
+        },
+        "orchestration": {
+          "definitions": {
+            "deploy": {
+              "engine": "shell",
+              "run": [
+                "echo",
+                "inner"
+              ]
+            }
+          },
+          "flows": {
+            "main": {
+              "steps": [
+                "deploy"
+              ],
+              "gates": {
+                "deploy": {
+                  "kind": "human"
+                }
+              }
+            }
+          }
+        }
+      },
+      "after": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "after"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "deploy",
+          "after"
+        ],
+        "gates": {
+          "deploy": {
+            "kind": "human"
+          }
+        }
+      }
+    }
+  }
+}

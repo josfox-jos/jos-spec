@@ -1,0 +1,33 @@
+{
+  "jos": {
+    "version": "2.1.0",
+    "kind": "atom"
+  },
+  "id": "version-2-1-plain",
+  "meta": {
+    "name": "version-2-1-plain",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A 2.1.0 document that uses nothing added after 2.0.0 runs",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "ok"
+    ]
+  }
+}

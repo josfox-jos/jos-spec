@@ -1,0 +1,6 @@
+# RFC 9116 — JOS specification (application/vnd.jos+json)
+Contact: mailto:jos@josfox.cloud
+Expires: 2027-10-14T00:00:00.000Z
+Preferred-Languages: en, es
+Policy: https://github.com/josfox-jos/jos-spec/blob/v2.0.0/SECURITY.md
+# Canonical: https://github.com/josfox-jos/jos-spec/blob/v2.0.0/.well-known/security.txt

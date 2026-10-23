@@ -1,0 +1,27 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "atom"
+  },
+  "id": "ai.example.atom.summarize",
+  "meta": {
+    "name": "Summarize"
+  },
+  "intention": {
+    "objective": "Summarize a document",
+    "success_criteria": [
+      "A summary is produced"
+    ]
+  },
+  "guardrails": {
+    "avoid": [
+      "Hallucinating facts"
+    ],
+    "max_cost_per_call": 0.1
+  },
+  "model_policy": {
+    "tier": "economy",
+    "vendor": "any",
+    "temperature": 0
+  }
+}

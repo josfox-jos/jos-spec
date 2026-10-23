@@ -1,0 +1,20 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "engine.llm",
+  "meta": {
+    "name": "engine.llm",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "engine.llm"
+  },
+  "execution": {
+    "engine": "llm",
+    "inputs": {
+      "text": "hello"
+    }
+  }
+}

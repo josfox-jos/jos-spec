@@ -1,0 +1,30 @@
+{
+  "description": "stderr alone exceeding the per-stream limit is 137 with truncated: true.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 \u00a73.5",
+    "\u00a77.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 137,
+  "result": {
+    "code": 137,
+    "receipts": [
+      {
+        "attempt": 1,
+        "code": 137,
+        "ok": false,
+        "timeout": false,
+        "truncated": true,
+        "exit": null
+      }
+    ]
+  },
+  "artifact": "art_8e57b6619a378eb22c4898c25398242a942760ab606218bf4f0542b27f6a3ac8"
+}

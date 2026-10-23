@@ -1,0 +1,49 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-external-program",
+  "meta": {
+    "name": "sealed-external-program",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "The directory hash covers D/.jos only (SPEC-2.0 §9.3): a program outside it runs as it is now, and the seal says nothing about it",
+    "success_criteria": [
+      {
+        "exit": 0
+      },
+      {
+        "stdout_contains": "external program"
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 4096
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "tool": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "tool.sh"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "tool"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:1084a95374ead8546f135da673e7670a8827637b3384f0f9f20c9a2fa2653084"
+  }
+}

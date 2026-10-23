@@ -1,0 +1,22 @@
+{
+  "description": "1.0.0 execution.budget.max_duration is read as an alias of guardrails.limit.seconds: killed, code 124.",
+  "promises": [
+    "P20"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§6.8"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 124,
+  "artifact": "art_088e727cde41e2b49c81f22554def51ab39a8f828b28eaee13fef2d592bd5c9c",
+  "result": {
+    "receipts": [
+      {
+        "timeout": true
+      }
+    ]
+  }
+}

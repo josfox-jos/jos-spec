@@ -1,0 +1,17 @@
+{
+  "description": "avoid /regex/ pattern: blocked before launch, code 3.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 3,
+  "artifact": "art_77ede4b57531226f7c3e8c0859ffd59f2ae94d0d86abb199bd7b7320146f6fe5",
+  "result": {
+    "reason": "avoid: pattern \"/\\\\b(curl|wget)\\\\b/\" matched the engine input"
+  }
+}

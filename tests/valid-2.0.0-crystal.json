@@ -1,0 +1,28 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "crystal"
+  },
+  "meta": {
+    "name": "translate#1"
+  },
+  "crystal": {
+    "key": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "artifact": "art_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "inputs_hash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "ctx_class": "prod",
+    "engine": "llm",
+    "model_id": "vendor-model-2026-01",
+    "temperature": 0,
+    "seed": 42,
+    "output_hash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "output_ref": "crystals/translate#1.out",
+    "receipt": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "created": "2026-10-14T12:00:00Z",
+    "expires": null
+  },
+  "integrity": {
+    "hash": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "signed_by": "key-1"
+  }
+}

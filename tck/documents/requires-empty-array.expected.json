@@ -1,0 +1,17 @@
+{
+  "description": "An empty requires[] has no unsatisfied entry; the atom runs (SPEC-2.0 §6.6).",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  }
+}

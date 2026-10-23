@@ -1,0 +1,17 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "brand"
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  },
+  "product": {
+    "tier": "x"
+  }
+}

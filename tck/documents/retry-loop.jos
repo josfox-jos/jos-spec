@@ -1,0 +1,31 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "retry.loop",
+  "meta": {
+    "name": "retry.loop",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "retry.loop",
+    "success_criteria": [
+      {
+        "stdout_contains": "second"
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "retries": 2
+    }
+  },
+  "execution": {
+    "run": [
+      "sh",
+      "-c",
+      "if read -r line; then echo second; else echo first; fi"
+    ]
+  }
+}

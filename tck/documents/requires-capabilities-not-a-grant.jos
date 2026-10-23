@@ -1,0 +1,46 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "requires-capabilities-not-a-grant",
+  "meta": {
+    "name": "requires-capabilities-not-a-grant",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A document that claims to provide what it requires",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "ok"
+    ]
+  },
+  "capabilities": [
+    {
+      "name": "payments",
+      "version": "1.0.0"
+    }
+  ],
+  "requires": [
+    {
+      "kind": "service",
+      "name": "payments",
+      "version": "1.0.0"
+    }
+  ]
+}

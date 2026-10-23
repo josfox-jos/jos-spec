@@ -1,0 +1,18 @@
+{
+  "description": "A folder whose manifest is sealed with the directory hash runs; the artifact of the run is the art_ of the directory (SPEC-2.0 §9.3).",
+  "promises": [
+    "P9",
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.3"
+  ],
+  "validate": null,
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  },
+  "run_document": "fixtures/dirs/sealed-ok",
+  "artifact": "art_df5acd102936d3eb213fd42415aced89c00cd4bdc0bd026c39a125bff6a33ad2"
+}

@@ -1,0 +1,25 @@
+{
+  "description": "readiness rc.7 pass 5 F-19: D/.jos names the directory D (SPEC-2.0 §9.1): with a manifest of kind atom, `validate D/.jos` and `run D/.jos` refuse it with code 2 and the text of `validate D`, and no step runs. Before the fix `validate D/.jos` said \"no .jos/manifest.jos under D/.jos\" instead.",
+  "run_document": "fixtures/dirs/manifest-not-directory/.jos",
+  "promises": [
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/jos/kind: a .jos/ manifest MUST be kind directory"
+    ]
+  },
+  "code": 2,
+  "result": {
+    "ok": false,
+    "code": 2,
+    "errors": [
+      "/jos/kind: a .jos/ manifest MUST be kind directory"
+    ],
+    "receipts": []
+  }
+}

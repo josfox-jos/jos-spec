@@ -1,0 +1,27 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "json.schema",
+  "meta": {
+    "name": "json.schema",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "json.schema",
+    "success_criteria": [
+      {
+        "json_schema": {
+          "type": "object"
+        }
+      }
+    ]
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "{}"
+    ]
+  }
+}

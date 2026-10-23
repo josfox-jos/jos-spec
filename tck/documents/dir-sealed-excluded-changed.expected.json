@@ -1,0 +1,17 @@
+{
+  "description": "Entries under logs, replays and dev at any depth, and under ai/cache, written after sealing are excluded and do not change the directory hash: the folder runs and its artifact is the sealed one.",
+  "promises": [
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.3"
+  ],
+  "validate": null,
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  },
+  "run_document": "fixtures/dirs/sealed-excluded-changed",
+  "artifact": "art_df647ead8eb2b924016d2f756cf118ac6387512ea5e386a9bc7a9d42dfb1c4b6"
+}

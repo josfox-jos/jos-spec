@@ -1,0 +1,36 @@
+{
+  "description": "Correction loop: attempt 1 fails, attempt 2 receives inputs.previous on stdin and passes; two chained receipts.",
+  "promises": [
+    "P17",
+    "P34"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.4",
+    "§7.2",
+    "§7.3"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_7343b906d9de803bb2ac813a77c7489812718e44495a774edf8ff2cf7e2cc6d9",
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "second\n"
+    },
+    "receipts": [
+      {
+        "attempt": 1,
+        "ok": false,
+        "code": 1,
+        "prev": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "attempt": 2,
+        "ok": true,
+        "code": 0
+      }
+    ]
+  }
+}

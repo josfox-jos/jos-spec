@@ -1,0 +1,33 @@
+{
+  "description": "A step whose effective tier is sandbox needs confinement; a runtime that cannot confine it refuses the run before its first step (SPEC-2.0 §6.5, code 5). A runtime that confines the step runs it instead, and its receipt records isolation \"sandbox\" (alternative).",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/security/tier: sandbox not available (SPEC-2.0 §6.5)"
+  },
+  "alternatives": [
+    {
+      "code": 0,
+      "result": {
+        "ok": true,
+        "code": 0,
+        "receipts": [
+          {
+            "isolation": "sandbox"
+          }
+        ]
+      },
+      "claim": "sandbox"
+    }
+  ]
+}

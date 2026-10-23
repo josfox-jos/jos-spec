@@ -1,0 +1,21 @@
+{
+  "description": "A .jos/ that grants only fs:read:. narrows the runtime grants: engine:shell is not granted, code 3.",
+  "document": "fixtures/dirs/narrow/doc.jos",
+  "promises": [
+    "P15",
+    "P21"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.2",
+    "Capability 0.1.0 §3"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 3,
+  "result": {
+    "reason": "capability: permission engine:shell not granted"
+  }
+}

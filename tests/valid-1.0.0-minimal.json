@@ -1,0 +1,9 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "Minimal JOS Artifact"
+  }
+}

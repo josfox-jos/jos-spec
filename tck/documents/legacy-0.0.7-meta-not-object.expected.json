@@ -1,0 +1,25 @@
+{
+  "description": "readiness rc.7 pass 5 F-16c: a meta that is not an object stays as written and the schema refuses it (code 2, /meta: type). Before the fix it was replaced by {name: id_jos} and the document was valid, so \"hello\", null and [1] shared one art_.",
+  "promises": [
+    "P3",
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/meta: type"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/meta: type"
+    ],
+    "receipts": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "description": "A document that declares jos.version 1.0.0 and asks for a sandbox. It runs `execution.run`, a 2.0 member (SPEC-2.0 §6.8): it is valid under SPEC-2.0 (a 1.0.x version is read as in §2.4 and validated with schema/jos.schema.json) and not under the 1.0.0 schema, which has no executable atom; tier-sandbox-1.0.0-flow is the genuine 1.0.0 case. It is unexecutable in a runtime that cannot confine it (§6.5, Appendix C). A runtime that confines the step runs it instead, and its receipt records isolation \"sandbox\" (alternative).",
+  "promises": [
+    "P3",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5"
+  ],
+  "validate": {
+    "valid": true,
+    "input_version": "1.0.0"
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/security/tier: sandbox not available (SPEC-2.0 §6.5)"
+  },
+  "alternatives": [
+    {
+      "code": 0,
+      "result": {
+        "code": 0,
+        "receipts": [
+          {
+            "isolation": "sandbox"
+          }
+        ]
+      },
+      "claim": "sandbox"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "typed-avoid",
+  "meta": {
+    "name": "typed-avoid",
+    "labels": {
+      "dotjos": "0.2.0",
+      "parent": "jos.monorepo"
+    }
+  },
+  "orchestration": {
+    "flows": {
+      "main": {
+        "steps": []
+      }
+    }
+  },
+  "guardrails": {
+    "avoid": "RAN"
+  }
+}

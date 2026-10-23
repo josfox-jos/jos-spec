@@ -1,0 +1,28 @@
+{
+  "description": "A URL is not a relative path: refused, the network is never used.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/url/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 3,
+  "result": {
+    "reason": "integrity_ref: not a relative path",
+    "output": null,
+    "receipts": [
+      {
+        "ok": false,
+        "code": 3,
+        "reason": "integrity_ref: not a relative path"
+      }
+    ]
+  }
+}

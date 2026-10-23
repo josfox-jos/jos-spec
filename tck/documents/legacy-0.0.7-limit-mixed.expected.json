@@ -1,0 +1,26 @@
+{
+  "description": "rc.8 (F-02): a 0.0.7 guardrails.timeout_ms (5000, that is 5 s) beside a declared guardrails.limit.seconds of 1: the two name the same limit with different values, so the document is code 2 (mixed spellings) in validate and run, before anything starts. max_retries, which the declared limit does not name, is not an error.",
+  "promises": [
+    "P3",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.5"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/guardrails/timeout_ms: mixed spellings \"timeout_ms\" and \"limit.seconds\""
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/guardrails/timeout_ms: mixed spellings \"timeout_ms\" and \"limit.seconds\""
+    ],
+    "receipts": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "description": "A sandbox step later in a flow refuses the run before the first step starts: one receipt, the refusal; step one leaves no file (SPEC-2.0 §6.5). A runtime that confines the sandbox step runs the document instead (alternative).",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/orchestration/definitions/two/security/tier: sandbox not available (SPEC-2.0 §6.5)",
+    "receipts": [
+      {
+        "code": 5,
+        "isolation": "none"
+      }
+    ]
+  },
+  "alternatives": [
+    {
+      "code": 0,
+      "result": {
+        "ok": true,
+        "code": 0
+      },
+      "claim": "sandbox"
+    }
+  ]
+}

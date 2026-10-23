@@ -1,0 +1,32 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "redos"
+  },
+  "guardrails": {
+    "avoid": [
+      "/(a+)+$/",
+      "/(?:x|xy)*z/"
+    ]
+  },
+  "intention": {
+    "success_criteria": [
+      {
+        "stdout_matches": "^(a*)*b"
+      },
+      {
+        "stdout_matches": "^(?:-[0-9]+)?$"
+      }
+    ]
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "a"
+    ]
+  }
+}

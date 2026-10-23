@@ -1,0 +1,31 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "context",
+  "meta": {
+    "name": "context",
+    "labels": {
+      "dotjos": "0.2.0"
+    }
+  },
+  "intention": {
+    "objective": "Conformance fixture: a .jos/ level with context files (PROJECT.md, genesis/) and a policy every run below it inherits"
+  },
+  "guardrails": {
+    "avoid": [
+      "drop table"
+    ],
+    "limit": {
+      "seconds": 4
+    }
+  },
+  "orchestration": {
+    "flows": {
+      "main": {
+        "steps": []
+      }
+    }
+  }
+}

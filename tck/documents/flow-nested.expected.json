@@ -1,0 +1,61 @@
+{
+  "description": "A step that uses a flow: the nested flow runs in the same run (same ledger and receipt chain), its steps are named sub/one and sub/two.",
+  "promises": [
+    "P9"
+  ],
+  "spec": [
+    "SPEC-2.0 §1.4",
+    "§5.1",
+    "§5.3"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "two\n",
+      "stderr": ""
+    },
+    "receipts": [
+      {
+        "step": "first"
+      },
+      {
+        "step": "sub/one"
+      },
+      {
+        "step": "sub/two"
+      },
+      {
+        "step": "sub",
+        "flow": "main",
+        "engine": "jos"
+      },
+      {
+        "step": "outer",
+        "flow": "main",
+        "engine": "jos"
+      }
+    ]
+  },
+  "ledger_kinds": [
+    "admit",
+    "derive",
+    "start",
+    "receipt",
+    "derive",
+    "derive",
+    "start",
+    "receipt",
+    "derive",
+    "start",
+    "receipt",
+    "receipt",
+    "receipt",
+    "end"
+  ]
+}

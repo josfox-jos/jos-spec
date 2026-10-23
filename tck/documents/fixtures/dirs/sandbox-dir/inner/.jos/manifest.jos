@@ -1,0 +1,40 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sandbox-dir-inner",
+  "meta": {
+    "name": "sandbox-dir-inner",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A standard folder under a sandbox folder"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "one": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sandbox-dir-inner.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "one"
+        ]
+      }
+    }
+  }
+}

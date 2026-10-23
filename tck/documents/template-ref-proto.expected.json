@@ -1,0 +1,24 @@
+{
+  "description": "A slot schema whose $ref names #/__proto__ does not resolve: code 2 with the same error in both engines (a JSON Pointer reads own members only).",
+  "run_args": [
+    "--with",
+    "{\"x\": 1}"
+  ],
+  "promises": [
+    "P29"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.7"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 2,
+  "result": {
+    "errors": [
+      "/with/x: $ref \"#/__proto__\" does not resolve"
+    ]
+  }
+}

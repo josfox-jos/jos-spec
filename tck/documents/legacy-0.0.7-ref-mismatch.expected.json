@@ -1,0 +1,28 @@
+{
+  "description": "The command was changed after the manifest was written: 4.1.0 refused it (Hash mismatch, exit 1); 2.0 refuses it with code 3 before any step starts.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/mismatch/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 3,
+  "result": {
+    "reason": "integrity_ref: declared hash does not match the document octets",
+    "output": null,
+    "receipts": [
+      {
+        "ok": false,
+        "code": 3,
+        "reason": "integrity_ref: declared hash does not match the document octets"
+      }
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "nested-sub",
+  "meta": {
+    "name": "nested-sub",
+    "labels": {
+      "dotjos": "0.2.0",
+      "parent": "jos.monorepo"
+    }
+  },
+  "orchestration": {
+    "flows": {
+      "main": {
+        "steps": []
+      }
+    }
+  },
+  "guardrails": {
+    "avoid": [
+      "SECRET"
+    ],
+    "limit": {
+      "seconds": 1
+    }
+  },
+  "security": {
+    "permissions": [
+      "engine:jos",
+      "fs:read:."
+    ]
+  }
+}

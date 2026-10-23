@@ -1,0 +1,24 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "inner"
+  },
+  "orchestration": {
+    "definitions": {
+      "l": {
+        "type": "jos",
+        "artifact": "leaf.jos"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "l"
+        ]
+      }
+    }
+  }
+}

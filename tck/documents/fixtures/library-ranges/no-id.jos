@@ -1,0 +1,18 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "no-id"
+  },
+  "intention": {
+    "objective": "a library entry without id: never a candidate of a use"
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "never chosen"
+    ]
+  }
+}

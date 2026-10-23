@@ -1,0 +1,49 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-doc-hash",
+  "meta": {
+    "name": "sealed-doc-hash",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sealed folder runs only when its directory hash matches (SPEC-2.0 \u00a79.3)",
+    "success_criteria": [
+      {
+        "exit": 0
+      },
+      {
+        "stdout_contains": "sealed ran"
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 4096
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "sealed ran"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "say"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:96a17b7254891b406aae5fb837a2641dad67637f2b816bba46d08b7160c1bec1"
+  }
+}

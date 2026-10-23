@@ -1,0 +1,23 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "shell.opt.in",
+  "meta": {
+    "name": "shell.opt.in",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "shell.opt.in",
+    "success_criteria": [
+      {
+        "stdout_contains": "b"
+      }
+    ]
+  },
+  "execution": {
+    "shell": true,
+    "run": "printf '%s' a | tr a b"
+  }
+}

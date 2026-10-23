@@ -1,0 +1,32 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "jcs.numbers",
+  "meta": {
+    "name": "jcs.numbers",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "jcs.numbers"
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  },
+  "x-numbers": [
+    1.0,
+    1e+21,
+    1e-07,
+    1e-06,
+    333333333.3333333,
+    -0.0,
+    4.5,
+    0.002,
+    100,
+    9007199254740992,
+    -9007199254740992
+  ]
+}

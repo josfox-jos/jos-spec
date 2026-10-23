@@ -1,0 +1,19 @@
+{
+  "description": "on_error does not turn an unsatisfied entry into a step failure: the run is refused before its first step (SPEC-2.0 §6.6, code 5).",
+  "promises": [
+    "P13",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/orchestration/definitions/two/requires/0: not satisfied by this runtime (service \"payments\") (SPEC-2.0 §6.6)"
+  }
+}

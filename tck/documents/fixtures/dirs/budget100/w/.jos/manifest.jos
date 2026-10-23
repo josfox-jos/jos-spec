@@ -1,0 +1,26 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "budget100-w",
+  "meta": {
+    "name": "budget100-w",
+    "labels": {
+      "dotjos": "0.2.0",
+      "parent": "budget100"
+    }
+  },
+  "orchestration": {
+    "flows": {
+      "main": {
+        "steps": []
+      }
+    }
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 100
+    }
+  }
+}

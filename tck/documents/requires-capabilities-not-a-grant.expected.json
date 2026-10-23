@@ -1,0 +1,19 @@
+{
+  "description": "Satisfaction is decided from the runtime, never from the document: a capabilities[] entry of the same document grants nothing (SPEC-2.0 §6.6, §12 item 3, code 5).",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6",
+    "SPEC-2.0 §12"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/requires/0: not satisfied by this runtime (service \"payments\") (SPEC-2.0 §6.6)"
+  }
+}

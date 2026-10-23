@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-cache-not-ai-edited",
+  "meta": {
+    "name": "sealed-cache-not-ai-edited",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sealed folder: Only ai/cache is excluded, not every cache/: a covered file under cache/ changed"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sealed-cache-not-ai-edited.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "say"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:fb5b73a3edcda491da467ca845dcda9a143605676590191c50cc03e8f3063bca"
+  }
+}

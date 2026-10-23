@@ -1,0 +1,18 @@
+{
+  "description": "When the folder runs, its manifest is the document: its unsatisfied entry refuses the run (SPEC-2.0 §9.1, §6.6, code 5).",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6",
+    "SPEC-2.0 §9.1"
+  ],
+  "validate": null,
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/requires/0: not satisfied by this runtime (service \"payments\") (SPEC-2.0 §6.6)"
+  },
+  "run_document": "fixtures/dirs/requires-parent"
+}

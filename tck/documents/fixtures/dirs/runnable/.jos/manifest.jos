@@ -1,0 +1,14 @@
+{
+  "jos": { "version": "2.0.0", "kind": "directory" },
+  "id": "runnable-folder",
+  "meta": { "name": "runnable-folder", "version": "1.0.0" },
+  "intention": {
+    "objective": "A folder is a .jos (SPEC-2.0 §9.1): running the folder runs its .jos/manifest.jos in the folder",
+    "success_criteria": [{ "exit": 0 }, { "stdout_contains": "folder ran" }]
+  },
+  "guardrails": { "limit": { "seconds": 10, "output_bytes": 4096 } },
+  "orchestration": {
+    "definitions": { "say": { "engine": "shell", "run": ["echo", "folder ran"] } },
+    "flows": { "main": { "steps": ["say"] } }
+  }
+}

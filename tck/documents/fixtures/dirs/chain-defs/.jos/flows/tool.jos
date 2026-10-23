@@ -1,0 +1,33 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "chaindefs.tool",
+  "meta": {
+    "name": "chaindefs.tool",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A chain definition",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "tool"
+    ]
+  }
+}

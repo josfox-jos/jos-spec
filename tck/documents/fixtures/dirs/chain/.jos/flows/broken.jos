@@ -1,0 +1,23 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "chain.broken",
+  "meta": {
+    "name": "broken",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "Declares a hash that does not match"
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "never"
+    ]
+  },
+  "integrity": {
+    "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

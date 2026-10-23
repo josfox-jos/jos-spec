@@ -1,0 +1,22 @@
+{
+  "description": "A parent .jos/ declares /security/permissions with the wrong type: the chain is invalid at run (code 2, naming the manifest and the member), never a silently dropped restriction.",
+  "document": "fixtures/dirs/typed-perm/c/doc.jos",
+  "promises": [
+    "P21"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.2",
+    "dotjos 0.2.0 §5.6"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 2,
+  "result": {
+    "errors": [
+      "../.jos/manifest.jos: /security/permissions: type"
+    ]
+  }
+}

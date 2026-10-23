@@ -1,0 +1,33 @@
+{
+  "spec": "Ledger 0.1.0 — ledger and replay (specs/kernel/ledger/0.1.0/SPEC.md)",
+  "status": "written before the code (F1 rule: vectors first)",
+  "date": "2026-10-14",
+  "phase": "F1: one ledger per run at <scope>/.jos/replays/<run_>/ledger.jsonl (or the runtime run dir), entry kinds admit/start/receipt/pal/end/error, hash chaining, verify, meter. F2: seal signature, approval/derive/secret_read/crystal/message kinds, replay modes.",
+  "description": "Cases operate on ledger files the harness produces by running documents, plus hand-written ledgers for tampering. Both engines MUST agree on verify(), meter() and on the entries they write (masked: ts, run_, cap_, hashes recomputed by the harness).",
+  "entry_shape": { "seq": "int from 1", "run": "run_…", "kind": "admit|deny|start|receipt|pal|end|error|…", "ts": "RFC 3339 with ms, Z", "body": "object", "prev": "sha256:… (zeros for seq 1)", "hash": "sha256 of the canonical entry with hash = \"\"" },
+  "cases": [
+    { "name": "one-run-writes-one-ledger", "op": "run_and_list", "args": ["kernel/tests/conformance/hello.jos"], "expect": { "value": { "files": ["ledger.jsonl"], "kinds": ["admit", "start", "receipt", "end"] } }, "note": "§3 one ledger per run; order of kinds for an atom" },
+    { "name": "seq-and-prev-chain", "op": "verify", "args": ["<ledger of hello run>"], "expect": { "value": { "ok": true, "count": 4, "head": "<hash of entry 4>" } } },
+    { "name": "entry-hash-rule", "op": "hash_entry", "args": [{ "seq": 1, "run": "run_01JA5Z7Q8X9K2M4N6P8R0T2V4W", "kind": "start", "ts": "2026-10-14T12:00:00.000Z", "body": { "artifact": "art_ab7ce6a74ec67e844d04b1f9f1ca376f94f0c2bf8ddf718f4f8046e5a9b0e947" }, "prev": "sha256:0000000000000000000000000000000000000000000000000000000000000000", "hash": "" }], "expect": { "value": "<sha256 of the JCS of this object with hash \"\" — harness computes with an independent serializer; both engines MUST match it>" }, "note": "§2 hashing rule; same as SPEC-2.0 §7.2 receipts (C3)" },
+    { "name": "tampered-body-detected", "op": "verify", "args": ["<ledger with entry 2 body edited>"], "expect": { "value": { "ok": false, "first_bad_seq": 2, "reason": "hash_mismatch" } } },
+    { "name": "broken-prev-detected", "op": "verify", "args": ["<ledger with entry 3 prev pointing to entry 1>"], "expect": { "value": { "ok": false, "first_bad_seq": 3, "reason": "prev_mismatch" } } },
+    { "name": "truncated-tail-detected", "op": "verify", "args": ["<ledger of hello run without its last line>", { "expect_end": true }], "expect": { "value": { "ok": false, "reason": "no_end_entry" } }, "note": "a run that ended MUST have an `end` entry; a missing tail is reported" },
+    { "name": "reordered-lines-detected", "op": "verify", "args": ["<ledger with lines 2 and 3 swapped>"], "expect": { "value": { "ok": false, "first_bad_seq": 2, "reason": "seq_gap" } } },
+    { "name": "receipt-entry-matches-result", "op": "cross_check", "args": ["<hello run result json>", "<its ledger>"], "expect": { "value": { "receipts_in_ledger": 1, "hashes_match_result": true } }, "note": "the receipt in result.receipts[] and the `receipt` entry body are the same object" },
+    { "name": "retry-writes-one-receipt-per-attempt", "op": "run_and_list", "args": ["<document with retries 2 that fails every time>"], "expect": { "value": { "receipt_entries": 3, "end_code": 1 } } },
+    { "name": "deny-is-ledgered", "op": "run_and_list", "args": ["<document whose avoid matches its own run>"], "expect": { "value": { "kinds": ["admit", "receipt", "end"], "receipt_code": 3 } }, "note": "an avoid hit still produces a receipt (code 3) and an end" },
+    { "name": "pal-entries-no-secrets", "op": "run_and_grep", "args": ["<document that reads jos://storage/fixtures/data.txt and writes jos://storage/out/x>", "hello"], "expect": { "value": { "pal_entries": 2, "ledger_contains_value_bytes": false } }, "note": "§3 values never appear; only canonical URI and blob_" },
+    { "name": "append-only-no-rewrite", "op": "run_twice_same_dir", "args": ["kernel/tests/conformance/hello.jos"], "expect": { "value": { "ledgers": 2, "first_unchanged": true } }, "note": "a second run never modifies the first run's ledger" },
+    { "name": "parallel-runs-distinct-ledgers", "op": "run_parallel", "args": ["kernel/tests/conformance/hello.jos", 100], "expect": { "value": { "ledgers": 100, "distinct_run_ids": 100, "all_verify": true } }, "note": "K6" },
+    { "name": "meter-derivable", "op": "meter", "args": ["<ledger of a run with 2 shell attempts>"], "expect": { "value": { "attempts": 2, "duration_ms": "<sum of receipt duration_ms>", "tokens_in": null, "tokens_out": null, "cost_usd": null, "cache_hits": 0, "engines": ["shell"] } }, "note": "§5 pure function; unreported meters are null" },
+    { "name": "meter-rejects-unverified", "op": "meter", "args": ["<tampered ledger>"], "expect": { "error": "ledger_invalid" }, "note": "metering a ledger that does not verify is an error, not a number" },
+    { "name": "entry-ts-rfc3339", "op": "shape", "args": ["<ledger of hello run>"], "expect": { "value": { "all_ts_rfc3339_ms_z": true, "monotonic": true } } },
+    { "name": "end-entry-body", "op": "shape", "args": ["<ledger of hello run>"], "expect": { "value": { "end_body_keys": ["artifact", "code", "ok", "receipts", "run"] } }, "note": "`receipts` lists receipt hashes, not objects" }
+  ],
+  "deferred": [
+    { "group": "seal.json with ed25519 signature; verify of the seal", "phase": "F2" },
+    { "group": "replay modes verify/deterministic/full and divergence report", "phase": "F2" },
+    { "group": "entry kinds approval, derive, secret_read, crystal, message, kill", "phase": "F2" },
+    { "group": "crystallized directory run with zero engine starts", "phase": "F2" }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "description": "The working directory is re-resolved on every attempt: after attempt 1 replaces it with a symlink out of the base, attempt 2 is refused with code 3.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 3,
+  "result": {
+    "code": 3,
+    "receipts": [
+      {
+        "attempt": 1,
+        "code": 1,
+        "ok": false,
+        "timeout": false,
+        "truncated": false,
+        "exit": 1
+      },
+      {
+        "attempt": 2,
+        "code": 3,
+        "ok": false,
+        "timeout": false,
+        "truncated": false
+      }
+    ]
+  },
+  "artifact": "art_3387c9549872b4e0112eada5995f2de110c279c7ae92aea0ba0fe79d031b6733"
+}

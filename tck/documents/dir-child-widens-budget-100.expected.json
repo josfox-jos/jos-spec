@@ -1,0 +1,23 @@
+{
+  "description": "A child .jos/ declares limit.seconds 100 under a 1.0.0 parent whose execution.budget.max_duration is 1s: the child widens (K11), code 2.",
+  "document": "fixtures/dirs/budget100/w/doc.jos",
+  "promises": [
+    "P15",
+    "P21"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.8",
+    "§9.2"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 2,
+  "result": {
+    "errors": [
+      ".jos/manifest.jos: /guardrails/limit/seconds: 100 exceeds the parent's 1"
+    ]
+  }
+}

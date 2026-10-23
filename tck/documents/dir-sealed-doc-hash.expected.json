@@ -1,0 +1,18 @@
+{
+  "description": "The integrity.hash of a directory manifest is the directory hash, not the document hash of SPEC-2.0 §8.1: a manifest sealed with the document hash is refused (code 3).",
+  "promises": [
+    "P6",
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.3",
+    "SPEC-2.0 §8.1"
+  ],
+  "validate": null,
+  "code": 3,
+  "result": {
+    "code": 3,
+    "reason": "integrity: declared hash does not match the directory hash (SPEC-2.0 §9.3)"
+  },
+  "run_document": "fixtures/dirs/sealed-doc-hash"
+}

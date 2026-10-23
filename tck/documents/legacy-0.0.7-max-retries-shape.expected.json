@@ -1,0 +1,27 @@
+{
+  "description": "readiness rc.7 pass 5 F-17a: the 0.0.7 guardrails.max_retries maps to guardrails.limit.retries; a value the schema refuses there (\"3\") is code 2 at /guardrails/max_retries. Before the fix it was set aside as guardrails.x-legacy-limit and the document was valid.",
+  "promises": [
+    "P3",
+    "P19",
+    "P20"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.5"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/guardrails/max_retries: limit.retries: type"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/guardrails/max_retries: limit.retries: type"
+    ],
+    "receipts": []
+  }
+}

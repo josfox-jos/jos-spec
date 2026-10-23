@@ -1,0 +1,17 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sandbox-parent",
+  "meta": {
+    "name": "sandbox-parent",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "Every step below this folder asks for a sandbox"
+  },
+  "security": {
+    "tier": "sandbox"
+  }
+}

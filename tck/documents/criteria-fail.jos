@@ -1,0 +1,28 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "criteria.fail",
+  "meta": {
+    "name": "criteria.fail",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "criteria.fail",
+    "success_criteria": [
+      {
+        "exit": 0
+      },
+      {
+        "stdout_contains": "hello"
+      }
+    ]
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "bye"
+    ]
+  }
+}

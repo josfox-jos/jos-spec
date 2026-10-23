@@ -1,0 +1,26 @@
+{
+  "description": "readiness rc.7 pass 5 F-15: security.tier outside the enum (\"Sandbox\") is code 2 (/security/tier: enum). Before the fix it moved to security.x-legacy-tier and the step ran outside any sandbox (0); \"sandbox\" is 5 (sandbox not available).",
+  "promises": [
+    "P3",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§6.5"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/security/tier: enum"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/security/tier: enum"
+    ],
+    "receipts": []
+  }
+}

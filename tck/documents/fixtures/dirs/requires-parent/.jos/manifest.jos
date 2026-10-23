@@ -1,0 +1,46 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "requires-parent",
+  "meta": {
+    "name": "requires-parent",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A folder whose manifest needs a service"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "level": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > requires-parent.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "level"
+        ]
+      }
+    }
+  },
+  "requires": [
+    {
+      "kind": "service",
+      "name": "payments"
+    }
+  ]
+}

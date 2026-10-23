@@ -1,0 +1,27 @@
+{
+  "description": "rc.8 (F-05): the number rule is closed under the canonical form. A literal whose value is an integer of magnitude greater than 2^53 and less than 10^21 is invalid however it is written (here 1e20): RFC 8785 writes the value 10^20 as the integer literal 100000000000000000000, which the same rule refuses, so a valid document could otherwise have an invalid canonical form.",
+  "promises": [
+    "P3",
+    "P6"
+  ],
+  "spec": [
+    "SECURITY.md Section 2 item 6",
+    "SPEC-2.0 §2.1",
+    "§8.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/x-n: integer value 1e20 is outside ±2^53 and below 10^21 (not representable in canonical form)"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/x-n: integer value 1e20 is outside ±2^53 and below 10^21 (not representable in canonical form)"
+    ],
+    "receipts": []
+  }
+}

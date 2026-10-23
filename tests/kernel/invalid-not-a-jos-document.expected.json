@@ -1,0 +1,23 @@
+{
+  "description": "A JSON object that is not a .jos document (no 'jos' and no 'meta' member; here an envelope with the members protected, payload and signature) is rejected before anything runs: code 2.",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.2",
+    "§13"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/: required 'jos'"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/: required 'jos'"
+    ]
+  }
+}

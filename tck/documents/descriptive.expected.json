@@ -1,0 +1,34 @@
+{
+  "description": "String criteria are descriptive: recorded, never evaluated; ok is the exit signal.",
+  "promises": [
+    "P17"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.3",
+    "§3.4"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_4022306ef60b8a0069c582d47082e13c4f87f7b560f24956e5e72b885810cbf1",
+  "result": {
+    "ok": true,
+    "receipts": [
+      {
+        "criteria": [
+          {
+            "check": "descriptive",
+            "verdict": "descriptive",
+            "detail": "The greeting is friendly"
+          },
+          {
+            "check": "descriptive",
+            "verdict": "descriptive",
+            "detail": "No profanity"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "rt.tool",
+  "meta": {
+    "name": "Pre-release with dots",
+    "version": "1.0.0-rc.1.2"
+  }
+}

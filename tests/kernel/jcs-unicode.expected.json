@@ -1,0 +1,17 @@
+{
+  "description": "Canonical hash over non-ASCII text and keys that sort differently by code point and by UTF-16 code unit.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §8.1"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_b8ec35f77f07fa5d0c060d21161ccc8500dffaa730b56046da86bf93e06f7cda",
+  "result": {
+    "ok": true
+  }
+}

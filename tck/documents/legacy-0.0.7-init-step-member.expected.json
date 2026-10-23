@@ -1,0 +1,23 @@
+{
+  "description": "The init output with a member a 2.0 definition does not have (cwd) in its step: the move covers the members of the mapped objects only, never the members of a step definition, so the step is refused with code 2 (fail closed: a step is not run with a member of it ignored).",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§2.5"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/orchestration/definitions/main_task: additional property 'cwd'"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/orchestration/definitions/main_task: additional property 'cwd'"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "description": "x- extension keys are preserved and included in the hash; they are not interpreted.",
+  "promises": [
+    "P5"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.5"
+  ],
+  "validate": {
+    "valid": true,
+    "document": {
+      "x-origin": {
+        "tool": "vector"
+      }
+    }
+  },
+  "code": 0,
+  "artifact": "art_92921d67d0ea30ac0737aeba9e6da1b72e80531c2597f54740645bf45f3e2dd2",
+  "result": {
+    "ok": true
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "description": "Only whole segments logs, replays and dev are excluded: a covered file under logsbook/ changed after sealing is refused (code 3).",
+  "promises": [
+    "P6",
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.3",
+    "SPEC-2.0 §12"
+  ],
+  "validate": null,
+  "code": 3,
+  "result": {
+    "code": 3,
+    "reason": "integrity: declared hash does not match the directory hash (SPEC-2.0 §9.3)"
+  },
+  "run_document": "fixtures/dirs/sealed-near-excluded-edited"
+}

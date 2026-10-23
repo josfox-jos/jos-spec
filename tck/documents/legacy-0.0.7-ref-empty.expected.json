@@ -1,0 +1,32 @@
+{
+  "description": "integrity_ref \"\": not verified, as 4.1.0 (decision D3).",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/empty/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "Hello from ref\n",
+      "stderr": ""
+    }
+  },
+  "ledger_kinds": [
+    "admit",
+    "derive",
+    "start",
+    "receipt",
+    "receipt",
+    "end"
+  ]
+}

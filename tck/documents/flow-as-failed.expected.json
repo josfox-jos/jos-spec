@@ -1,0 +1,31 @@
+{
+  "description": "The as name of a step that did not pass is not published into the context: a dependent that renders {{ v }} has an unresolved slot (code 2).",
+  "promises": [
+    "P11"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.2"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 2,
+  "result": {
+    "ok": false,
+    "steps": [
+      {
+        "step": "a",
+        "status": "continued",
+        "code": 1
+      },
+      {
+        "step": "c",
+        "status": "failed",
+        "code": 2,
+        "reason": "with: unresolved slots"
+      }
+    ]
+  }
+}

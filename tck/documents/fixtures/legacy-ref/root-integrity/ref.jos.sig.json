@@ -1,0 +1,6 @@
+{
+  "$schema": "https://josfox.ai/schemas/jos-manifest-0.0.7.json",
+  "manifest_version": "1.0.0",
+  "artifact_ref": "ref.jos",
+  "artifact_sha256": "a77aa9ef28953491e55bbe9e987da2b2b95d5a1b6e5de6b6d89067cd06d627d2"
+}

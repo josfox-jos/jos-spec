@@ -1,0 +1,109 @@
+{
+  "description": "The 13-key \"Minimal Valid Artifact\" of the README of @josfox/jos 4.1.0, verbatim: valid before and after the rc.8 fix, with the same art_ (pinned), and its greet step runs.",
+  "promises": [
+    "P3",
+    "P9"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§2.5"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "document": {
+      "jos": {
+        "version": "2.0.0",
+        "kind": "flow"
+      },
+      "x-legacy-version": "0.0.7",
+      "x-legacy-orchestration_contract": {
+        "version": "0.0.7",
+        "mode": "sync"
+      },
+      "meta": {
+        "name": "example",
+        "version": "1.0.0",
+        "x-legacy-type": "atom"
+      },
+      "intention": {
+        "objective": "Demonstrate JOS",
+        "success_criteria": "Output greeting"
+      },
+      "guardrails": {
+        "avoid": [],
+        "limit": {
+          "retries": 0
+        }
+      },
+      "security": {
+        "x-legacy-type": "open",
+        "permissions": [],
+        "x-legacy-integrity_ref": null
+      },
+      "orchestration": {
+        "definitions": {
+          "greet": {
+            "type": "shell",
+            "command": "echo 'Hello!'"
+          }
+        },
+        "flows": {
+          "main": {
+            "steps": [
+              "greet"
+            ]
+          }
+        }
+      },
+      "x-legacy-id_jos": "example-v1",
+      "x-legacy-jos": {
+        "open": "jos run artifact",
+        "supports": [
+          "@josfox/jos"
+        ]
+      },
+      "x-legacy-capabilities": [
+        "demo"
+      ],
+      "x-legacy-artifacts": {
+        "description": "Minimal example"
+      },
+      "x-legacy-x_run_params": {
+        "timeout": 5000,
+        "retry_on_failure": false
+      },
+      "x-legacy-adaptive_ai": {
+        "learning_enabled": false,
+        "feedback_collection": false
+      },
+      "x-legacy-files": []
+    }
+  },
+  "code": 0,
+  "artifact": "art_80b6f5a0cfa9526c41e3bb0fe57ffa832f9d2f432fe6dd8c32b01ff837b7edf2",
+  "result": {
+    "ok": true,
+    "flow": "main",
+    "steps": [
+      {
+        "step": "greet",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "Hello!\n",
+      "stderr": ""
+    }
+  },
+  "ledger_kinds": [
+    "admit",
+    "derive",
+    "start",
+    "receipt",
+    "receipt",
+    "end"
+  ]
+}

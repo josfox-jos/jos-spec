@@ -1,0 +1,31 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "template"
+  },
+  "id": "t.x",
+  "meta": {
+    "name": "t",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "tpl"
+  },
+  "execution": {
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "$ref": "#/__proto__"
+        }
+      },
+      "required": [
+        "x"
+      ]
+    },
+    "run": [
+      "echo",
+      "R"
+    ]
+  }
+}

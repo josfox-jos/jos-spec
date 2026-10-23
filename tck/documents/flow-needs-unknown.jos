@@ -1,0 +1,38 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "needs-unknown"
+  },
+  "orchestration": {
+    "definitions": {
+      "a": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "a"
+        ]
+      },
+      "b": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "b"
+        ],
+        "needs": [
+          "zzz"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "a",
+          "b"
+        ]
+      }
+    }
+  }
+}

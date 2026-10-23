@@ -1,0 +1,24 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "spawn.enoent",
+  "meta": {
+    "name": "spawn.enoent",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "spawn.enoent",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "execution": {
+    "run": [
+      "jos-vector-no-such-program"
+    ]
+  }
+}

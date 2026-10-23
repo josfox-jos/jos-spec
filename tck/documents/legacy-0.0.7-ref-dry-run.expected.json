@@ -1,0 +1,25 @@
+{
+  "description": "run --dry-run verifies too (as 4.1.0): the altered document is code 3 and no plan is printed.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/mismatch/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 3,
+  "result": {
+    "dry_run": true,
+    "reason": "integrity_ref: declared hash does not match the document octets",
+    "plan": null
+  },
+  "run_args": [
+    "--dry-run"
+  ]
+}

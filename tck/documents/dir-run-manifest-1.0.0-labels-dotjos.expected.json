@@ -1,0 +1,23 @@
+{
+  "description": "readiness rc.7 pass 5 F-19: the one exception of SPEC-2.0 §9.1 to \"a folder manifest MUST be of kind directory\": a 1.0.0 manifest of kind flow whose meta.labels.dotjos is a string (the 1.0.0 .jos/ convention) is accepted as the manifest of D. `validate D` is valid with a warning and `run D` runs it (0); any other manifest that is not of kind directory is refused by both (dir-run-manifest-not-directory, dir-run-manifest-0.0.7).",
+  "run_document": "fixtures/dirs/manifest-1.0.0-labels-dotjos",
+  "promises": [
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.1"
+  ],
+  "validate": {
+    "valid": true,
+    "errors": [],
+    "warnings": [
+      "/jos/kind: flow accepted as directory for input 1.0.0 (labels.dotjos present)"
+    ]
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0,
+    "input_version": "1.0.0"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "swap"
+  },
+  "intention": {
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "retries": 1
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "shell": true,
+    "cwd": "fixtures/swap",
+    "run": "cd ../.. && rm -rf fixtures/swap && ln -s /tmp fixtures/swap; exit 1"
+  }
+}

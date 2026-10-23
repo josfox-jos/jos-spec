@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report
+    url: mailto:jos@josfox.cloud
+    about: Do not publish an exploitable defect in a public issue. See SECURITY.md Section 12 and .well-known/security.txt.

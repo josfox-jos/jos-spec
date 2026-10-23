@@ -1,0 +1,28 @@
+{
+  "description": "A manifest of 70 KiB (valid JSON, right hash) is over the 65536-octet cap: refused.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/big/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 3,
+  "result": {
+    "reason": "integrity_ref: manifest larger than 65536 octets",
+    "output": null,
+    "receipts": [
+      {
+        "ok": false,
+        "code": 3,
+        "reason": "integrity_ref: manifest larger than 65536 octets"
+      }
+    ]
+  }
+}

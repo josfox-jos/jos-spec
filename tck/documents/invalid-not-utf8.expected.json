@@ -1,0 +1,22 @@
+{
+  "description": "hello.jos with one byte (0xFF) that is not valid UTF-8 inside a string: invalid (code 2) in both engines, never decoded with a replacement character; SPEC-2.0 §2.1.",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/: document is not UTF-8"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/: document is not UTF-8"
+    ]
+  }
+}

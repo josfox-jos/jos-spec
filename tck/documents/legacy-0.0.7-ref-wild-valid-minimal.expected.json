@@ -1,0 +1,26 @@
+{
+  "description": "The LF copy git keeps of legacy/git-2026-01/valid_minimal.jos and its real manifest (computed over CRLF): verified with eol crlf (4.1.0 refused this copy).",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/wild-valid-minimal/valid_minimal.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "integrity_ref": {
+      "manifest": "./valid_minimal.jos.sig.json",
+      "sha256": "a02389efa86252b0729ba291a8810cfa9f25d5fc846a7d774e9e056659add111",
+      "eol": "crlf"
+    }
+  },
+  "artifact": "art_f7f81997a5958a8a8f114e7f87b7eba159b2bd838874b0b9370c3061e8f9f369"
+}

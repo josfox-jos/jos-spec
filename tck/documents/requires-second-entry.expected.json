@@ -1,0 +1,18 @@
+{
+  "description": "Every entry is decided; the unsatisfied one is named by its own JSON Pointer (/requires/1) (SPEC-2.0 §6.6, code 5).",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/requires/1: not satisfied by this runtime (service \"payments\") (SPEC-2.0 §6.6)"
+  }
+}

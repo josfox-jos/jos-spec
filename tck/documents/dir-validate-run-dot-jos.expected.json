@@ -1,0 +1,21 @@
+{
+  "description": "readiness rc.7 pass 5 F-19: D/.jos names the directory D (SPEC-2.0 §9.1). `validate D/.jos` validates the directory D, as `validate D` does, and `run D/.jos` runs D/.jos/manifest.jos in D: both 0 for a valid folder. Before the fix `validate D/.jos` looked for D/.jos/.jos/manifest.jos and gave 2 while `run D/.jos` gave 0.",
+  "run_document": "fixtures/dirs/runnable/.jos",
+  "promises": [
+    "P9",
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.1"
+  ],
+  "validate": {
+    "valid": true,
+    "errors": [],
+    "warnings": []
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  }
+}

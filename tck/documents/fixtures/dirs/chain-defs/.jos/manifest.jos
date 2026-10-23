@@ -1,0 +1,40 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "chain-defs",
+  "meta": {
+    "name": "chain-defs",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A standard folder whose .jos/flows/ holds definitions"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "level": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > chain-defs.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "level"
+        ]
+      }
+    }
+  }
+}

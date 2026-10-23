@@ -1,0 +1,132 @@
+{
+  "description": "The exact output of `jos init hello` of the published @josfox/jos 4.1.0 (its src/commands/init.js run offline, cwd and home in a scratch folder, 2026-10-21T01:27:01Z), with the detached manifest it wrote: rc.8 before this fix refused it (`/orchestration: additional property 'state'`). The 0.0.7 normalization moves orchestration.state to orchestration.x-legacy-state (never dropped, never interpreted), the manifest verifies over the octets as written, and the default step echoes its greeting.",
+  "promises": [
+    "P3",
+    "P6",
+    "P9"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§2.5",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/init-atom/hello.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "document": {
+      "jos": {
+        "version": "2.0.0",
+        "kind": "flow"
+      },
+      "x-legacy-version": "0.0.7",
+      "x-legacy-orchestration_contract": {
+        "version": "0.0.7",
+        "mode": "sync"
+      },
+      "meta": {
+        "version": "1.0.0",
+        "x-legacy-type": "atom",
+        "name": "hello",
+        "x-legacy-provider": "local",
+        "author": "JOS Developer",
+        "x-legacy-canonical_version": "Format version v0.0.7 — Specification maturity v0.1.0 (Alpha)"
+      },
+      "intention": {
+        "objective": "Define your objective here",
+        "success_criteria": "Define success criteria here"
+      },
+      "guardrails": {
+        "avoid": [],
+        "limit": {
+          "retries": 1
+        }
+      },
+      "security": {
+        "x-legacy-type": "open",
+        "permissions": [],
+        "x-legacy-health_check": null,
+        "x-legacy-integrity": null,
+        "x-legacy-integrity_ref": "./hello.jos.sig.json"
+      },
+      "orchestration": {
+        "x-legacy-state": {
+          "current_status": "idle"
+        },
+        "definitions": {
+          "main_task": {
+            "type": "shell",
+            "description": "Main task - replace with your command",
+            "command": "echo 'Hello from hello'"
+          }
+        },
+        "flows": {
+          "main": {
+            "description": "Main execution flow",
+            "steps": [
+              "main_task"
+            ]
+          }
+        }
+      },
+      "x-legacy-$schema": "https://josfox.ai/schemas/jos-0.0.7.json",
+      "x-legacy-$comment": "Format version v0.0.7 — Specification maturity v0.1.0 (Alpha)",
+      "x-legacy-jos": {
+        "open": "jos run atom",
+        "supports": [
+          "@josfox/jos",
+          "josctl"
+        ],
+        "canonical": "Format version v0.0.7 — Specification maturity v0.1.0 (Alpha)"
+      },
+      "x-legacy-id_jos": "atom-hello-1792546021683",
+      "x-legacy-adaptive_ai": {
+        "learning_mode": "frozen",
+        "llm_friendly_sentence": "This atom artifact performs the hello task."
+      },
+      "x-legacy-x_run_params": {
+        "timeout": 300,
+        "retry_on_failure": false
+      },
+      "x-legacy-artifacts": {
+        "description": "Auto-generated atom artifact. Update this description.",
+        "outputs": []
+      },
+      "x-legacy-capabilities": [],
+      "x-legacy-files": []
+    }
+  },
+  "code": 0,
+  "artifact": "art_c9e48201675d27d67af0529b2179fb4f95a499ee2dfa21e1a5e417c995498298",
+  "result": {
+    "ok": true,
+    "flow": "main",
+    "steps": [
+      {
+        "step": "main_task",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "Hello from hello\n",
+      "stderr": ""
+    },
+    "integrity_ref": {
+      "manifest": "./hello.jos.sig.json",
+      "sha256": "9c060e4f8476dafc753070049023c78d7d4afea80efe18d73eedcd32a6470caf",
+      "eol": "as-is"
+    }
+  },
+  "ledger_kinds": [
+    "admit",
+    "verify",
+    "derive",
+    "start",
+    "receipt",
+    "receipt",
+    "end"
+  ]
+}

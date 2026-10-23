@@ -1,0 +1,17 @@
+{
+  "description": "require_auth, require_admin and require_approval are declarations for the host that admits the caller: the core kernel does not enforce them and the document runs (SPEC-2.0 §6.5).",
+  "promises": [
+    "P27"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  }
+}

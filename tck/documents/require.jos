@@ -1,0 +1,25 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "require",
+  "meta": {
+    "name": "require",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "require"
+  },
+  "guardrails": {
+    "require": [
+      "hello"
+    ]
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "bye"
+    ]
+  }
+}

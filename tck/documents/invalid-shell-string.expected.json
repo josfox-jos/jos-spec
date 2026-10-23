@@ -1,0 +1,23 @@
+{
+  "description": "A string run without shell: true is invalid (code 2): no implicit shell.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.8"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/execution/run: a command line requires shell: true"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/execution/run: a command line requires shell: true"
+    ]
+  },
+  "semantic": true
+}

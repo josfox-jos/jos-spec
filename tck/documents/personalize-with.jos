@@ -1,0 +1,85 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "two-users-one-prompt"
+  },
+  "intention": {
+    "objective": "Two users run the same prompt; each gets their own result",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "orchestration": {
+    "definitions": {
+      "greet": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "template"
+        },
+        "id": "local.greet",
+        "meta": {
+          "name": "greet",
+          "version": "1.0.0"
+        },
+        "intention": {
+          "objective": "Greet the user in their own words",
+          "success_criteria": [
+            {
+              "exit": 0
+            }
+          ]
+        },
+        "execution": {
+          "inputs": {
+            "type": "object",
+            "required": [
+              "user",
+              "greeting"
+            ],
+            "properties": {
+              "user": {
+                "type": "string",
+                "minLength": 1
+              },
+              "greeting": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "run": [
+            "echo",
+            "{{ greeting }}, {{ user }}"
+          ]
+        }
+      },
+      "ana": {
+        "use": "local.greet@1.0.0",
+        "with": {
+          "user": "Ana",
+          "greeting": "Hola"
+        }
+      },
+      "lee": {
+        "use": "local.greet@1.0.0",
+        "with": {
+          "user": "Lee",
+          "greeting": "Hello"
+        }
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "ana",
+          "lee"
+        ]
+      }
+    }
+  }
+}

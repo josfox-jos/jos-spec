@@ -1,0 +1,25 @@
+{
+  "description": "An invoke that names no definition and is not an id[@version] is code 2 in validate and run, with the same pointer (rc.8).",
+  "promises": [
+    "P5"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.8",
+    "§5.3"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/execution/flow/0/invoke: \"Not A Ref\" is not an id[@version]"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/execution/flow/0/invoke: \"Not A Ref\" is not an id[@version]"
+    ]
+  },
+  "semantic": true
+}

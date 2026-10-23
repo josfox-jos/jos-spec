@@ -1,0 +1,40 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "tier-sandbox-net-egress-granted",
+  "meta": {
+    "name": "tier-sandbox-net-egress-granted",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sandbox step whose document lists a network permission",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "ok"
+    ]
+  },
+  "security": {
+    "tier": "sandbox",
+    "permissions": [
+      "engine:shell",
+      "net:egress:example.com"
+    ]
+  }
+}

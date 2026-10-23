@@ -1,0 +1,1189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/josfox-jos/jos-spec/v2.0.0/schema/profiles/exec-contract-1.schema.json",
+  "title": "exec-contract/1 profile — execution contract blocks",
+  "$comment": "Applied in addition to the core schema when jos.profiles contains \"exec-contract/1\". Owner: JOSFOX LLC. Vendor-neutral profile: names are descriptive; no product names appear in normative text.",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "object",
+      "description": "Components that make the document machine-processable.",
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "required": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "prompt": {
+      "type": "object",
+      "description": "A crystallized prompt: canonical template with variables, provenance, evaluations, hash and a layout by stability. Referenced as prompt://id@version.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9.-]*$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "template": {
+          "type": "string"
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "author": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
+        },
+        "evals": {
+          "type": "object",
+          "properties": {
+            "suite": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "layout": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "stability"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "stability": {
+                "type": "string",
+                "enum": [
+                  "global",
+                  "versioned",
+                  "tenant",
+                  "session",
+                  "request"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Where a runtime places prompt-cache boundaries (stable prefix first, variable suffix last)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "runtime": {
+      "type": "object",
+      "required": [
+        "class"
+      ],
+      "description": "Where this document MAY run. Checked against the identity of the runtime that tries to execute it: if the class does not match, the run is denied regardless of other permissions.",
+      "properties": {
+        "class": {
+          "type": "string",
+          "enum": [
+            "system",
+            "sadmin",
+            "org",
+            "tenant",
+            "dev"
+          ]
+        },
+        "isolation": {
+          "type": "object",
+          "properties": {
+            "tenant": {
+              "type": "string"
+            },
+            "execution_zone": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "allowed_hosts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "filesystem": {
+          "type": "object",
+          "properties": {
+            "scope": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "identity": {
+          "type": "object",
+          "properties": {
+            "required_role": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "environment": {
+          "type": "string",
+          "enum": [
+            "dev",
+            "staging",
+            "prod"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "isolation": {
+      "type": "object",
+      "description": "Isolation by tenant. The tenant is never written here: it comes from the identity of the runtime.",
+      "properties": {
+        "tenant": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "strict"
+              ]
+            },
+            "source": {
+              "type": "string",
+              "enum": [
+                "runtime_identity"
+              ]
+            }
+          },
+          "additionalProperties": true
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "cross_tenant": {
+              "type": "string",
+              "enum": [
+                "deny"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "storage": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "secrets": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "memory": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "mcp": {
+      "type": "object",
+      "description": "MCP servers this document uses. Discovering a tool never grants permission: executable = discovered ∩ required ∩ role-based access ∩ tenant ∩ runtime.",
+      "properties": {
+        "servers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "ref"
+            ],
+            "properties": {
+              "ref": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "trust": {
+                "type": "string",
+                "enum": [
+                  "verified",
+                  "unverified"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "tools": {
+          "type": "object",
+          "properties": {
+            "allow": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "deny": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "discovery": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "declared",
+                "announced"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "auth": {
+          "type": "object",
+          "properties": {
+            "via": {
+              "type": "string",
+              "enum": [
+                "gateway",
+                "pass"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "tenant_scope": {
+          "type": "string",
+          "enum": [
+            "required",
+            "optional"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "transport": {
+      "type": "object",
+      "description": "A2A is the transport; the .jos document is the typed payload it carries.",
+      "properties": {
+        "a2a": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "media_type": {
+                  "type": "string"
+                },
+                "spec": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "trust": {
+              "type": "object",
+              "properties": {
+                "require_signature": {
+                  "type": "boolean"
+                },
+                "require_identity": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "discovery": {
+      "type": "object",
+      "description": "How the component is announced. Announcing makes it visible; it never authorizes.",
+      "properties": {
+        "well_known": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "declared",
+            "announced"
+          ]
+        },
+        "grants": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "jos_native": {
+      "type": "object",
+      "description": "A component is .jos-native when it understands .jos documents, tenants, role-based access, capabilities, resources, personas, intentions, prompt and store references, billing, metrics and the identity of the runtime without an adapter.",
+      "properties": {
+        "aware": {
+          "type": "boolean"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "understands": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "identity": {
+      "type": "object",
+      "required": [
+        "live_id"
+      ],
+      "description": "The live instance of this object.",
+      "properties": {
+        "live_id": {
+          "type": "string",
+          "pattern": "^[a-z]{2,8}_[a-z]{3}_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "canonical_id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$"
+        },
+        "live_id_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "lineage": {
+      "type": "object",
+      "description": "Where it comes from. Relations are mutable and versioned; the live identifier does not embed them.",
+      "properties": {
+        "session": {
+          "type": "string",
+          "pattern": "^[a-z]{2,8}_ses_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "intention": {
+          "type": "string",
+          "pattern": "^[a-z]{2,8}_int_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "parent": {
+          "type": "string",
+          "pattern": "^jfx_[a-z]{3}_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "generated_by": {
+          "type": "string",
+          "pattern": "^jfx_gen_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "run": {
+          "type": "string",
+          "pattern": "^jfx_run_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "trace": {
+          "type": "string",
+          "pattern": "^jfx_trc_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "tenant": {
+          "type": "string",
+          "pattern": "^jfx_ten_[0-9A-HJKMNP-TV-Z]{26}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "origin": {
+      "type": "object",
+      "description": "Who created it, in which runtime, with which version of the generator.",
+      "properties": {
+        "generator": {
+          "type": "object",
+          "required": [
+            "live_id"
+          ],
+          "properties": {
+            "live_id": {
+              "type": "string",
+              "pattern": "^jfx_gen_[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "runtime": {
+              "type": "string"
+            },
+            "tenant": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "generator_version": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "policy": {
+      "type": "object",
+      "required": [
+        "rules"
+      ],
+      "description": "Deterministic authorization condition. Evaluated in code, never by a model.",
+      "properties": {
+        "effect_default": {
+          "type": "string",
+          "enum": [
+            "deny"
+          ]
+        },
+        "rules": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "effect",
+              "when"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "effect": {
+                "type": "string",
+                "enum": [
+                  "allow",
+                  "deny"
+                ]
+              },
+              "when": {
+                "type": "object",
+                "properties": {
+                  "roles": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "capabilities": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "tenant_scope": {
+                    "type": "string",
+                    "enum": [
+                      "tenant",
+                      "org",
+                      "platform"
+                    ]
+                  },
+                  "runtime_class": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "guardian": {
+      "type": "object",
+      "required": [
+        "checks"
+      ],
+      "description": "What it watches and with which mechanism. Fails closed.",
+      "properties": {
+        "fails": {
+          "type": "string",
+          "enum": [
+            "closed"
+          ]
+        },
+        "checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "check_type",
+              "on_fail"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "check_type": {
+                "type": "string",
+                "enum": [
+                  "code",
+                  "schema",
+                  "hash",
+                  "metric"
+                ]
+              },
+              "expression": {
+                "type": "string"
+              },
+              "on_fail": {
+                "type": "string",
+                "enum": [
+                  "block",
+                  "warn",
+                  "audit"
+                ]
+              },
+              "invariant": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "model_card": {
+      "type": "object",
+      "required": [
+        "provider",
+        "model_id",
+        "pricing",
+        "source"
+      ],
+      "description": "Cost card of a model: prices per million tokens and tokenization rules for attachments, with source and date.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": [
+            "anthropic",
+            "google",
+            "openai",
+            "voyage",
+            "meta",
+            "otro"
+          ]
+        },
+        "model_id": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "pricing": {
+          "type": "object",
+          "required": [
+            "input_per_m",
+            "output_per_m"
+          ],
+          "properties": {
+            "input_per_m": {
+              "type": "number",
+              "minimum": 0
+            },
+            "output_per_m": {
+              "type": "number",
+              "minimum": 0
+            },
+            "cache_read_per_m": {
+              "type": "number",
+              "minimum": 0
+            },
+            "cache_write_per_m": {
+              "type": "number",
+              "minimum": 0
+            },
+            "embed_per_m": {
+              "type": "number",
+              "minimum": 0
+            },
+            "audio_per_m": {
+              "type": "number",
+              "minimum": 0
+            },
+            "image_per_m": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "image": {
+          "type": "object",
+          "required": [
+            "formula"
+          ],
+          "properties": {
+            "formula": {
+              "type": "string",
+              "enum": [
+                "patches",
+                "tiles",
+                "flat",
+                "none"
+              ]
+            },
+            "patch_px": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "tile_px": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "tokens_per_tile": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "small_px": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "small_tokens": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max_long_edge_px": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max_tokens": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "flat_tokens": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "audio": {
+          "type": "object",
+          "properties": {
+            "tokens_per_second": {
+              "type": "number",
+              "minimum": 0
+            },
+            "per_minute": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "video": {
+          "type": "object",
+          "properties": {
+            "tokens_per_second": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "context_window": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_output": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source": {
+          "type": "object",
+          "required": [
+            "url",
+            "date"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "pattern": "^https?://"
+            },
+            "date": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "template": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "requires"
+      ],
+      "description": "A template: what every object that inherits from it must declare and must not declare. Deterministic: paths, not opinions.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9.-]*$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "for": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "Kinds that may inherit from this template."
+        },
+        "requires": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "Paths (a.b.c) the inheriting object MUST declare."
+        },
+        "forbids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "Paths the inheriting object MUST NOT declare."
+        },
+        "uptake": {
+          "type": "object",
+          "properties": {
+            "min": {
+              "type": "string",
+              "pattern": "^\\d+\\.\\d+\\.\\d+$"
+            },
+            "enforce": {
+              "type": "string",
+              "enum": [
+                "available",
+                "mandatory"
+              ]
+            },
+            "deadline": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "adapter": {
+      "type": "object",
+      "required": [
+        "class",
+        "role",
+        "template",
+        "entry",
+        "exports",
+        "metering",
+        "observability",
+        "guardians",
+        "store"
+      ],
+      "description": "An adapter: a worker (runs a model) or a driver (runs something deterministic: sandbox, HTTP, resource). Encapsulated in `entry`, installable, versioned.",
+      "properties": {
+        "class": {
+          "type": "string",
+          "enum": [
+            "coding-agent",
+            "vision",
+            "realtime",
+            "general",
+            "sandbox",
+            "http",
+            "resource"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "worker",
+            "driver"
+          ]
+        },
+        "template": {
+          "type": "object",
+          "required": [
+            "ref"
+          ],
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^template://[a-z][a-z0-9.-]*@\\d+\\.\\d+\\.\\d+$"
+            }
+          },
+          "additionalProperties": false
+        },
+        "entry": {
+          "type": "string",
+          "description": "ES module, relative to the repository, that implements the contract of the class. Encapsulated: nothing outside its exports exists."
+        },
+        "exports": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "isolation": {
+          "type": "string",
+          "enum": [
+            "process",
+            "container",
+            "vm"
+          ],
+          "description": "For class sandbox: what it isolates. tenant and org require a container or a virtual machine; process is valid only in development and administrative runtimes."
+        },
+        "install": {
+          "type": "object",
+          "required": [
+            "method"
+          ],
+          "properties": {
+            "method": {
+              "type": "string",
+              "enum": [
+                "vendored",
+                "store",
+                "npm"
+              ]
+            },
+            "ref": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "metering": {
+          "type": "object",
+          "required": [
+            "sku"
+          ],
+          "properties": {
+            "sku": {
+              "type": "string"
+            },
+            "charge": {
+              "type": "string",
+              "enum": [
+                "sku",
+                "none"
+              ]
+            },
+            "reason": {
+              "type": "string"
+            },
+            "dimensions": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "description": "charge none is valid only in development and administrative runtimes and with a reason; for tenant and org the SKU must have a price."
+        },
+        "observability": {
+          "type": "object",
+          "required": [
+            "metrics"
+          ],
+          "properties": {
+            "metrics": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "type"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_.]*$"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "counter",
+                      "gauge",
+                      "histogram"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "traces": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "guardians": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "Canonical identifiers of documents of kind guardian that watch this adapter."
+        },
+        "store": {
+          "type": "object",
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "validated",
+                "registered"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "from": {
+      "type": "string",
+      "pattern": "^agent://[a-z0-9.-]+$",
+      "description": "On A2A: who sends."
+    },
+    "to": {
+      "type": "string",
+      "pattern": "^agent://[a-z0-9.-]+$",
+      "description": "On A2A: to whom."
+    },
+    "gates": {
+      "type": "object",
+      "description": "Deterministic gates (code, not AI) that run before execution. Their order is part of the design.",
+      "properties": {
+        "before_execute": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "Order of the gates: auth comes first; rbac, quota, resources and secrets are mandatory."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "model_policy_step": {
+      "type": "object",
+      "description": "Model requirements for one step; same shape as model_policy minus per_step.",
+      "properties": {
+        "preferred": {
+          "type": "string",
+          "description": "Specific model key"
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "economy",
+            "mid",
+            "flagship",
+            "reasoning"
+          ],
+          "description": "Model quality tier"
+        },
+        "vendor": {
+          "type": "string",
+          "enum": [
+            "google",
+            "openai",
+            "anthropic",
+            "any"
+          ],
+          "description": "Preferred vendor"
+        },
+        "fallbacks": {
+          "type": "array",
+          "description": "Ordered fallback model list",
+          "items": {
+            "type": "string"
+          }
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "requirements": {
+          "type": "object",
+          "description": "Requirements for automatic model selection (deterministic): the model is chosen by class, not by name.",
+          "properties": {
+            "coding": {
+              "type": "boolean"
+            },
+            "tool_use": {
+              "type": "boolean"
+            },
+            "vision": {
+              "type": "boolean"
+            },
+            "realtime_voice": {
+              "type": "boolean"
+            },
+            "context": {
+              "type": "string",
+              "enum": [
+                "low",
+                "normal",
+                "high"
+              ]
+            },
+            "latency": {
+              "type": "string",
+              "enum": [
+                "fast",
+                "normal",
+                "relaxed"
+              ]
+            },
+            "cost": {
+              "type": "string",
+              "enum": [
+                "cheap",
+                "normal",
+                "premium"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

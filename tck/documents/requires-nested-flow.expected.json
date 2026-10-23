@@ -1,0 +1,24 @@
+{
+  "description": "Every definition of the chosen flow is checked recursively before the first step; an unsatisfied entry two levels down refuses the run and step one leaves no file (SPEC-2.0 §6.6, code 5).",
+  "promises": [
+    "P13",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "receipts": [
+      {
+        "code": 5,
+        "isolation": "none"
+      }
+    ]
+  }
+}

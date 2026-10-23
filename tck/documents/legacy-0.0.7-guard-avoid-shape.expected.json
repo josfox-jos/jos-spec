@@ -1,0 +1,26 @@
+{
+  "description": "readiness rc.7 pass 5 F-15: guardrails.avoid with a non-string item is code 2 (/guardrails/avoid/1: type), as in a 2.0 document. Before the fix avoid moved to guardrails.x-legacy-avoid and the touch step ran (0).",
+  "promises": [
+    "P3",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.5"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/guardrails/avoid/1: type"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/guardrails/avoid/1: type"
+    ],
+    "receipts": []
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "description": "1.0.0 execution.flow `[{ invoke }]` is an alias of orchestration.flows.main (SPEC-2.0 §6.8, rc.8): an invoke names a definition (`first`) or is a `use` reference (`lib.second`, an inline document with that id, §5.3). rc.7 refused the document as unexecutable (code 5).",
+  "promises": [
+    "P3",
+    "P11"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.8",
+    "§5.3"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "1.0.0",
+    "input_version": "1.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0,
+    "flow": "main",
+    "steps": [
+      {
+        "step": "first",
+        "status": "ok",
+        "code": 0
+      },
+      {
+        "step": "lib.second",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "second\n"
+    }
+  }
+}

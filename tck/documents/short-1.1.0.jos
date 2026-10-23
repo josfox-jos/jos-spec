@@ -1,0 +1,17 @@
+{
+  "id": "greet.v11",
+  "intent": "Greet in the 1.1.0 vocabulary",
+  "done": {
+    "stdout_contains": "hi"
+  },
+  "avoid": "rm -rf",
+  "limit": {
+    "time": "2s"
+  },
+  "retries": 0,
+  "on_error": "fail",
+  "run": [
+    "echo",
+    "hi"
+  ]
+}

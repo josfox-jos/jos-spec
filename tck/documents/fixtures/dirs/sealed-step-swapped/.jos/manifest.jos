@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-step-swapped",
+  "meta": {
+    "name": "sealed-step-swapped",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sealed folder: The command of a step changed after sealing: the change is refused before anythi"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sealed-step-swapped-after-sealing.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "say"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:3387286b9d371bb99d1edc19789074c3488c583b1ab589b27305547a3123c474"
+  }
+}

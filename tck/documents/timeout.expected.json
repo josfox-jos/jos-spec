@@ -1,0 +1,27 @@
+{
+  "description": "limit.seconds: the supervisor kills the process and returns 124.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 124,
+  "artifact": "art_f23c1eec4f0199b4c1a314deaf322544a6c4085a5ad82185a99a911c732cb7ea",
+  "result": {
+    "ok": false,
+    "receipts": [
+      {
+        "code": 124,
+        "timeout": true,
+        "truncated": false,
+        "exit": null,
+        "signal": "SIGKILL"
+      }
+    ]
+  }
+}

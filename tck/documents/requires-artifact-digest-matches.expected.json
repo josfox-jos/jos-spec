@@ -1,0 +1,18 @@
+{
+  "description": "A digest equal to the art_ of the resolved definition, with a version in range, satisfies the entry; the flow runs (SPEC-2.0 §6.6, §8.2).",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6",
+    "SPEC-2.0 §8.2"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  }
+}

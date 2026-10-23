@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sandbox-deep-mid",
+  "meta": {
+    "name": "sandbox-deep-mid",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A middle folder that declares standard"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "level": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sandbox-deep-mid.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "level"
+        ]
+      }
+    }
+  },
+  "security": {
+    "tier": "standard"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "g"
+  },
+  "orchestration": {
+    "definitions": {
+      "a": {
+        "type": "shell",
+        "command": "true"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "a"
+        ],
+        "gates": {
+          "a": {
+            "kind": "auto"
+          }
+        }
+      }
+    }
+  }
+}

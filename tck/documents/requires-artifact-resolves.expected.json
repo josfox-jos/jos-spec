@@ -1,0 +1,18 @@
+{
+  "description": "A requires entry of kind artifact that resolves (here inline) in its version range is satisfied and the flow runs (SPEC-2.0 §6.6).",
+  "promises": [
+    "P13",
+    "P28"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  }
+}

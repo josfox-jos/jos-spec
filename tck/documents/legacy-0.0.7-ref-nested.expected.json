@@ -1,0 +1,33 @@
+{
+  "description": "A 2.0 flow names an altered 0.0.7 file (type: jos): the child is verified before the first step of the run, so the step before it does not run either (decision D5; 4.1.0 ran the steps before it).",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/nested/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "2.0"
+  },
+  "code": 3,
+  "result": {
+    "reason": "artifact \"child/ref.jos\": integrity_ref: declared hash does not match the document octets",
+    "output": null,
+    "receipts": [
+      {
+        "ok": false,
+        "code": 3,
+        "reason": "artifact \"child/ref.jos\": integrity_ref: declared hash does not match the document octets"
+      }
+    ]
+  },
+  "ledger_kinds": [
+    "admit",
+    "receipt",
+    "end"
+  ]
+}

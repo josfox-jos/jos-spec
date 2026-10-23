@@ -1,0 +1,49 @@
+{
+ "$comment": "Reference implementations attached to this release candidate as assets. CI (job reference-implementations, on release published) downloads each asset, checks its sha256 against this file, installs it offline and runs the document-level TCK with --expect-version. Built by npm pack (npm 11.17.0) and by a deterministic tar for the Python kernel.",
+ "implementations": [
+  {
+   "id": "jos-core-js",
+   "package": "@josfox/jos-core",
+   "version": "2.0.0",
+   "asset": "josfox-jos-core-2.0.0.tgz",
+   "kind": "npm tarball",
+   "tck": {
+    "cli": "node {install}/node_modules/@josfox/jos-core/bin/jos-core",
+    "expect_version": "2.0.0"
+   },
+   "sha256": "c86cefc671e77f84cdcdbf9629d514f9b144699a98428960771dfb93a09d8648",
+   "size": 92754
+  },
+  {
+   "id": "jos-core-py",
+   "package": "jos-core",
+   "version": "2.0.0",
+   "python_version": "2.0.0",
+   "asset": "jos-core-py-2.0.0.tar.gz",
+   "kind": "source tarball",
+   "root": "jos-core-py-2.0.0",
+   "tck": {
+    "cli": "python3 -I {extract}/jos-core-py-2.0.0/bin/jos-core",
+    "expect_version": "2.0.0"
+   },
+   "sha256": "760619b1513bb0468d48f3954f32a1b95ddc85f117b2f8a77d26ed3c269787d6",
+   "size": 92398
+  },
+  {
+   "id": "jos-host",
+   "package": "@josfox/jos",
+   "version": "5.0.0",
+   "asset": "josfox-jos-5.0.0.tgz",
+   "kind": "npm tarball",
+   "depends_on": [
+    "jos-core-js"
+   ],
+   "smoke": {
+    "cli": "node {install}/node_modules/@josfox/jos/bin/jos",
+    "expect_version": "5.0.0"
+   },
+   "sha256": "33fae371c61ca0dfb6e100ea92fbb0538c0a42866d5828a5c610f7de96f9740d",
+   "size": 103450
+  }
+ ]
+}

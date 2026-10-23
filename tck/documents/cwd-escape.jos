@@ -1,0 +1,20 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "cwd.escape",
+  "meta": {
+    "name": "cwd.escape",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "cwd.escape"
+  },
+  "execution": {
+    "cwd": "../../..",
+    "run": [
+      "pwd"
+    ]
+  }
+}

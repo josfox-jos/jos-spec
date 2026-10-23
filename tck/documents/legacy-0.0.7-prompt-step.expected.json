@@ -1,0 +1,36 @@
+{
+  "description": "0.0.7 example (specs/jos-format/0.0.7/examples/executable.jos) whose definitions are `type: prompt` steps. rc.8: invalid (code 2) in validate and run alike. A definition is a reference, an inline document or a 1.0.0 step `type: shell|jos|http` (SPEC-2.0 §5.1), and schema/jos.schema.json closes both the type and the members of a definition; the normalized 0.0.7 document keeps the definitions as written (§2.4), so it does not validate. rc.3 to rc.7 read it as valid and unexecutable (code 5, I71), against the schema.",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§5.1",
+    "§11"
+  ],
+  "validate": {
+    "valid": false,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "errors": [
+      "/orchestration/definitions/confirm/type: enum",
+      "/orchestration/definitions/confirm: additional property 'template'",
+      "/orchestration/definitions/greet/type: enum",
+      "/orchestration/definitions/greet: additional property 'template'"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "ok": false,
+    "code": 2,
+    "input_version": "0.0.7",
+    "errors": [
+      "/orchestration/definitions/confirm/type: enum",
+      "/orchestration/definitions/confirm: additional property 'template'",
+      "/orchestration/definitions/greet/type: enum",
+      "/orchestration/definitions/greet: additional property 'template'"
+    ],
+    "receipts": []
+  }
+}

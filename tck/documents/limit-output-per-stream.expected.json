@@ -1,0 +1,31 @@
+{
+  "description": "Output limit is per stream: 600 + 500 bytes with limit 1000 is within budget.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "code": 0,
+    "receipts": [
+      {
+        "attempt": 1,
+        "code": 0,
+        "ok": true,
+        "timeout": false,
+        "truncated": false,
+        "exit": 0
+      }
+    ],
+    "ok": true
+  },
+  "artifact": "art_efceecb9b951369f5843973028407fcd8d9cdf3ff7ee138b49c2210329735468"
+}

@@ -1,0 +1,25 @@
+{
+  "description": "rc.8 (F-03): files[0] maps to orchestration.definitions.file_1, which the document already defines (a shell step of its author): code 2 (mixed spellings) instead of replacing the author's definition with {type: jos, artifact}.",
+  "promises": [
+    "P3",
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/files/0: mixed spellings \"files[0]\" and \"orchestration.definitions.file_1\""
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/files/0: mixed spellings \"files[0]\" and \"orchestration.definitions.file_1\""
+    ],
+    "receipts": []
+  }
+}

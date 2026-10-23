@@ -1,0 +1,270 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "example.review.pipeline",
+  "meta": {
+    "name": "review-pipeline",
+    "version": "0.2.0",
+    "author": "JOSFOX LLC",
+    "description": "Review a document package with two independent reviewers from different vendors, a responder from a third vendor, an executor that runs and measures every call, a two-stage grader, a recorder, a planner, and N independent scorers who grade a versioned rubric against offline sources. Confidence is the lower bound of the 95% interval of the scorers, not an opinion.",
+    "domain": "standards",
+    "tags": [
+      "review",
+      "independent-review",
+      "execution",
+      "grading",
+      "recording",
+      "planning",
+      "multi-model",
+      "registration"
+    ],
+    "labels": {
+      "rubric": "docs/RUBRIC.md v1.0",
+      "sources": "sources/ (RFC 6838, 6839, 8259, 6901, 8785, 2046; IANA application registry)",
+      "inputs": "package = SPECIFICATION.md, schema/, IANA.md, SECURITY.md, tests/, examples/",
+      "output": "runs/<run-id>/verdict.json",
+      "threshold": "confidence (lower bound of the 95% interval) >= 0.99 and no failed weight-5 check",
+      "scorers": "N >= 5, >= 2 vendors, model identifiers fixed in plan.json, no scorer from the vendor of the responder",
+      "rounds_max": "3",
+      "stopping": "no early stop: the 3 rounds always run; the gate is evaluated at the end",
+      "severities": "mapping in docs/RUBRIC.md",
+      "background": "an earlier review reached 0.96 self-reported, without a rubric or external validation"
+    }
+  },
+  "intention": {
+    "objective": "Bring a document package to a measured confidence of at least 0.99, with every finding closed by a verifiable diff, every citation checked against real text, every step executed and measured, and every run reproducible by hash",
+    "success_criteria": [
+      "verdict.json reports confidence as the lower bound of the 95% interval of at least 5 scorers, at least 0.99, and no failed weight-5 check for any scorer",
+      "scorers grade the seeded packages before the package, and none grades a seeded package above 0.95; a scorer that does leaves the sample",
+      "reviewers A and B use different vendors; the responder uses a third one; no scorer uses the vendor of the responder",
+      "every finding has an identifier, a weight from the rubric, a citation checked against the offline sources, and a response with a diff or a cited rejection",
+      "every output of a reviewer and of the responder is graded in two stages (deterministic and judged); an output graded C or worse does not pass the gate",
+      "one event identifier with an HMAC is emitted for every model call, and grade, model, cost and routing signal are recorded per event",
+      "plan.json is frozen before the first step and does not change within a run",
+      "runs/<run-id>/ holds the plan, prompts, outputs, grades, events, urls.json (human step) and the hash of the package, and is sealed",
+      "a second run on the same hash with the same model identifiers reproduces the confidence within 0.005"
+    ]
+  },
+  "guardrails": {
+    "avoid": [
+      "the same vendor acting as reviewer and responder in one round, or as responder and scorer in any round",
+      "a scorer that sees grades.json, response.diff or the outputs of other scorers",
+      "stopping early when the threshold is crossed",
+      "changing a model or the plan within a run",
+      "quotas of findings per role",
+      "citations from memory: every citation is checked against sources/",
+      "modifying sources/",
+      "network access from the model steps; the only URL check is the human step url-check"
+    ],
+    "require": [
+      "every role runs with its persona from flows/roles/<role>.jos, unchanged during the run",
+      "the plan step writes plan.json with exact model identifiers and a budget per role before anything runs",
+      "every model call goes through the execute-calls step; no role calls a model on its own",
+      "findings of both reviewers are merged after both finish, with an overlap table",
+      "the final gate is human: the owner reads verdict.json and urls.json and decides",
+      "if the threshold is not reached after round 3, the state is NOT READY with the list of failed checks per scorer"
+    ],
+    "max_cost_per_call": 3
+  },
+  "execution": {
+    "capability": "review.multi-model",
+    "inputs": {
+      "package": "path to the directory of the document package",
+      "rounds": "3",
+      "scorers": "5",
+      "threshold": "0.99",
+      "run_id": "YYYYMMDD-HHMM-<hash8 of the package>"
+    },
+    "budget": {
+      "max_cost_usd": 60,
+      "max_tokens": 3000000,
+      "max_duration": "3h",
+      "max_retries": 1
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "plan": {
+        "type": "jos",
+        "artifact": "flows/roles/planner.jos",
+        "description": "Freeze plan.json: topology, exact model identifiers per role, budget. Vendor diversity is checked before the next step"
+      },
+      "preflight": {
+        "type": "shell",
+        "command": "python3 -I tools/check-superset.py && python3 -I tools/validate-jos.py --schema schema/jos.schema.json tests/valid-*.json && node tools/guard-repo-jos.mjs --dir . --perfil spec --json",
+        "description": "No model calls: superset check, schema vectors, repository gate"
+      },
+      "calibrate-scorers": {
+        "type": "jos",
+        "artifact": "flows/roles/scorer.jos",
+        "description": "Each scorer grades the seeded packages first; a scorer that gives more than 0.95 to a seeded defect leaves the sample"
+      },
+      "review-a": {
+        "type": "jos",
+        "artifact": "flows/roles/reviewer-a.jos",
+        "description": "Independent reviewer A: registration template, subtype name, security considerations, published specification"
+      },
+      "review-b": {
+        "type": "jos",
+        "artifact": "flows/roles/reviewer-b.jos",
+        "description": "Independent reviewer B, from another vendor: interoperability, parsers, structured syntax suffix, fragments, active content"
+      },
+      "merge-findings": {
+        "type": "shell",
+        "command": "python3 -I tools/merge-findings.py runs/$RUN_ID",
+        "description": "Merge the findings of both reviewers by citation and rubric check; overlap table"
+      },
+      "check-citations": {
+        "type": "shell",
+        "command": "python3 -I tools/check-citations.py runs/$RUN_ID/findings.json sources/",
+        "description": "Every citation (document, section, text) must exist in the offline sources; otherwise the finding drops to weight 0"
+      },
+      "execute-calls": {
+        "type": "jos",
+        "artifact": "flows/roles/executor.jos",
+        "description": "Run every model call of the previous step, measure tokens and cost, and emit one event identifier per call"
+      },
+      "grade": {
+        "type": "jos",
+        "artifact": "flows/roles/grader.jos",
+        "description": "Stage 1 deterministic (efficiency, context, intention) and stage 2 judged at temperature 0. Scale A to F"
+      },
+      "record": {
+        "type": "jos",
+        "artifact": "flows/roles/recorder.jos",
+        "description": "Record grade, model, cost, event identifier and routing signal per event. Write only"
+      },
+      "respond": {
+        "type": "jos",
+        "artifact": "flows/roles/responder.jos",
+        "description": "Third vendor. Close each finding with a diff or a cited rejection. The subtype name is out of scope"
+      },
+      "apply-and-validate": {
+        "type": "shell",
+        "command": "git apply --check runs/$RUN_ID/response.diff && python3 -I tools/validate-jos.py --schema schema/jos.schema.json tests/valid-*.json && python3 -I tools/check-superset.py",
+        "description": "A diff is applied only if the documents still validate and the superset holds"
+      },
+      "url-check": {
+        "type": "shell",
+        "command": "python3 -I tools/url-check.py --human runs/$RUN_ID/urls.json",
+        "description": "Human step: a person resolves every $id and URL of the package and records the status code and hash in urls.json"
+      },
+      "score-1": {
+        "type": "jos",
+        "artifact": "flows/roles/scorer.jos",
+        "description": "N scorers grade the rubric on the package after round 1, blind to grades and diffs"
+      },
+      "score-2": {
+        "type": "jos",
+        "artifact": "flows/roles/scorer.jos",
+        "description": "Same after round 2"
+      },
+      "score-3": {
+        "type": "jos",
+        "artifact": "flows/roles/scorer.jos",
+        "description": "Same after round 3. This step writes verdict.json"
+      },
+      "seal": {
+        "type": "shell",
+        "command": "python3 -I tools/seal-run.py runs/$RUN_ID",
+        "description": "Canonical hash of the whole run and of the package; the verdict is bound to that hash"
+      },
+      "decide": {
+        "type": "shell",
+        "command": "echo 'Human decision: the owner reads verdict.json and urls.json'",
+        "description": "Final human gate. Executes nothing"
+      }
+    },
+    "flows": {
+      "round": {
+        "description": "One round. Reviewers A and B run in parallel; merge and citation check run when both finish; everything else in sequence",
+        "steps": [
+          "review-a",
+          "review-b",
+          "execute-calls",
+          "merge-findings",
+          "check-citations",
+          "grade",
+          "record",
+          "respond",
+          "execute-calls",
+          "grade",
+          "record",
+          "apply-and-validate"
+        ],
+        "gates": {
+          "check-citations": "invalid_citations == 0 OR uncited_findings_lowered_to_weight_0",
+          "grade": "grade in [A, B]",
+          "apply-and-validate": "exit 0"
+        }
+      },
+      "full": {
+        "description": "Frozen plan, preflight, scorer calibration, three full rounds without early stop, scoring after each round, human URL step, sealing, human decision",
+        "steps": [
+          "plan",
+          "preflight",
+          "calibrate-scorers",
+          "round",
+          "score-1",
+          "round",
+          "score-2",
+          "round",
+          "url-check",
+          "score-3",
+          "seal",
+          "decide"
+        ],
+        "gates": {
+          "plan": "distinct_vendors(review-a, review-b) AND vendor(respond) not in vendors(scorer) AND plan_frozen",
+          "preflight": "exit 0",
+          "calibrate-scorers": "valid_scorers >= 5 AND vendors(valid_scorers) >= 2",
+          "url-check": "human",
+          "score-3": "ci95_lower >= 0.99 AND failed_weight5_checks == 0",
+          "decide": "human"
+        }
+      }
+    }
+  },
+  "model_policy": {
+    "tier": "reasoning",
+    "vendor": "any",
+    "fallbacks": [
+      "anthropic",
+      "openai",
+      "google"
+    ],
+    "temperature": 0.2
+  },
+  "tool_policy": {
+    "allowed": [
+      "read",
+      "write:runs/**",
+      "shell:python3",
+      "shell:node",
+      "shell:git apply --check"
+    ],
+    "denied": [
+      "git:push",
+      "mail:send",
+      "http:post",
+      "http:get",
+      "write:sources/**"
+    ],
+    "require_approval": false
+  },
+  "security": {
+    "tier": "sandbox",
+    "permissions": [
+      "pipeline:run",
+      "run:write"
+    ],
+    "data_class": "internal",
+    "require_auth": true,
+    "require_admin": false
+  },
+  "reproducibility": {
+    "class": "bounded"
+  }
+}

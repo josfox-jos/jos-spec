@@ -1,0 +1,24 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "ai.example.atom.sanitize",
+  "meta": {
+    "name": "Sanitize"
+  },
+  "intention": {
+    "objective": "Clean dirty input into valid output.",
+    "success_criteria": [
+      "Output is valid JSON matching the target schema",
+      "No source id is modified"
+    ]
+  },
+  "guardrails": {
+    "avoid": [
+      "hallucinating data",
+      "modifying the source id"
+    ]
+  },
+  "x-note": "1.1.0 aliases (intent/done) are a short form; the kernel normalizes them to objective/success_criteria before schema validation (SPEC-2.0 \u00a72.4). This vector is the canonical result."
+}

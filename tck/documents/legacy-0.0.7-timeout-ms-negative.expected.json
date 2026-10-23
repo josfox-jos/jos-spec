@@ -1,0 +1,27 @@
+{
+  "description": "readiness rc.7 pass 5 F-17a: a 0.0.7 guardrails.timeout_ms of -1000 maps to limit.seconds -1, which the schema refuses: code 2 at /guardrails/timeout_ms (it was guardrails.x-legacy-limit, valid).",
+  "promises": [
+    "P3",
+    "P19",
+    "P20"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.5"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/guardrails/timeout_ms: limit.seconds: minimum"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/guardrails/timeout_ms: limit.seconds: minimum"
+    ],
+    "receipts": []
+  }
+}

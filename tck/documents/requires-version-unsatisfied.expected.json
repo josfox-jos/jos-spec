@@ -1,0 +1,18 @@
+{
+  "description": "A requires entry whose version range no candidate satisfies is not satisfied (SPEC-2.0 §6.6, code 5).",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/requires/0: not satisfied by this runtime (artifact \"lib.helper\") (SPEC-2.0 §6.6)"
+  }
+}

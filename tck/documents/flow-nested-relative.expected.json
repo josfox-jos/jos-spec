@@ -1,0 +1,24 @@
+{
+  "description": "A nested document's relative artifact paths resolve against its own directory (SPEC-2.0 §6.8): outer.jos -> sub2/inner.jos -> leaf.jos is sub2/leaf.jos, not the root's leaf.jos.",
+  "document": "fixtures/nest/outer.jos",
+  "promises": [
+    "P9"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.1",
+    "§6.8"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "LEAF-in-sub2\n",
+      "stderr": ""
+    }
+  }
+}

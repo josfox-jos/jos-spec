@@ -1,0 +1,103 @@
+name: conformance
+
+# Written for the public repository layout (SPECIFICATION.md, schema/, tests/, tools/ at the root).
+# The only step that uses the network installs the pinned validator; every check after it runs offline.
+# The job reference-implementations (release published) downloads the release assets and runs the document-level TCK.
+on:
+  pull_request:
+  push:
+    branches: [main, jos-spec-v2]
+    tags: ['v*', 'jos-spec-v*']
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag whose assets are verified
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  conformance:
+    if: github.event_name != 'release' && github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the repository gate counts tags
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Pinned validator
+        run: python -m pip install "jsonschema==4.23.0"
+      - name: Superset 1.0.0 -> 2.0 (offline)
+        run: python3 -I tools/check-superset.py
+      - name: TCK (schema level, offline; each invalid vector is judged on its own)
+        run: python3 -I tck/run.py
+      - name: TCK self-test (a valid document injected as an invalid vector must make the TCK fail)
+        run: |
+          t=$(mktemp -d)
+          cp tests/valid-*.json tests/invalid-*.json "$t"/
+          first=$(ls tests/valid-*.json | head -n 1)
+          cp "$first" "$t/invalid-zz-selftest-$(basename "$first")"
+          if python3 -I tck/run.py --tests "$t"; then
+            echo "::error::the TCK accepted an invalid vector that validates; the TCK is not judging each vector"; exit 1
+          fi
+          echo "self-test: the TCK rejected the injected vector, as required"
+      - name: Traceability of the requirements (blocking for the security and identity sections; the rest is reported in the summary)
+        run: |
+          python3 -I tools/traceability.py --out quality/TRACEABILITY.md --strict 2.1,2.2,5.3,6.5,6.6,9.1,9.2,9.3,12
+          sed -n '/## Requirements without any vector/,$p' quality/TRACEABILITY.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Pending markers (blocking only on a final tag vMAJOR.MINOR.PATCH)
+        run: |
+          found=$(grep -rn '<pending:' --include='*.md' --include='security.txt' . | grep -v -E '^\./RELEASE_PROCESS\.md:' | grep -v 'PULL_REQUEST_TEMPLATE' || true)
+          if [ -z "$found" ]; then echo "no pending markers"; exit 0; fi
+          echo "$found"
+          if [[ "$GITHUB_REF" =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::pending markers in a final release (RELEASE_PROCESS.md, stage 2)"; exit 1
+          fi
+          echo "::warning::pending markers are expected until the final tag (release candidate; see RELEASE_PROCESS.md)"
+      - name: Repository gate (profile spec, 100 required; mandatory)
+        run: |
+          test -f tools/guard-repo-jos.mjs || { echo "::error::tools/guard-repo-jos.mjs is missing; the gate is mandatory"; exit 1; }
+          node tools/guard-repo-jos.mjs --dir . --perfil spec --minimo 100 --salida quality
+      - name: Gate report
+        if: always()
+        run: cat quality/QUALITY.md || true
+
+  reference-implementations:
+    # The release assets are the reference implementations pinned by tck/reference-implementations.lock.json.
+    # Download them, check each sha256 against the lock, install offline and run the document-level TCK.
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Download the release assets
+        run: gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir assets
+      - name: Verify hashes, install offline, run the document-level TCK and the host smoke test
+        run: python3 -I tools/verify-reference-implementations.py --assets assets --out quality/reference-implementations
+      - name: Summary
+        if: always()
+        run: |
+          { echo "Tag: $TAG · commit: $GITHUB_SHA"; echo; cat quality/reference-implementations/SUMMARY.md; } >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reference-implementations-${{ github.event.release.tag_name || inputs.tag }}
+          path: quality/reference-implementations/

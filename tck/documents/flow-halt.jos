@@ -1,0 +1,60 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "halt"
+  },
+  "orchestration": {
+    "definitions": {
+      "a": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "a"
+        ]
+      },
+      "b": {
+        "engine": "shell",
+        "run": [
+          "false"
+        ],
+        "needs": [
+          "a"
+        ]
+      },
+      "c": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "c"
+        ],
+        "needs": [
+          "b"
+        ]
+      },
+      "d": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "d"
+        ],
+        "needs": [
+          "a"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ],
+        "on_error": "halt"
+      }
+    }
+  }
+}

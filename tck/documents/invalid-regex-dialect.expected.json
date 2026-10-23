@@ -1,0 +1,17 @@
+{
+  "description": "Back-references, inline flags, bare braces, empty classes and {,n} are outside the shared regex dialect: invalid in both engines.",
+  "promises": [
+    "P4"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": false
+  },
+  "code": 2,
+  "result": {
+    "code": 2
+  }
+}

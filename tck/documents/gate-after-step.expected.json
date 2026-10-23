@@ -1,0 +1,34 @@
+{
+  "description": "The gate key `after-step1` of the 1.0.0 example is the gate of step1 (SPEC-2.0 §5.5, rc.8): its expression passes on exit 3, so the flow goes on to step2. A key that names no step of the flow (`decide`) is valid (the schema does not constrain the keys) and is not evaluated. rc.7: validate accepted the document and run refused it (code 2).",
+  "promises": [
+    "P3",
+    "P12"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.5"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "1.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0,
+    "steps": [
+      {
+        "step": "step1",
+        "status": "ok",
+        "code": 1
+      },
+      {
+        "step": "step2",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "two\n"
+    }
+  }
+}

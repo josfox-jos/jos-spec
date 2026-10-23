@@ -1,0 +1,32 @@
+# JOS specification (.jos)
+
+> `.jos` is a JSON format (RFC 8259) for declaring an intention: what is intended, when it is done, and what is to be avoided, with the metadata needed to identify, verify, compose and execute it. Media type: `application/vnd.jos+json`. A document is data; parsing or validating it MUST NOT run anything.
+
+## Normative
+
+- Specification 2.0: SPECIFICATION.md
+- Specification 1.0.0 (in force; compatibility with 2.0 and the registration as submitted): versions/1.0.0/README.md
+- Every promise of the format with its phase: PROMISES.md; proof vector by vector: tck/PROOF.md
+- JSON Schema, document: schema/jos.schema.json
+- JSON Schema, normalized core form: schema/core.schema.json
+- Security considerations (normative): SECURITY.md
+- Conformance of documents, parsers and runtimes: CONFORMANCE.md
+- Registration template, RFC 6838 Section 5.6: IANA.md
+
+## Test vectors
+
+- Valid and invalid documents, with the reason each invalid one fails: tests/ (index in tests/README.md)
+- Document-level conformance (any implementation): tck/run-documents.py over tck/documents/
+
+## Governance
+
+- GOVERNANCE.md (change controller, change classes, versions and tags), MAINTAINERS.md, CONTRIBUTING.md, CODE_OF_CONDUCT.md, RELEASE_PROCESS.md, CHANGELOG.md, LICENSE
+
+## Validate without network access
+
+    python3 -I tools/check-superset.py
+    python3 -I tools/validate-jos.py --schema schema/jos.schema.json tests/valid-*.json
+
+## Relationship to other protocols
+
+- A2A carries a JOS document as structured data in a message. MCP exposes tools a JOS document can depend on. JOS declares the contract.

@@ -1,0 +1,33 @@
+{
+  "description": "file_exists and file_sha256 with paths relative to the declared cwd.",
+  "promises": [
+    "P17"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.3",
+    "§6.8"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_fa48be99018e48b0875bd34511f3db32a5330d43718c0ec458270f562fccd187",
+  "result": {
+    "receipts": [
+      {
+        "criteria": [
+          {
+            "check": "file_exists",
+            "pass": true,
+            "detail": "exists"
+          },
+          {
+            "check": "file_sha256",
+            "pass": true,
+            "detail": "match"
+          }
+        ]
+      }
+    ]
+  }
+}

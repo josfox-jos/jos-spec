@@ -1,0 +1,86 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "id": "requires-on-error-continue",
+  "meta": {
+    "name": "requires-on-error-continue",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A step allowed to fail that has an unsatisfied dependency",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "one": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > requires-on-error-continue.effect.txt"
+        ]
+      },
+      "two": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "id": "two",
+        "meta": {
+          "name": "two",
+          "version": "1.0.0"
+        },
+        "intention": {
+          "objective": "A step that may fail",
+          "success_criteria": [
+            {
+              "exit": 0
+            }
+          ]
+        },
+        "guardrails": {
+          "limit": {
+            "seconds": 5,
+            "output_bytes": 65536,
+            "retries": 0
+          }
+        },
+        "execution": {
+          "engine": "shell",
+          "run": [
+            "echo",
+            "ok"
+          ],
+          "on_error": "continue"
+        },
+        "requires": [
+          {
+            "kind": "service",
+            "name": "payments"
+          }
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "one",
+          "two"
+        ]
+      }
+    }
+  }
+}

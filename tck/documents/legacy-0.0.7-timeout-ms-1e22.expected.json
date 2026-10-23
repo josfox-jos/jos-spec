@@ -1,0 +1,26 @@
+{
+  "description": "readiness rc.7 pass 5 F-18: a value produced by a mapping satisfies Section 2.1 and the schema itself. timeout_ms 1e22 is a valid literal, but it maps to limit.seconds 1e19, an integer between 2^53 and 10^21 that the canonical form writes as 10000000000000000000, which Section 2.1 refuses: code 2 at /guardrails/timeout_ms. Before the fix the document was valid and its canonical form invalid.",
+  "promises": [
+    "P3",
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.1",
+    "§2.4"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/guardrails/timeout_ms: limit.seconds integer value 10000000000000000000 is outside ±2^53 and below 10^21 (not representable in canonical form)"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/guardrails/timeout_ms: limit.seconds integer value 10000000000000000000 is outside ±2^53 and below 10^21 (not representable in canonical form)"
+    ],
+    "receipts": []
+  }
+}

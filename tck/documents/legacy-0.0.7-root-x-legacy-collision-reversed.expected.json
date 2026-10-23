@@ -1,0 +1,26 @@
+{
+  "description": "rc.8 (F-03): a root member that the 0.0.7 mapping moves to x-legacy-<member> (adaptive_ai) beside an x-legacy-adaptive_ai the document already has: the move would drop one of the two values, so the document is code 2 (mixed spellings), whatever the member order (here x-legacy-adaptive_ai before adaptive_ai). Before the fix the result kept one value or the other depending on the order, with two different art_.",
+  "promises": [
+    "P3",
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§2.5"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/adaptive_ai: mixed spellings \"adaptive_ai\" and \"x-legacy-adaptive_ai\""
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/adaptive_ai: mixed spellings \"adaptive_ai\" and \"x-legacy-adaptive_ai\""
+    ],
+    "receipts": []
+  }
+}

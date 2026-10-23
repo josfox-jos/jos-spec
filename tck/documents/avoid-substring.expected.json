@@ -1,0 +1,25 @@
+{
+  "description": "avoid substring matched against the argv joined by spaces: the process does not start, code 3.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 3,
+  "artifact": "art_942553b4b3ff7f570fa0fd125d1bc23ff32471efd7024869d84c3225030ab59f",
+  "result": {
+    "ok": false,
+    "reason": "avoid: pattern \"rm -rf\" matched the engine input",
+    "receipts": [
+      {
+        "code": 3,
+        "criteria": []
+      }
+    ]
+  }
+}

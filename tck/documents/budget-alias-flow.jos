@@ -1,0 +1,37 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "budget.alias.flow",
+  "meta": {
+    "name": "budget.alias.flow",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A 1.0.0 flow whose execution.budget bounds its steps"
+  },
+  "execution": {
+    "budget": {
+      "max_duration": "300ms",
+      "max_retries": 0,
+      "max_tokens": 1000,
+      "max_cost_usd": 0.5
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "slow": {
+        "type": "shell",
+        "command": "sleep 5"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "slow"
+        ]
+      }
+    }
+  }
+}

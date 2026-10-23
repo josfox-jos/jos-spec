@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-file-added",
+  "meta": {
+    "name": "sealed-file-added",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sealed folder: A file added under .jos/ after sealing is covered: the directory hash no longer "
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sealed-file-added.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "say"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:451bab44d49b96dcc3f0f17e7ea69e57b71f9f1e07ab163b46524dab9fb0cc9e"
+  }
+}

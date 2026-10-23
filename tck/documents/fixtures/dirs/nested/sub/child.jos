@@ -1,0 +1,16 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "child"
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "SECRET-ran-shell"
+    ]
+  }
+}

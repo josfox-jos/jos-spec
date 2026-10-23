@@ -1,0 +1,28 @@
+{
+  "description": "A template whose required slot `word` is not given: code 2 at the step (SPEC-2.0 §5.7).",
+  "promises": [
+    "P29"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.7"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 2,
+  "result": {
+    "ok": false,
+    "errors": [
+      "/with: required 'word'"
+    ],
+    "steps": [
+      {
+        "step": "main",
+        "status": "failed",
+        "code": 2
+      }
+    ]
+  }
+}

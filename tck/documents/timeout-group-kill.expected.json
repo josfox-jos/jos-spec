@@ -1,0 +1,31 @@
+{
+  "description": "A grandchild that outlives the limit is killed with the whole group: 124, finished in about one second.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 124,
+  "result": {
+    "code": 124,
+    "receipts": [
+      {
+        "attempt": 1,
+        "code": 124,
+        "ok": false,
+        "timeout": true,
+        "truncated": false,
+        "exit": null
+      }
+    ]
+  },
+  "artifact": "art_e713d8b6b5afb4417d21ca851a1605a4a70dad0464c12d6f858892bd1ac2f58e",
+  "max_duration_ms": 2500
+}

@@ -1,0 +1,25 @@
+{
+  "description": "readiness rc.7 pass 5 F-16b: a files entry that is neither a string nor an object is code 2 at its JSON Pointer. Before the fix it became {type: jos} with no artifact and the document was valid, so [5], [6], [null] and [true] shared one art_.",
+  "promises": [
+    "P3",
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/files/1: not a string or an object"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/files/1: not a string or an object"
+    ],
+    "receipts": []
+  }
+}

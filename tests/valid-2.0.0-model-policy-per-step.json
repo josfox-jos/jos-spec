@@ -1,0 +1,47 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "routed"
+  },
+  "orchestration": {
+    "definitions": {
+      "a": {
+        "engine": "shell",
+        "run": [
+          "true"
+        ]
+      },
+      "b": {
+        "engine": "shell",
+        "run": [
+          "true"
+        ],
+        "needs": [
+          "a"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "a",
+          "b"
+        ]
+      }
+    }
+  },
+  "model_policy": {
+    "task_class": "reason",
+    "model_id": "vendor-model-2026-01",
+    "seed": 7,
+    "per_step": {
+      "b": {
+        "tier": "economy",
+        "task_class": "extract"
+      }
+    }
+  }
+}

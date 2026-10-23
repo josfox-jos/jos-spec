@@ -1,0 +1,18 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "v2-xlegacy"
+  },
+  "security": {
+    "x-legacy-integrity_ref": "./ref.jos.sig.json"
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "v2 ran"
+    ]
+  }
+}

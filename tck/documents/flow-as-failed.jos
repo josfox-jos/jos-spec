@@ -1,0 +1,45 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "as-failed"
+  },
+  "orchestration": {
+    "definitions": {
+      "a": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo FAILED-OUTPUT; exit 1"
+        ],
+        "as": "v",
+        "execution": {
+          "on_error": "continue"
+        }
+      },
+      "c": {
+        "engine": "shell",
+        "run": [
+          "cat"
+        ],
+        "needs": [
+          "a"
+        ],
+        "with": {
+          "x": "{{ v }}"
+        }
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "a",
+          "c"
+        ]
+      }
+    }
+  }
+}

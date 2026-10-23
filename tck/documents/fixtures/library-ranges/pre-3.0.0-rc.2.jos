@@ -1,0 +1,20 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "rt.pre",
+  "meta": {
+    "name": "pre",
+    "version": "3.0.0-rc.2"
+  },
+  "intention": {
+    "objective": "library entry rt.pre 3.0.0-rc.2 for version-range resolution (SPEC-2.0 §2.7, §5.3)"
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "pre 3.0.0-rc.2"
+    ]
+  }
+}

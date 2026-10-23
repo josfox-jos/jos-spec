@@ -1,0 +1,18 @@
+{
+  "id_jos": "example-v1",
+  "jos": { "open": "jos run artifact", "supports": ["@josfox/jos"] },
+  "orchestration_contract": { "version": "0.0.7", "mode": "sync" },
+  "meta": { "name": "example", "version": "1.0.0", "type": "atom" },
+  "intention": { "objective": "Demonstrate JOS", "success_criteria": "Output greeting" },
+  "guardrails": { "avoid": [], "max_retries": 0 },
+  "capabilities": ["demo"],
+  "artifacts": { "description": "Minimal example" },
+  "orchestration": {
+    "definitions": { "greet": { "type": "shell", "command": "echo 'Hello!'" } },
+    "flows": { "main": { "steps": ["greet"] } }
+  },
+  "security": { "type": "open", "permissions": [], "integrity_ref": null },
+  "files": [],
+  "x_run_params": { "timeout": 5000, "retry_on_failure": false },
+  "adaptive_ai": { "learning_enabled": false, "feedback_collection": false }
+}

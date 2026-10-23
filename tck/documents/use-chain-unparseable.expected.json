@@ -1,0 +1,26 @@
+{
+  "description": "A file of the nearest .jos/ level that cannot be read as a document (duplicate member names) stops the resolution (code 2, naming the file): use never falls back silently to the library (SPEC-2.0 §5.3).",
+  "document": "fixtures/dirs/unparse/app.jos",
+  "run_args": [
+    "--library",
+    "fixtures/library"
+  ],
+  "promises": [
+    "P10"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.3"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 2,
+  "result": {
+    "ok": false,
+    "errors": [
+      ".jos/flows/z.jos: /: duplicate key \"execution\""
+    ]
+  }
+}

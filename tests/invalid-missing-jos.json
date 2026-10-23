@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "name": "No jos header"
+  },
+  "intention": {
+    "objective": "Fails: required root field \"jos\" is absent."
+  }
+}

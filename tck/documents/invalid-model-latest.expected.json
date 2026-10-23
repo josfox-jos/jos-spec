@@ -1,0 +1,22 @@
+{
+  "description": "model_id \"latest\" is an invalid value: models are pinned (code 2). rc.8: the pattern of schema/jos.schema.json (no `latest` word anywhere in the identifier).",
+  "promises": [
+    "P22"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.2"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/model_policy/model_id: pattern"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/model_policy/model_id: pattern"
+    ]
+  }
+}

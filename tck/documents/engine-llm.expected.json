@@ -1,0 +1,19 @@
+{
+  "description": "Engine class llm is valid and unexecutable in F0 (code 5).",
+  "promises": [
+    "P2",
+    "P23"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.1",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "artifact": "art_b9aac191efd619d37ddb21d0c196b9414720b97de580ee319ccfc98cdc4c2d65",
+  "result": {
+    "unexecutable": "engine 'llm' is not available in this kernel (shell and jos only)"
+  }
+}

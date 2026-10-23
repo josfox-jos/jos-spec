@@ -1,0 +1,29 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "env.allowlist",
+  "meta": {
+    "name": "env.allowlist",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "env.allowlist",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "execution": {
+    "env": [
+      "PATH",
+      "JOS_VECTOR_ALLOWED"
+    ],
+    "run": [
+      "printenv",
+      "JOS_VECTOR_ALLOWED"
+    ]
+  }
+}

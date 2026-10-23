@@ -1,0 +1,29 @@
+{
+  "description": "The document asks for 30 s; its .jos/ allows 7 s: the effective limit is the minimum (dry run shows the plan).",
+  "document": "fixtures/dirs/chain/app/inherit-limit.jos",
+  "run_args": [
+    "--dry-run"
+  ],
+  "promises": [
+    "P20"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.2",
+    "§3.5"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "plan": {
+      "limits": {
+        "seconds": 7,
+        "output_bytes": 1048576,
+        "retries": 1
+      }
+    }
+  }
+}

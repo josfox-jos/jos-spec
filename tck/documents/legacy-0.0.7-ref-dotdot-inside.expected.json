@@ -1,0 +1,29 @@
+{
+  "description": "./sub/../ref.jos.sig.json resolves lexically inside the directory: verified, the document runs.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/dotdot-inside/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "Hello from ref\n",
+      "stderr": ""
+    },
+    "integrity_ref": {
+      "manifest": "./sub/../ref.jos.sig.json",
+      "sha256": "f7c36fdd2451f290f9f12c0c4fcd3cbdf2a2c0323d425af4b5fafb42c40a2ea1",
+      "eol": "as-is"
+    }
+  }
+}

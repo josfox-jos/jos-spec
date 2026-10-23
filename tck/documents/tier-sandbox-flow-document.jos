@@ -1,0 +1,48 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "id": "tier-sandbox-flow-document",
+  "meta": {
+    "name": "tier-sandbox-flow-document",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A flow that asks for a sandbox for all its steps",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "one": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > tier-sandbox-flow-document.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "one"
+        ]
+      }
+    }
+  },
+  "security": {
+    "tier": "sandbox"
+  }
+}

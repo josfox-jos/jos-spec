@@ -1,0 +1,19 @@
+{
+  "description": "The flow's own unsatisfied entry refuses the run before its first step: step one never runs and leaves no file (SPEC-2.0 §6.6, code 5).",
+  "promises": [
+    "P13",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/requires/0: not satisfied by this runtime (mcp-server \"github\") (SPEC-2.0 §6.6)"
+  }
+}

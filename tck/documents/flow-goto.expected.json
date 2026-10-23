@@ -1,0 +1,39 @@
+{
+  "description": "An auto gate (exit == 0) fails with on_fail goto:fallback: middle is skipped, fallback runs, the failure is handled and the flow is done.",
+  "promises": [
+    "P18"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.5"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "steps": [
+      {
+        "step": "check",
+        "status": "failed",
+        "code": 1
+      },
+      {
+        "step": "middle",
+        "status": "skipped",
+        "reason": "goto fallback"
+      },
+      {
+        "step": "fallback",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "fallback\n",
+      "stderr": ""
+    }
+  }
+}

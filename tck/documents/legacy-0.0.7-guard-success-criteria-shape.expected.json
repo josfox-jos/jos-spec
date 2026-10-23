@@ -1,0 +1,26 @@
+{
+  "description": "readiness rc.7 pass 5 F-15: intention.success_criteria, the definition of done, is held to the guard rule: a value of another shape is code 2 (/intention/success_criteria: oneOf), never moved.",
+  "promises": [
+    "P3",
+    "P17"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.4"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/intention/success_criteria: oneOf"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/intention/success_criteria: oneOf"
+    ],
+    "receipts": []
+  }
+}

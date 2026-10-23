@@ -1,0 +1,85 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "id": "tier-sandbox-used-definition",
+  "meta": {
+    "name": "tier-sandbox-used-definition",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A step that uses a sandbox definition",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "one": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > tier-sandbox-used-definition.effect.txt"
+        ]
+      },
+      "boxed": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "id": "lib.boxed",
+        "meta": {
+          "name": "lib.boxed",
+          "version": "1.0.0"
+        },
+        "intention": {
+          "objective": "A library atom that asks for a sandbox",
+          "success_criteria": [
+            {
+              "exit": 0
+            }
+          ]
+        },
+        "guardrails": {
+          "limit": {
+            "seconds": 5,
+            "output_bytes": 65536,
+            "retries": 0
+          }
+        },
+        "execution": {
+          "engine": "shell",
+          "run": [
+            "echo",
+            "ok"
+          ]
+        },
+        "security": {
+          "tier": "sandbox"
+        }
+      },
+      "two": {
+        "use": "lib.boxed@^1.0.0"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "one",
+          "two"
+        ]
+      }
+    }
+  }
+}

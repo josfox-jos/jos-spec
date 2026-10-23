@@ -1,0 +1,36 @@
+{
+  "description": "A document two levels below a .jos/ that also holds context files (PROJECT.md, genesis/registries/) states no policy of its own; scope resolution loads the directory's policy before the run and its avoid list stops the launch (code 3: admit, receipt, end; nothing started). Covers the policy half of the row; injecting PROJECT.md and genesis/ content into an engine's context is the `context` engine (P43, F2).",
+  "document": "fixtures/dirs/context/app/deep/doc.jos",
+  "promise": "P39: \"Context server / anti-context-dissolution: canonical vocabulary and invariants loaded before every run\" (the generator, guardrails layer 2). 2.0: directory chain: `.jos/PROJECT.md`, `genesis/`, policies are loaded by scope resolution before a run; the kernel exposes `effective(ctx)`. Phase F1.",
+  "promises": [
+    "P39"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.2",
+    "dotjos 0.2.0",
+    "PROMISES.md P39"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 3,
+  "result": {
+    "ok": false,
+    "output": null,
+    "reason": "avoid: pattern \"drop table\" matched the engine input",
+    "receipts": [
+      {
+        "step": "context-before-run",
+        "code": 3,
+        "criteria": []
+      }
+    ]
+  },
+  "ledger_kinds": [
+    "admit",
+    "receipt",
+    "end"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "id": "release-notes.decomposed",
+  "meta": {
+    "name": "release-notes.decomposed",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "Write the release notes (output of a decompose engine: one flow of nano-intentions)",
+    "success_criteria": [
+      {
+        "stdout_contains": "notes ready"
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "collect": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "collect"
+        },
+        "intention": {
+          "objective": "List the changes since the last tag",
+          "success_criteria": [
+            {
+              "stdout_contains": "changes"
+            }
+          ]
+        },
+        "guardrails": {
+          "limit": {
+            "seconds": 3
+          }
+        },
+        "model_policy": {
+          "task_class": "extract"
+        },
+        "execution": {
+          "engine": "shell",
+          "run": [
+            "echo",
+            "changes collected"
+          ]
+        }
+      },
+      "draft": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "meta": {
+          "name": "draft"
+        },
+        "intention": {
+          "objective": "Turn the changes into notes",
+          "success_criteria": [
+            {
+              "exit": 0
+            },
+            {
+              "stdout_contains": "notes ready"
+            }
+          ]
+        },
+        "guardrails": {
+          "limit": {
+            "seconds": 3
+          }
+        },
+        "model_policy": {
+          "task_class": "generate"
+        },
+        "execution": {
+          "engine": "shell",
+          "run": [
+            "echo",
+            "notes ready"
+          ]
+        },
+        "needs": [
+          "collect"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "collect",
+          "draft"
+        ]
+      }
+    }
+  }
+}

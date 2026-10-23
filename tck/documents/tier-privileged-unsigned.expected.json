@@ -1,0 +1,19 @@
+{
+  "description": "A privileged document requires a signature (SPEC-2.0 §5.3); a runtime that cannot verify signatures does not run it (code 5).",
+  "promises": [
+    "P6",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.3"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/security/tier: signature verification not available (SPEC-2.0 §5.3)"
+  }
+}

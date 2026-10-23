@@ -1,0 +1,25 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "output.limit",
+  "meta": {
+    "name": "output.limit",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "output.limit"
+  },
+  "guardrails": {
+    "limit": {
+      "output_bytes": 1024,
+      "seconds": 10
+    }
+  },
+  "execution": {
+    "run": [
+      "yes"
+    ]
+  }
+}

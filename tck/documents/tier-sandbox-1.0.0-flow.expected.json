@@ -1,0 +1,30 @@
+{
+  "description": "A 1.0.0 flow (valid under the 1.0.0 schema: its step is a 1.0.0 `type: shell` step) that asks for a sandbox stays valid and is unexecutable in a runtime that cannot confine its steps; its step leaves no file (SPEC-2.0 §6.5, Appendix C).",
+  "promises": [
+    "P3",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5"
+  ],
+  "validate": {
+    "valid": true,
+    "input_version": "1.0.0"
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/security/tier: sandbox not available (SPEC-2.0 §6.5)"
+  },
+  "alternatives": [
+    {
+      "code": 0,
+      "result": {
+        "ok": true,
+        "code": 0
+      },
+      "claim": "sandbox"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "description": "Three atoms joined by needs (fetch; shape needs fetch and reads it through `with` and `as`; report needs both). Each step re-enters run() with a derived Capability; one receipt per step and a flow receipt; the ledger records admit, one derive/start/receipt per step, the flow receipt and end.",
+  "promises": [
+    "P9",
+    "P11",
+    "P12",
+    "P18",
+    "P34"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.1",
+    "§5.2",
+    "§5.4",
+    "§7.2",
+    "Capability 0.1.0 §6",
+    "Ledger 0.1.0 §3"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "artifact": "art_ac5a1f56aa5bccd3bfa9c8d9afbca86406b2e7b088b4d4e53e0e780f9cdf99b9",
+  "result": {
+    "ok": true,
+    "flow": "main",
+    "steps": [
+      {
+        "step": "fetch",
+        "status": "ok",
+        "code": 0
+      },
+      {
+        "step": "shape",
+        "status": "ok",
+        "code": 0
+      },
+      {
+        "step": "report",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "done\n",
+      "stderr": ""
+    },
+    "receipts": [
+      {
+        "step": "fetch",
+        "engine": "shell",
+        "code": 0,
+        "artifact": "art_b7d6c91e5733a787f2d139fc20618741db4fb0017f2ee4a41f7e2fb574e4244a",
+        "output_hash": "sha256:b6a98d9ce9a2d9149288fa3df42d377c3e42737afdcdaf714e33c0a100b51060"
+      },
+      {
+        "step": "shape",
+        "engine": "shell",
+        "code": 0,
+        "output_hash": "sha256:7d1986edef05bddff1244074e728de4a2c0d29d010f142a3760fa3959d40e040"
+      },
+      {
+        "step": "report",
+        "engine": "shell",
+        "code": 0
+      },
+      {
+        "step": "flow3",
+        "flow": "main",
+        "engine": "jos",
+        "code": 0,
+        "ok": true
+      }
+    ]
+  },
+  "ledger_kinds": [
+    "admit",
+    "derive",
+    "start",
+    "receipt",
+    "derive",
+    "start",
+    "receipt",
+    "derive",
+    "start",
+    "receipt",
+    "receipt",
+    "end"
+  ]
+}

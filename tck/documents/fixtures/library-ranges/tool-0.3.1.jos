@@ -1,0 +1,20 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "rt.tool",
+  "meta": {
+    "name": "tool",
+    "version": "0.3.1"
+  },
+  "intention": {
+    "objective": "library entry rt.tool 0.3.1 for version-range resolution (SPEC-2.0 §5.3, meta.version)"
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "tool 0.3.1"
+    ]
+  }
+}

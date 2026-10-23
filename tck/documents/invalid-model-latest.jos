@@ -1,0 +1,22 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "model.latest",
+  "meta": {
+    "name": "model.latest",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "model.latest"
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  },
+  "model_policy": {
+    "model_id": "latest"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "budget.zero",
+  "meta": {
+    "name": "budget.zero",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "budget.zero"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 0
+    }
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  }
+}

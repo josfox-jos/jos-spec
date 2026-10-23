@@ -1,0 +1,41 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "require-auth-descriptive",
+  "meta": {
+    "name": "require-auth-descriptive",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "Authorization declarations are recorded for the host and not enforced by the core kernel",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "ok"
+    ]
+  },
+  "security": {
+    "tier": "standard",
+    "require_auth": true,
+    "require_admin": true
+  },
+  "tool_policy": {
+    "require_approval": true
+  }
+}

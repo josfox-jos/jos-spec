@@ -1,0 +1,18 @@
+{
+  "description": "kind flow requires orchestration.flows (SPEC-2.0 \u00a74.1).",
+  "promises": [
+    "P14"
+  ],
+  "spec": [
+    "SPEC-2.0 \u00a73.5",
+    "\u00a77.1"
+  ],
+  "validate": {
+    "valid": false
+  },
+  "code": 2,
+  "result": {
+    "code": 2
+  },
+  "semantic": true
+}

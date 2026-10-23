@@ -1,0 +1,9 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "robot"
+  },
+  "meta": {
+    "name": "Bad kind"
+  }
+}

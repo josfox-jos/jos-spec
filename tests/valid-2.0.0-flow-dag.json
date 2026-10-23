@@ -1,0 +1,70 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "dag"
+  },
+  "intention": {
+    "objective": "Three steps with a dependency graph",
+    "success_criteria": [
+      "all steps ok"
+    ]
+  },
+  "orchestration": {
+    "definitions": {
+      "extract": {
+        "use": "ai.acme.extract@1.2.0",
+        "with": {
+          "doc": "{{ input }}"
+        },
+        "as": "entities"
+      },
+      "lang": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "en"
+        ]
+      },
+      "translate": {
+        "use": "ai.acme.translate",
+        "with": {
+          "text": "{{ entities }}"
+        },
+        "needs": [
+          "extract",
+          "lang"
+        ]
+      },
+      "verify": {
+        "type": "shell",
+        "command": "./verify.sh",
+        "needs": [
+          "translate"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "extract",
+          "lang",
+          "translate",
+          "verify"
+        ],
+        "gates": {
+          "verify": {
+            "kind": "auto",
+            "expr": "exit == 0",
+            "on_fail": "halt"
+          },
+          "translate": {
+            "kind": "human"
+          }
+        }
+      }
+    }
+  }
+}

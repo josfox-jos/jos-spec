@@ -1,0 +1,40 @@
+{
+  "orchestration_contract": {
+    "version": "0.0.7",
+    "mode": "sync"
+  },
+  "id_jos": "legacy-0.0.7-timeout-ms-shape",
+  "meta": {
+    "name": "legacy-0.0.7-timeout-ms-shape",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "legacy-0.0.7-timeout-ms-shape",
+    "success_criteria": "the step runs"
+  },
+  "guardrails": {
+    "avoid": [],
+    "timeout_ms": "5000"
+  },
+  "orchestration": {
+    "definitions": {
+      "main_task": {
+        "type": "shell",
+        "description": "step",
+        "command": "echo ok"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "main_task"
+        ]
+      }
+    }
+  },
+  "security": {
+    "type": "open",
+    "permissions": [],
+    "integrity_ref": null
+  }
+}

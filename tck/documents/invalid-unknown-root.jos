@@ -1,0 +1,22 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "unknown.root",
+  "meta": {
+    "name": "unknown.root",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "unknown.root"
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  },
+  "supports": [
+    "x"
+  ]
+}

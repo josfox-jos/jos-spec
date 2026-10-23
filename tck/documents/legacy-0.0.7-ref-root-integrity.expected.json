@@ -1,0 +1,29 @@
+{
+  "description": "A 0.0.7 document with a false root integrity.hash (kept as x-legacy-integrity, never interpreted) and a right manifest: verified, it runs.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/root-integrity/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "Hello from ref\n",
+      "stderr": ""
+    },
+    "integrity_ref": {
+      "manifest": "./ref.jos.sig.json",
+      "sha256": "a77aa9ef28953491e55bbe9e987da2b2b95d5a1b6e5de6b6d89067cd06d627d2",
+      "eol": "as-is"
+    }
+  }
+}

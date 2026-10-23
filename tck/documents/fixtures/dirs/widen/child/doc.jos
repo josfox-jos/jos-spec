@@ -1,0 +1,15 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "in-widening-child"
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "never runs"
+    ]
+  }
+}

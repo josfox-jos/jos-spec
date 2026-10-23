@@ -1,0 +1,29 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "budget100",
+  "meta": {
+    "name": "budget100",
+    "labels": {
+      "dotjos": "0.2.0",
+      "parent": "jos.monorepo"
+    }
+  },
+  "intention": {
+    "objective": "1.0.0 manifest whose limit is execution.budget"
+  },
+  "execution": {
+    "budget": {
+      "max_duration": "1s"
+    }
+  },
+  "orchestration": {
+    "flows": {
+      "main": {
+        "steps": []
+      }
+    }
+  }
+}

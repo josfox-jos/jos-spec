@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-manifest-edited",
+  "meta": {
+    "name": "sealed-manifest-edited",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sealed folder: The manifest itself changed after sealing (its objective), its integrity.hash ke (edited after sealing)"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sealed-manifest-edited.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "say"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:0846f524d91cd886b2eca930445e2e1f729681ed512a7e07577ccd2d50c6ffbd"
+  }
+}

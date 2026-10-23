@@ -1,0 +1,36 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "chaindefs.boxed",
+  "meta": {
+    "name": "chaindefs.boxed",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A chain definition that asks for a sandbox",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "ok"
+    ]
+  },
+  "security": {
+    "tier": "sandbox"
+  }
+}

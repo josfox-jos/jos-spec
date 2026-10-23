@@ -1,0 +1,88 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "id": "requires-used-definition",
+  "meta": {
+    "name": "requires-used-definition",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A step that uses a definition with an unsatisfied dependency",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "one": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > requires-used-definition.effect.txt"
+        ]
+      },
+      "needs": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "id": "lib.needs",
+        "meta": {
+          "name": "lib.needs",
+          "version": "1.0.0"
+        },
+        "intention": {
+          "objective": "A library atom that needs a service",
+          "success_criteria": [
+            {
+              "exit": 0
+            }
+          ]
+        },
+        "guardrails": {
+          "limit": {
+            "seconds": 5,
+            "output_bytes": 65536,
+            "retries": 0
+          }
+        },
+        "execution": {
+          "engine": "shell",
+          "run": [
+            "echo",
+            "ok"
+          ]
+        },
+        "requires": [
+          {
+            "kind": "service",
+            "name": "payments"
+          }
+        ]
+      },
+      "two": {
+        "use": "lib.needs@^1.0.0"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "one",
+          "two"
+        ]
+      }
+    }
+  }
+}

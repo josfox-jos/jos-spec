@@ -1,0 +1,35 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "gate.after.step",
+  "meta": {
+    "name": "gate.after.step",
+    "version": "1.0.0"
+  },
+  "orchestration": {
+    "definitions": {
+      "step1": {
+        "type": "shell",
+        "command": "exit 3"
+      },
+      "step2": {
+        "type": "shell",
+        "command": "echo two"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "step1",
+          "step2"
+        ],
+        "gates": {
+          "after-step1": "exit_code == 3",
+          "decide": "human"
+        }
+      }
+    }
+  }
+}

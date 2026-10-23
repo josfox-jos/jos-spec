@@ -1,0 +1,19 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom",
+    "profiles": [
+      "exec-contract/1"
+    ]
+  },
+  "meta": {
+    "name": "with-profile"
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "true"
+    ]
+  },
+  "x-profile-note": "profile members live in schema/profiles/exec-contract-1.schema.json; the core ignores them"
+}

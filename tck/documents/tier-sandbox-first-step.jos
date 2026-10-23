@@ -1,0 +1,74 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "id": "tier-sandbox-first-step",
+  "meta": {
+    "name": "tier-sandbox-first-step",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "The first step asks for a sandbox",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "one": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "atom"
+        },
+        "id": "one",
+        "meta": {
+          "name": "one",
+          "version": "1.0.0"
+        },
+        "intention": {
+          "objective": "A sandbox step",
+          "success_criteria": [
+            {
+              "exit": 0
+            }
+          ]
+        },
+        "guardrails": {
+          "limit": {
+            "seconds": 5,
+            "output_bytes": 65536,
+            "retries": 0
+          }
+        },
+        "execution": {
+          "engine": "shell",
+          "run": [
+            "sh",
+            "-c",
+            "echo effect > tier-sandbox-first-step.effect.txt"
+          ]
+        },
+        "security": {
+          "tier": "sandbox"
+        }
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "one"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "combinators",
+  "meta": {
+    "name": "combinators",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "combinators",
+    "success_criteria": [
+      {
+        "all": [
+          {
+            "stdout_matches": "^hello, \\.jos\\n$"
+          },
+          {
+            "stderr_empty": true
+          }
+        ]
+      },
+      {
+        "any": [
+          {
+            "stdout_contains": "absent"
+          },
+          {
+            "sha256": "sha256:c5bb83a0d3b00b005d9e8581a452632dc88e2443fa5aff887f499e601dc1c221"
+          }
+        ]
+      },
+      {
+        "not": {
+          "exit": 3
+        }
+      },
+      {
+        "all": [
+          "only descriptive",
+          "items"
+        ]
+      }
+    ]
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "hello, .jos"
+    ]
+  }
+}

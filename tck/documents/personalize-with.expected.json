@@ -1,0 +1,63 @@
+{
+  "description": "Two users, one prompt: the same template (local.greet@1.0.0) instantiated with each user's `with` gives two concrete documents with different art_ and different results (output_hash = sha256 of each stdout, \"Hola, Ana\\n\" and \"Hello, Lee\\n\", computed outside the kernels when this vector was written). Covers the templates-with-`with` half of the row; inheritance along the .jos/ chain is covered by the dir-* vectors and user claims in the Capability by the capability group.",
+  "promise": "P40: \"Nano-personalization: two users, same prompt, different result\" (nano-intentions, Jos). 2.0: directory inheritance + user claims in the Capability + templates with `with`. Phase F1.",
+  "promises": [
+    "P40"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.7",
+    "§5.3",
+    "§9.2",
+    "PROMISES.md P40"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "artifact": "art_700d3456a2605c33efe3e9582cd78318d4f5f8720701ef3578027bed9fe01087",
+  "result": {
+    "ok": true,
+    "flow": "main",
+    "steps": [
+      {
+        "step": "ana",
+        "status": "ok",
+        "code": 0
+      },
+      {
+        "step": "lee",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "Hello, Lee\n",
+      "stderr": ""
+    },
+    "receipts": [
+      {
+        "step": "ana",
+        "engine": "shell",
+        "code": 0,
+        "artifact": "art_7dcb7d7486500426e7b09aa7f2f5d89836a78bd67e9aac5f13705a263174c7ee",
+        "output_hash": "sha256:4811029be5dd8b0cf3cfc78f8e081c8cb50c999e63eea0e4ee6e7a26dcb39634"
+      },
+      {
+        "step": "lee",
+        "engine": "shell",
+        "code": 0,
+        "artifact": "art_2aef7e3c207b3ca89b6ab8deff8be9ddad7378c80320421ad99d4927e886e62c",
+        "output_hash": "sha256:64b795b0154302ac6e1b6aecb1f3e29a17d5ac2528d7de5efe37037053b5300e"
+      },
+      {
+        "step": "two-users-one-prompt",
+        "flow": "main",
+        "engine": "jos",
+        "code": 0,
+        "ok": true
+      }
+    ]
+  }
+}

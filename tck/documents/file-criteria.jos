@@ -1,0 +1,31 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "file.criteria",
+  "meta": {
+    "name": "file.criteria",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "file.criteria",
+    "success_criteria": [
+      {
+        "file_exists": "data.txt"
+      },
+      {
+        "file_sha256": {
+          "path": "data.txt",
+          "hash": "40f97f21857707cf396c99fa3be7aa6fdd50816b572060610ea48e0cef722abd"
+        }
+      }
+    ]
+  },
+  "execution": {
+    "cwd": "fixtures",
+    "run": [
+      "true"
+    ]
+  }
+}

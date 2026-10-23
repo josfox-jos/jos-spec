@@ -1,0 +1,24 @@
+{
+  "description": "needs a -> c -> b -> a: the graph is not acyclic, the document is invalid (code 2) in both engines; nothing runs and no ledger is written.",
+  "promises": [
+    "P12"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.4",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/orchestration/definitions: needs form a cycle (a, b, c)"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/orchestration/definitions: needs form a cycle (a, b, c)"
+    ]
+  },
+  "semantic": true
+}

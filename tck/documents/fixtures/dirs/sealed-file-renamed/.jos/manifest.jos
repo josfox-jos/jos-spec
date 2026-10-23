@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-file-renamed",
+  "meta": {
+    "name": "sealed-file-renamed",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sealed folder: A covered file renamed after sealing (same bytes, other path): the path is part "
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sealed-file-renamed.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "say"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:a7a25d714e1be40a594f6322e6cba1d4b917e60b9342b5213982e2880c1fb1a7"
+  }
+}

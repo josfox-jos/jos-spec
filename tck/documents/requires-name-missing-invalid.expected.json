@@ -1,0 +1,17 @@
+{
+  "description": "requires[] entries need kind and name; an entry without name makes the document invalid (code 2).",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": {
+    "valid": false
+  },
+  "code": 2,
+  "result": {
+    "ok": false,
+    "code": 2
+  }
+}

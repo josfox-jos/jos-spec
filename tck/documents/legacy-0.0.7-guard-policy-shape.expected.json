@@ -1,0 +1,26 @@
+{
+  "description": "readiness rc.7 pass 5 F-15: tool_policy and model_policy of a 0.0.7 document are kept with the member rule; a member the schema defines with another shape is code 2 (/model_policy/temperature: maximum).",
+  "promises": [
+    "P3",
+    "P22"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§6.2"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/model_policy/temperature: maximum"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/model_policy/temperature: maximum"
+    ],
+    "receipts": []
+  }
+}

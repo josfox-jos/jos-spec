@@ -1,0 +1,27 @@
+{
+  "description": "File criteria are confined to the run cwd: a path outside it fails.",
+  "promises": [
+    "P17"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.3"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 1,
+  "artifact": "art_ceb20d10fc44ce57ed9997fe7200186d7238fe3fdab720b79403caa6c1809480",
+  "result": {
+    "receipts": [
+      {
+        "criteria": [
+          {
+            "check": "file_exists",
+            "pass": false,
+            "detail": "outside cwd"
+          }
+        ]
+      }
+    ]
+  }
+}

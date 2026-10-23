@@ -1,0 +1,44 @@
+{
+  "description": "all/any/not, stdout_matches (end-of-input $), stderr_empty and sha256 over the output bytes; a combinator with only descriptive children is descriptive.",
+  "promises": [
+    "P17"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.3",
+    "§3.4"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_4562257d183bba3d74b61a797813eab17cc8b9574061c0549f32150c78b55f53",
+  "result": {
+    "ok": true,
+    "receipts": [
+      {
+        "criteria": [
+          {
+            "check": "all",
+            "verdict": "pass",
+            "detail": "2/2 passed"
+          },
+          {
+            "check": "any",
+            "verdict": "pass",
+            "detail": "1/2 passed"
+          },
+          {
+            "check": "not",
+            "verdict": "pass",
+            "detail": "0/1 passed"
+          },
+          {
+            "check": "all",
+            "verdict": "descriptive",
+            "detail": "no evaluable criteria"
+          }
+        ]
+      }
+    ]
+  }
+}

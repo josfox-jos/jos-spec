@@ -1,0 +1,58 @@
+{
+  "description": "Canonical 2.0 atom from F0-PROMPT: exit 0 and stdout contains hello.",
+  "promises": [
+    "P1",
+    "P3",
+    "P18",
+    "P19",
+    "P34"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.1",
+    "§3.4",
+    "§6.8",
+    "§7.2"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "artifact": "art_ab7ce6a74ec67e844d04b1f9f1ca376f94f0c2bf8ddf718f4f8046e5a9b0e947",
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "hello, .jos\n",
+      "stderr": ""
+    },
+    "receipts": [
+      {
+        "attempt": 1,
+        "code": 0,
+        "ok": true,
+        "engine": "shell",
+        "exit": 0,
+        "step": "hello",
+        "output_hash": "sha256:c5bb83a0d3b00b005d9e8581a452632dc88e2443fa5aff887f499e601dc1c221",
+        "timeout": false,
+        "truncated": false,
+        "prev": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "criteria": [
+          {
+            "check": "exit",
+            "verdict": "pass",
+            "pass": true,
+            "detail": "exit 0 (want 0)"
+          },
+          {
+            "check": "stdout_contains",
+            "verdict": "pass",
+            "pass": true,
+            "detail": "found"
+          }
+        ]
+      }
+    ]
+  }
+}

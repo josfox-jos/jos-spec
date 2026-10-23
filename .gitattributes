@@ -1,0 +1,3 @@
+# document-level TCK fixtures are hashed over their exact octets (CRLF and LF): git must never convert their
+# line ends (mirrors the monorepo's root .gitattributes for kernel/tests/conformance/)
+tck/documents/fixtures/legacy-ref/** -text

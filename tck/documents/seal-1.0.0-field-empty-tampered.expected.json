@@ -1,0 +1,20 @@
+{
+  "description": "The same 1.0.0 seal over content that changed afterwards: code 3 before any step (rc.8; neither seal matches).",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §8.1",
+    "SECURITY.md Section 2"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "1.0.0"
+  },
+  "code": 3,
+  "result": {
+    "ok": false,
+    "code": 3,
+    "reason": "integrity: declared hash does not match the computed hash"
+  }
+}

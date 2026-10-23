@@ -1,0 +1,51 @@
+{
+  "description": "rc.8 (F-02): a 0.0.7 guardrails.max_retries is merged into the declared guardrails.limit member by member, never replacing it: limit.seconds (0.5) and limit.cost_usd survive beside the mapped limit.retries, and the supervisor kills the 5 s step and returns 124. Before the fix the mapped {retries: 0} replaced the declared limit and the step ran to completion (code 0).",
+  "promises": [
+    "P3",
+    "P19",
+    "P20"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "document": {
+      "guardrails": {
+        "avoid": [],
+        "limit": {
+          "seconds": 0.5,
+          "cost_usd": 0.01,
+          "retries": 0
+        }
+      }
+    }
+  },
+  "code": 124,
+  "artifact": "art_adffc6527c292f42c59613c08013c3117379ea35c9a1f133c4d1d7e6a0fd55e3",
+  "result": {
+    "ok": false,
+    "code": 124,
+    "steps": [
+      {
+        "step": "main_task",
+        "status": "failed",
+        "code": 124
+      }
+    ],
+    "receipts": [
+      {
+        "code": 124,
+        "timeout": true,
+        "exit": null,
+        "signal": "SIGKILL"
+      },
+      {
+        "code": 124
+      }
+    ]
+  }
+}

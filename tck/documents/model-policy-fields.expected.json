@@ -1,0 +1,18 @@
+{
+  "description": "model_policy routing fields of SPEC-2.0 §6.2 (task_class, model_id pinned, temperature, seed) are part of the core schema.",
+  "promises": [
+    "P22"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.2",
+    "§8.4"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_fa23a9cfac637d7cf6bb6c092bc491629be0e18fc3a53ab46523b579ad740c94",
+  "result": {
+    "ok": true
+  }
+}

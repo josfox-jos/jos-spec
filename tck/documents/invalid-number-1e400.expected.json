@@ -1,0 +1,18 @@
+{
+  "description": "A non-finite number (1e400) is invalid in both engines instead of becoming null in one of them.",
+  "promises": [
+    "P3",
+    "P4"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": false
+  },
+  "code": 2,
+  "result": {
+    "code": 2
+  }
+}

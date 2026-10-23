@@ -1,0 +1,25 @@
+{
+  "description": "An unsatisfied requires entry of the second step refuses the run before the first step starts: one receipt, the refusal; step one never runs and leaves no file (SPEC-2.0 §6.6).",
+  "promises": [
+    "P13",
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/orchestration/definitions/two/requires/0: not satisfied by this runtime (service \"payments\") (SPEC-2.0 §6.6)",
+    "receipts": [
+      {
+        "code": 5,
+        "isolation": "none"
+      }
+    ]
+  }
+}

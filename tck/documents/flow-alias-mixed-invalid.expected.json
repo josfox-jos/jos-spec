@@ -1,0 +1,25 @@
+{
+  "description": "execution.flow and orchestration.flows.main name the same flow twice: mixed spellings, code 2 in validate and run (rc.8).",
+  "promises": [
+    "P5"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.8",
+    "§2.4"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/execution/flow: mixed spellings 'execution.flow' and 'orchestration.flows.main'"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/execution/flow: mixed spellings 'execution.flow' and 'orchestration.flows.main'"
+    ]
+  },
+  "semantic": true
+}

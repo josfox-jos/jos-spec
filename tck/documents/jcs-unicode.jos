@@ -1,0 +1,28 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "jcs.unicode",
+  "meta": {
+    "name": "jcs.unicode",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "Saluda en español — ñandú 🦊"
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  },
+  "x-keys": {
+    "€": 1,
+    "\r": 2,
+    "דּ": 3,
+    "1": 4,
+    "😀": 5,
+    "": 6,
+    "ö": 7
+  }
+}

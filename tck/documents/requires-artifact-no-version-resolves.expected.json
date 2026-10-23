@@ -1,0 +1,17 @@
+{
+  "description": "An artifact entry without version or digest is satisfied when its name resolves; the flow runs (SPEC-2.0 §6.6).",
+  "promises": [
+    "P13"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.6"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0
+  }
+}

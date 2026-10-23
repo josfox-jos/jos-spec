@@ -1,0 +1,17 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "lib.z",
+  "meta": {
+    "name": "z",
+    "version": "1.0.0"
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "LIBRARY-Z"
+    ]
+  }
+}

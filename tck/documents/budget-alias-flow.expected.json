@@ -1,0 +1,28 @@
+{
+  "description": "1.0.0 execution.budget of a flow is read as its guardrails.limit, as for an atom (rc.8): max_duration 300ms bounds the step, which is killed with code 124. rc.7 applied execution.budget to atoms only, and the step ran for its own default of 60 s.",
+  "promises": [
+    "P20"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§6.8"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "1.0.0",
+    "input_version": "1.0.0"
+  },
+  "code": 124,
+  "result": {
+    "ok": false,
+    "code": 124,
+    "steps": [
+      {
+        "step": "slow",
+        "status": "failed",
+        "code": 124
+      }
+    ]
+  },
+  "max_duration_ms": 4000
+}

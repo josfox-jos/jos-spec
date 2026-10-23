@@ -1,0 +1,23 @@
+{
+  "jos": {
+    "version": "1.0.0",
+    "kind": "flow"
+  },
+  "id": "manifest-1.0.0-labels-dotjos",
+  "meta": {
+    "name": "manifest-1.0.0-labels-dotjos",
+    "labels": {
+      "dotjos": "0.2.0"
+    }
+  },
+  "intention": {
+    "objective": "a 1.0.0 folder manifest of kind flow with meta.labels.dotjos: the 1.0.0 exception of SPEC-2.0 9.1"
+  },
+  "orchestration": {
+    "flows": {
+      "main": {
+        "steps": []
+      }
+    }
+  }
+}

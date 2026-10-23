@@ -1,0 +1,16 @@
+{
+  "jos": "2.0.0",
+  "intent": "Print a greeting",
+  "done": [
+    {
+      "exit": 0
+    },
+    {
+      "stdout_contains": "hello"
+    }
+  ],
+  "run": [
+    "echo",
+    "hello, .jos"
+  ]
+}

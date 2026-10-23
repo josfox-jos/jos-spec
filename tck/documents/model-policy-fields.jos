@@ -1,0 +1,29 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "model.policy",
+  "meta": {
+    "name": "model.policy",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "model.policy"
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  },
+  "model_policy": {
+    "task_class": "transform",
+    "model_id": "example-model-2026-01-01",
+    "temperature": 0,
+    "seed": 42,
+    "vendor": "any"
+  },
+  "reproducibility": {
+    "class": "deterministic"
+  }
+}

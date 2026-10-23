@@ -1,0 +1,1304 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/josfox-jos/jos-spec/v2.0.0/schema/core.schema.json",
+  "title": ".jos core document (2.0.0)",
+  "description": "Core schema of a .jos 2.0 document after normalization (SPEC-2.0 §2.4): header, root members (§2.3), atom (§3), kinds (§4), execution fields (§6.8), criteria objects (§3.3). A core kernel validates the normalized document against this schema. Profile members ui, metrics and billing are accepted with their 1.0.0 shape (§2.3).",
+  "$comment": "Core schema of the media type application/vnd.jos+json (version parameter 2.0.0; IANA.md). The normalized form every reference kernel validates after SPEC-2.0 Section 2.4; it contains the registered 1.0.0 schema plus the SPEC-2.0 additions.",
+  "type": "object",
+  "required": [
+    "jos",
+    "meta"
+  ],
+  "properties": {
+    "jos": {
+      "type": "object",
+      "description": "Format header — identifies version and kind",
+      "required": [
+        "version",
+        "kind"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Specification version the document conforms to (semver)",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "examples": [
+            "1.0.0"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "atom",
+            "flow",
+            "service",
+            "persona",
+            "template",
+            "crystal",
+            "directory",
+            "engine"
+          ],
+          "description": "Document kind (SPEC-2.0 §4.1)"
+        },
+        "schema": {
+          "type": "string",
+          "description": "URL to JSON Schema for validation",
+          "format": "uri"
+        },
+        "profiles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*/\\d+$"
+          },
+          "description": "Profiles the document uses, each name/MAJOR (SPEC-2.0 §10)"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "id": {
+      "type": "string",
+      "description": "Reverse-DNS or short name, optionally suffixed @<semver> (SPEC-2.0 §2.7)",
+      "pattern": "^[a-z][a-z0-9.\\-_]*$",
+      "examples": [
+        "com.example.service.revenue-report",
+        "com.example.flow.churn-predictor",
+        "com.example.persona.support-agent"
+      ]
+    },
+    "meta": {
+      "type": "object",
+      "description": "Artifact metadata — name, version, author, description",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable artifact name",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "version": {
+          "type": "string",
+          "description": "Artifact version (semver)",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author name or handle"
+        },
+        "license": {
+          "type": "string",
+          "description": "SPDX license identifier",
+          "examples": [
+            "Apache-2.0",
+            "MIT",
+            "proprietary"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of what this artifact does",
+          "maxLength": 500
+        },
+        "domain": {
+          "type": "string",
+          "description": "Business domain",
+          "examples": [
+            "ai",
+            "devops",
+            "finance",
+            "legal",
+            "security"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "Searchable tags for discovery",
+          "items": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "maxItems": 20,
+          "uniqueItems": true
+        },
+        "labels": {
+          "type": "object",
+          "description": "Key-value labels (Kubernetes-style)",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "intention": {
+      "type": "object",
+      "description": "Behavioral contract — what this artifact aims to accomplish",
+      "properties": {
+        "objective": {
+          "type": "string",
+          "description": "Clear statement of the artifact's goal",
+          "maxLength": 1000
+        },
+        "success_criteria": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/criterion"
+              }
+            }
+          ],
+          "description": "When it is done (SPEC-2.0 §3.3-§3.4). A string alone is a one-element list"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "description": "Execution boundaries — what the artifact must avoid or require",
+      "properties": {
+        "avoid": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Substring or /regex/ patterns; a match against the engine input blocks the launch (code 3)"
+        },
+        "require": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Substring or /regex/ patterns that MUST appear in the output, else ok is false"
+        },
+        "max_cost_per_call": {
+          "type": "number",
+          "description": "Maximum USD cost per LLM call",
+          "minimum": 0,
+          "examples": [
+            0.1,
+            1.0
+          ]
+        },
+        "limit": {
+          "type": "object",
+          "description": "Hard limits enforced by the supervisor (SPEC-2.0 §3.5)",
+          "properties": {
+            "seconds": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Wall-clock limit; exceeded -> killed, code 124"
+            },
+            "output_bytes": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Per-stream output limit; exceeded -> truncated and killed, code 137"
+            },
+            "tokens": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "cost_usd": {
+              "type": "number",
+              "minimum": 0
+            },
+            "retries": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Correction-loop re-runs when ok is false (SPEC-2.0 §3.4)"
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": true
+          }
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "execution": {
+      "type": "object",
+      "description": "Execution bindings — how the runtime should run this artifact",
+      "properties": {
+        "capability": {
+          "type": "string",
+          "description": "Primary capability to invoke"
+        },
+        "inputs": {
+          "type": "object",
+          "description": "Named inputs; for templates, a JSON Schema (SPEC-2.0 §6.8)"
+        },
+        "bindings": {
+          "type": "object",
+          "description": "Protocol bindings",
+          "properties": {
+            "mcp": {
+              "type": "object",
+              "properties": {
+                "server_url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "tools": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "patternProperties": {
+                "^x-": true
+              }
+            },
+            "a2a": {
+              "type": "object",
+              "properties": {
+                "payload_format": {
+                  "type": "string",
+                  "const": ".jos"
+                },
+                "agent_card": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "additionalProperties": false,
+              "patternProperties": {
+                "^x-": true
+              }
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": true
+          }
+        },
+        "flow": {
+          "type": "array",
+          "description": "Flow invocations for kind=flow",
+          "items": {
+            "type": "object",
+            "required": [
+              "invoke"
+            ],
+            "properties": {
+              "invoke": {
+                "type": "string",
+                "description": "Artifact ID to invoke"
+              }
+            },
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": true
+            }
+          }
+        },
+        "budget": {
+          "type": "object",
+          "description": "Execution budget caps",
+          "properties": {
+            "max_cost_usd": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Max USD spend"
+            },
+            "max_tokens": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Max total tokens"
+            },
+            "max_duration": {
+              "type": "string",
+              "description": "Max wall-clock time (e.g. '2m', '30s')"
+            },
+            "max_retries": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Max retry attempts"
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": true
+          }
+        },
+        "engine": {
+          "type": "string",
+          "enum": [
+            "shell",
+            "function",
+            "jos",
+            "llm",
+            "judge",
+            "decompose",
+            "human"
+          ],
+          "description": "Engine class (SPEC-2.0 §6.1); never a vendor or model"
+        },
+        "run": {
+          "oneOf": [
+            {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              },
+              "description": "argv; argv[0] is the program"
+            },
+            {
+              "type": "string",
+              "minLength": 1,
+              "description": "Command line; requires shell: true"
+            }
+          ],
+          "description": "For shell: argv (array) or a command line (string, requires shell: true)"
+        },
+        "shell": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run through /bin/sh -c. Default false"
+        },
+        "cwd": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative to the document location; it MUST resolve inside the document directory (code 3); the processes of a step are confined only under SPEC-2.0 §6.5"
+        },
+        "env": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+          },
+          "description": "Allow-list of environment variable names passed to the engine (default [\"PATH\"])"
+        },
+        "outputs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Names the output(s) of the step"
+        },
+        "on_error": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "fail",
+                "continue",
+                "retry"
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "use"
+              ],
+              "properties": {
+                "use": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false,
+              "patternProperties": {
+                "^x-": true
+              }
+            }
+          ],
+          "description": "Default fail"
+        }
+      },
+      "additionalProperties": false,
+      "if": {
+        "required": [
+          "run"
+        ],
+        "properties": {
+          "run": {
+            "type": "string"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "shell"
+        ],
+        "properties": {
+          "shell": {
+            "const": true
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "orchestration": {
+      "type": "object",
+      "description": "Composition (SPEC-2.0 §5). Validated structurally only by the core kernel; the composition kernel (F1) validates definitions, needs and gates",
+      "properties": {
+        "definitions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "flows": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "steps"
+            ],
+            "properties": {
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "model_policy": {
+      "type": "object",
+      "description": "Model requirements — runtime remaps to cheapest available",
+      "properties": {
+        "preferred": {
+          "type": "string",
+          "description": "Specific model key"
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "economy",
+            "mid",
+            "flagship",
+            "reasoning"
+          ],
+          "description": "Model quality tier"
+        },
+        "vendor": {
+          "type": "string",
+          "description": "Preferred vendor; open enumeration (SPEC-2.0 §1.3)",
+          "examples": [
+            "google",
+            "openai",
+            "anthropic",
+            "any"
+          ]
+        },
+        "fallbacks": {
+          "type": "array",
+          "description": "Ordered fallback model list",
+          "items": {
+            "type": "string"
+          }
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "task_class": {
+          "type": "string",
+          "enum": [
+            "extract",
+            "transform",
+            "generate",
+            "reason",
+            "judge",
+            "plan",
+            "code",
+            "chat"
+          ]
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "enum": [
+              "latest"
+            ]
+          },
+          "description": "Exact model identifier when pinned; 'latest' is invalid"
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "max_cost_usd": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "persona": {
+      "type": "object",
+      "description": "AI agent personality (for kind=persona)",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "BCP-47 language tag",
+          "examples": [
+            "en-US",
+            "es-MX"
+          ]
+        },
+        "tone": {
+          "type": "string",
+          "description": "Communication style",
+          "examples": [
+            "professional",
+            "friendly",
+            "technical"
+          ]
+        },
+        "system_prompt": {
+          "type": "string",
+          "description": "System prompt template or inline text"
+        },
+        "max_sentences": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "greeting": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "tool_policy": {
+      "type": "object",
+      "description": "Controls which tools this artifact can access",
+      "properties": {
+        "allowed": {
+          "type": "array",
+          "description": "Whitelisted tool names",
+          "items": {
+            "type": "string"
+          }
+        },
+        "denied": {
+          "type": "array",
+          "description": "Blacklisted tool names",
+          "items": {
+            "type": "string"
+          }
+        },
+        "require_approval": {
+          "type": "boolean",
+          "description": "Require human-in-the-loop approval for tool calls",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "security": {
+      "type": "object",
+      "description": "Scoped access control",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": [
+            "sandbox",
+            "standard",
+            "privileged"
+          ],
+          "description": "Security tier"
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Required permissions",
+          "items": {
+            "type": "string"
+          },
+          "examples": [
+            [
+              "file:read",
+              "net:outbound",
+              "llm:call"
+            ]
+          ]
+        },
+        "data_class": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "pii"
+          ],
+          "description": "Data classification level"
+        },
+        "require_auth": {
+          "type": "boolean",
+          "default": false
+        },
+        "require_admin": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "description": "What this artifact provides to the runtime",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Capability name"
+          },
+          "version": {
+            "type": "string",
+            "description": "Capability version (semver)"
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": true
+        }
+      }
+    },
+    "requires": {
+      "type": "array",
+      "description": "What this artifact needs from the runtime",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "name"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "mcp-server",
+              "artifact",
+              "service"
+            ],
+            "description": "Dependency kind"
+          },
+          "name": {
+            "type": "string",
+            "description": "Dependency name"
+          },
+          "version": {
+            "type": "string",
+            "description": "Semver constraint"
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^art_[a-f0-9]{64}$",
+            "description": "Content identifier pinning the dependency"
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": true
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "description": "Health probes and lifecycle hooks",
+      "properties": {
+        "health_path": {
+          "type": "string"
+        },
+        "ready_path": {
+          "type": "string"
+        },
+        "interval": {
+          "type": "string"
+        },
+        "on_install": {
+          "type": "string",
+          "description": "Artifact to invoke on install"
+        },
+        "on_remove": {
+          "type": "string",
+          "description": "Artifact to invoke on removal"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "reproducibility": {
+      "type": "object",
+      "description": "Execution determinism classification",
+      "properties": {
+        "class": {
+          "type": "string",
+          "enum": [
+            "deterministic",
+            "bounded",
+            "stochastic"
+          ],
+          "description": "How reproducible are the results?"
+        },
+        "tolerance": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "object",
+              "required": [
+                "metric",
+                "value"
+              ],
+              "properties": {
+                "metric": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false,
+              "patternProperties": {
+                "^x-": true
+              }
+            }
+          ]
+        },
+        "n_runs": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "description": "Cryptographic sealing for tamper detection",
+      "properties": {
+        "hash": {
+          "type": "string",
+          "description": "SHA-256 hash of the artifact (computed with this field empty)",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "signed_by": {
+          "type": "string",
+          "description": "Publisher key ID"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the artifact was sealed"
+        },
+        "signature": {
+          "type": "string",
+          "description": "Detached signature over integrity.hash (SPEC-2.0 §8.1)"
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "ui": {
+      "type": "object",
+      "description": "UI hints — runtime OWNS rendering, artifact declares preferences",
+      "properties": {
+        "icon": {
+          "type": "string",
+          "description": "Emoji or URL"
+        },
+        "color": {
+          "type": "string",
+          "description": "Hex color for card",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "category": {
+          "type": "string"
+        },
+        "card": {
+          "type": "object",
+          "properties": {
+            "layout": {
+              "type": "string",
+              "enum": [
+                "compact",
+                "detailed",
+                "hero"
+              ]
+            },
+            "show_metrics": {
+              "type": "boolean"
+            },
+            "show_cost": {
+              "type": "boolean"
+            },
+            "badge": {
+              "type": "string",
+              "examples": [
+                "NEW",
+                "PRO",
+                "BETA"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": true
+          }
+        },
+        "widget": {
+          "type": "object",
+          "properties": {
+            "position": {
+              "type": "string",
+              "enum": [
+                "bottom-right",
+                "bottom-left",
+                "top-right",
+                "top-left"
+              ]
+            },
+            "auto_open": {
+              "type": "boolean"
+            },
+            "greeting": {
+              "type": "string"
+            },
+            "placeholder": {
+              "type": "string"
+            },
+            "badge_text": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "patternProperties": {
+            "^x-": true
+          }
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "description": "Metrics the runtime should collect",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "help"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "counter",
+              "gauge",
+              "histogram"
+            ]
+          },
+          "help": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "patternProperties": {
+          "^x-": true
+        }
+      }
+    },
+    "billing": {
+      "type": "object",
+      "description": "Marketplace pricing model",
+      "properties": {
+        "model": {
+          "type": "string",
+          "enum": [
+            "free",
+            "usage",
+            "subscription"
+          ],
+          "description": "Pricing model"
+        },
+        "tiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "price_usd",
+              "quota"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "price_usd": {
+                "type": "number",
+                "minimum": 0
+              },
+              "quota": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Calls per month (0=unlimited)"
+              }
+            },
+            "additionalProperties": false,
+            "patternProperties": {
+              "^x-": true
+            }
+          }
+        },
+        "wallet": {
+          "type": "string",
+          "description": "Revenue wallet address"
+        },
+        "cost_cap_daily_usd": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-": true
+      }
+    },
+    "crystal": {
+      "type": "object",
+      "description": "Sealed execution record (SPEC-2.0 §8.3). Required for kind crystal.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "artifact": {
+          "type": "string"
+        },
+        "inputs_hash": {
+          "type": "string"
+        },
+        "ctx_class": {
+          "type": "string"
+        },
+        "engine": {
+          "type": "string"
+        },
+        "model_id": {
+          "type": "string"
+        },
+        "temperature": {
+          "type": "number"
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "output_hash": {
+          "type": "string"
+        },
+        "output_ref": {
+          "type": "string"
+        },
+        "receipt": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "expires": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "key",
+        "artifact",
+        "output_hash"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "patternProperties": {
+    "^x-": true
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "criterion": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Descriptive criterion (SPEC-2.0 §3.3): recorded, never evaluated, never affects ok"
+        },
+        {
+          "type": "object",
+          "description": "Process exit status equals n",
+          "required": [
+            "exit"
+          ],
+          "properties": {
+            "exit": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "stdout contains the substring",
+          "required": [
+            "stdout_contains"
+          ],
+          "properties": {
+            "stdout_contains": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "stdout matches the regular expression",
+          "required": [
+            "stdout_matches"
+          ],
+          "properties": {
+            "stdout_matches": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "stderr is empty",
+          "required": [
+            "stderr_empty"
+          ],
+          "properties": {
+            "stderr_empty": {
+              "const": true
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "A path relative to the run cwd exists",
+          "required": [
+            "file_exists"
+          ],
+          "properties": {
+            "file_exists": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "SHA-256 of a file relative to the run cwd",
+          "required": [
+            "file_sha256"
+          ],
+          "properties": {
+            "file_sha256": {
+              "type": "object",
+              "required": [
+                "path",
+                "hash"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "hash": {
+                  "type": "string",
+                  "pattern": "^(sha256:)?[a-f0-9]{64}$"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Engine structured output validates against a JSON Schema (object) or a schema reference (string)",
+          "required": [
+            "json_schema"
+          ],
+          "properties": {
+            "json_schema": {
+              "type": [
+                "object",
+                "string",
+                "boolean"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "SHA-256 of the engine output bytes",
+          "required": [
+            "sha256"
+          ],
+          "properties": {
+            "sha256": {
+              "type": "string",
+              "pattern": "^(sha256:)?[a-f0-9]{64}$"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Graded by a judge engine (SPEC-2.0 §6.1)",
+          "required": [
+            "judge"
+          ],
+          "properties": {
+            "judge": {
+              "type": "object",
+              "required": [
+                "rubric"
+              ],
+              "properties": {
+                "rubric": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "task_class": {
+                  "const": "judge"
+                },
+                "threshold": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "Every child passes",
+          "required": [
+            "all"
+          ],
+          "properties": {
+            "all": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/criterion"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "At least one child passes",
+          "required": [
+            "any"
+          ],
+          "properties": {
+            "any": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/criterion"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "description": "The child does not pass",
+          "required": [
+            "not"
+          ],
+          "properties": {
+            "not": {
+              "$ref": "#/$defs/criterion"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

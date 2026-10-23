@@ -1,0 +1,10 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "Hyphen inside the pre-release",
+    "version": "1.0.0-rc-1"
+  }
+}

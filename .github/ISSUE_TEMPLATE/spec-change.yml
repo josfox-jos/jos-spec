@@ -1,0 +1,52 @@
+name: Specification change proposal
+description: A normative change to the format (prose, schema, vectors). The items are those of CONTRIBUTING.md.
+labels: [spec, proposal]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What cannot be expressed or verified today, with a minimal `.jos` document.
+    validations:
+      required: true
+  - type: textarea
+    id: normative
+    attributes:
+      label: Proposed normative behavior
+      description: Using the key words of RFC 2119 and RFC 8174 in capitals, and the section of SPECIFICATION.md where it belongs.
+    validations:
+      required: true
+  - type: dropdown
+    id: class
+    attributes:
+      label: Change class (GOVERNANCE.md)
+      options:
+        - Editorial (no version change)
+        - Patch
+        - Minor (new optional member, kind or profile)
+        - Major (documents valid today become invalid)
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility impact
+      description: Affected versions; whether documents that are valid today stay valid (`tools/check-superset.py`); migration.
+    validations:
+      required: true
+  - type: textarea
+    id: security
+    attributes:
+      label: Security considerations
+      description: Sections of SECURITY.md affected, and why.
+    validations:
+      required: true
+  - type: checkboxes
+    id: sync
+    attributes:
+      label: The pull request will contain
+      options:
+        - label: The change to SPECIFICATION.md
+        - label: The change to schema/jos.schema.json and schema/core.schema.json
+        - label: At least one valid and one invalid vector under tests/ for each new MUST, with the reason the invalid one fails
+        - label: A CHANGELOG.md entry

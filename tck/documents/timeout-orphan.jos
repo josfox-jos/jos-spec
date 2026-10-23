@@ -1,0 +1,29 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "orphan"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 1
+    }
+  },
+  "intention": {
+    "success_criteria": [
+      {
+        "exit": 0
+      },
+      {
+        "stdout_contains": "hi"
+      }
+    ]
+  },
+  "execution": {
+    "engine": "shell",
+    "shell": true,
+    "run": "sleep 6 & echo hi"
+  }
+}

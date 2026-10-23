@@ -1,0 +1,17 @@
+{
+  "description": "A json_schema criterion needs structured engine output: unexecutable in F0 (code 5).",
+  "promises": [
+    "P17"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.3"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "artifact": "art_d5037d36086ad0d8ca9d1ad59e1b4d5ac152056521152d0876ed4f65ac0b286a",
+  "result": {
+    "unexecutable": "criterion 'json_schema' requires structured engine output (not available in this kernel)"
+  }
+}

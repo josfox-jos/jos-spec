@@ -1,0 +1,13 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "Both spellings"
+  },
+  "intention": {
+    "objective": "Say it one way",
+    "intent": "and the other"
+  }
+}

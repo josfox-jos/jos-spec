@@ -1,0 +1,20 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "invalid.number.2p53.plus.2.exp",
+  "meta": {
+    "name": "invalid.number.2p53.plus.2.exp",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "invalid.number.2p53.plus.2.exp"
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  },
+  "x-n": 9.007199254740994e15
+}

@@ -1,0 +1,31 @@
+{
+  "description": "readiness rc.7 pass 5 F-14b: a files that is not an array maps nothing and is kept as x-legacy-files; art_ pinned.",
+  "promises": [
+    "P3",
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "document": {
+      "x-legacy-files": "child.jos"
+    }
+  },
+  "code": 0,
+  "artifact": "art_36947799294f81b6f572dd2b4406a19d55956ef1c5743007a71855410fd41bd4",
+  "result": {
+    "ok": true,
+    "code": 0,
+    "steps": [
+      {
+        "step": "main_task",
+        "status": "ok",
+        "code": 0
+      }
+    ]
+  }
+}

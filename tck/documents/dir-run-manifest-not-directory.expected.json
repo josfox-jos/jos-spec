@@ -1,0 +1,25 @@
+{
+  "description": "rc.8 (F-09): a folder D is a .jos only when D/.jos/manifest.jos is a document of kind directory (SPEC-2.0 §9.1). With a manifest of kind atom, `validate D` and `run D` both refuse it with code 2 and the same text, and no step runs (before the fix `run D` executed the manifest).",
+  "run_document": "fixtures/dirs/manifest-not-directory",
+  "promises": [
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/jos/kind: a .jos/ manifest MUST be kind directory"
+    ]
+  },
+  "code": 2,
+  "result": {
+    "ok": false,
+    "code": 2,
+    "errors": [
+      "/jos/kind: a .jos/ manifest MUST be kind directory"
+    ],
+    "receipts": []
+  }
+}

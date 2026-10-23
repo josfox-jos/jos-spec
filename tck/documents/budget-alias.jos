@@ -1,0 +1,23 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "budget.alias",
+  "meta": {
+    "name": "budget.alias",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "budget.alias"
+  },
+  "execution": {
+    "budget": {
+      "max_duration": "300ms"
+    },
+    "run": [
+      "sleep",
+      "5"
+    ]
+  }
+}

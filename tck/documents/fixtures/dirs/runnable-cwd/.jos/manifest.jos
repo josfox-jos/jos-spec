@@ -1,0 +1,14 @@
+{
+  "jos": { "version": "2.0.0", "kind": "directory" },
+  "id": "runnable-folder-cwd",
+  "meta": { "name": "runnable-folder-cwd", "version": "1.0.0" },
+  "intention": {
+    "objective": "Running a folder runs its .jos/manifest.jos with the folder as working directory: the step reads a file that exists only in the folder",
+    "success_criteria": [{ "exit": 0 }, { "stdout_contains": "inside the folder" }]
+  },
+  "guardrails": { "limit": { "seconds": 10, "output_bytes": 4096 } },
+  "orchestration": {
+    "definitions": { "read": { "engine": "shell", "run": ["cat", "marker.txt"] } },
+    "flows": { "main": { "steps": ["read"] } }
+  }
+}

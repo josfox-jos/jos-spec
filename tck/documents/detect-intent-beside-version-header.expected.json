@@ -1,0 +1,26 @@
+{
+  "description": "rc.7 R2, detection order rows (3) and (4): a header that declares a 2. version names the canonical form, so a root `intent` beside it is an unknown root member (code 2), never read as the 1.1.0 short form (which would make this document a valid atom).",
+  "promises": [
+    "P3",
+    "P5"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.3",
+    "§2.4"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/: additional property 'intent'"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/: additional property 'intent'"
+    ],
+    "receipts": []
+  }
+}

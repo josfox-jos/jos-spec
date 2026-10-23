@@ -1,0 +1,26 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "widen.root",
+  "meta": {
+    "name": "widen.root",
+    "labels": {
+      "dotjos": "0.2.0",
+      "parent": "jos.monorepo"
+    }
+  },
+  "security": {
+    "permissions": [
+      "engine:shell"
+    ]
+  },
+  "orchestration": {
+    "flows": {
+      "main": {
+        "steps": []
+      }
+    }
+  }
+}

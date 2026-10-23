@@ -1,0 +1,17 @@
+{
+  "description": "A short-form duration must be a string or a number.",
+  "promises": [
+    "P1"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": false
+  },
+  "code": 2,
+  "result": {
+    "code": 2
+  }
+}

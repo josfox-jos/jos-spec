@@ -1,0 +1,17 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "pal-out"
+  },
+  "execution": {
+    "run": [
+      "cat"
+    ],
+    "inputs": {
+      "data": "jos://storage/../outside.txt"
+    }
+  }
+}

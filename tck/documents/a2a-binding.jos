@@ -1,0 +1,35 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "a2a-contract",
+  "meta": {
+    "name": "a2a-contract",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "Be the contract an A2A peer receives: the binding travels inside the sealed document",
+    "success_criteria": [
+      {
+        "exit": 0
+      },
+      {
+        "stdout_contains": "contract"
+      }
+    ]
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "contract"
+    ],
+    "bindings": {
+      "a2a": {
+        "payload_format": ".jos",
+        "agent_card": "https://agents.example/.well-known/agent.json"
+      }
+    }
+  }
+}

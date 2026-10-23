@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sealed-nested-edited",
+  "meta": {
+    "name": "sealed-nested-edited",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A sealed folder: A covered file three levels down changed after sealing: nothing runs (code 3)."
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "say": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sealed-nested-edited.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "say"
+        ]
+      }
+    }
+  },
+  "integrity": {
+    "hash": "sha256:360d9a6ec92daa30c9756e43cb7553f7abf43e564ca7b091276847dfc05695e2"
+  }
+}

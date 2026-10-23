@@ -1,0 +1,24 @@
+{
+  "description": "A standard step runs, and its receipt records that this runtime did not confine it (SPEC-2.0 §6.5, §7.2).",
+  "promises": [
+    "P19",
+    "P34"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5",
+    "SPEC-2.0 §7.2"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "code": 0,
+    "receipts": [
+      {
+        "isolation": "none"
+      }
+    ]
+  }
+}

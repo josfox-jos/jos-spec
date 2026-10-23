@@ -1,0 +1,71 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "id": "flow3",
+  "meta": {
+    "name": "flow3",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "Three atoms joined by needs: fetch a word, shape it from the context, report",
+    "success_criteria": [
+      {
+        "stdout_contains": "done"
+      }
+    ]
+  },
+  "guardrails": {
+    "avoid": [
+      "rm -rf"
+    ],
+    "limit": {
+      "seconds": 10
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "fetch": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "alpha"
+        ],
+        "as": "raw"
+      },
+      "shape": {
+        "engine": "shell",
+        "run": [
+          "cat"
+        ],
+        "needs": [
+          "fetch"
+        ],
+        "with": {
+          "word": "{{ raw }}"
+        }
+      },
+      "report": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "done"
+        ],
+        "needs": [
+          "fetch",
+          "shape"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "fetch",
+          "shape",
+          "report"
+        ]
+      }
+    }
+  }
+}

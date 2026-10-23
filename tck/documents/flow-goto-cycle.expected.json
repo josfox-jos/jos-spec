@@ -1,0 +1,20 @@
+{
+  "description": "goto targets a step that already ran: it would create a cycle in the executed path; invalid flow (code 2) before anything runs.",
+  "promises": [
+    "P12"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.5"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 2,
+  "result": {
+    "errors": [
+      "/orchestration/flows/main/gates/second/on_fail: goto:first targets a step that runs before second (a cycle in the executed path)"
+    ]
+  }
+}

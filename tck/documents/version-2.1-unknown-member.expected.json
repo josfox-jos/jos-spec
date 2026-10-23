@@ -1,0 +1,22 @@
+{
+  "description": "A member that a later minor version adds makes the document invalid for a 2.0 reader (closed core, SPEC-2.0 §2.2, §2.3): never ignored silently.",
+  "promises": [
+    "P5"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.2"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/: additional property 'sandbox_policy'"
+    ]
+  },
+  "code": 2,
+  "result": {
+    "errors": [
+      "/: additional property 'sandbox_policy'"
+    ]
+  },
+  "artifact": null
+}

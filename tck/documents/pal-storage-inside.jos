@@ -1,0 +1,28 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "pal-in"
+  },
+  "intention": {
+    "objective": "Read a PAL storage route under the run's cwd",
+    "success_criteria": [
+      {
+        "exit": 0
+      },
+      {
+        "stdout_contains": "\"inputs\""
+      }
+    ]
+  },
+  "execution": {
+    "run": [
+      "cat"
+    ],
+    "inputs": {
+      "data": "jos://storage/fixtures/data.txt"
+    }
+  }
+}

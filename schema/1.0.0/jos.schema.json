@@ -1,0 +1,458 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/josfox-jos/jos-spec/main/schema/jos.schema.json",
+  "title": ".jos Artifact",
+  "description": "JOS v1.0.0 — Portable, declarative, sealed AI execution contract. The canonical unit of the .jos ecosystem.",
+  "type": "object",
+  "required": ["jos", "meta"],
+  "additionalProperties": false,
+  "properties": {
+    "jos": {
+      "type": "object",
+      "description": "Format header — identifies version and kind",
+      "required": ["version", "kind"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Specification version (semver)",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "examples": ["1.0.0"]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Artifact kind — determines execution semantics",
+          "enum": ["atom", "flow", "service", "persona"]
+        },
+        "schema": {
+          "type": "string",
+          "description": "URL to JSON Schema for validation",
+          "format": "uri"
+        }
+      },
+      "additionalProperties": false
+    },
+    "id": {
+      "type": "string",
+      "description": "Reverse-DNS identifier (e.g. ai.foxtana.service.revenue-report)",
+      "pattern": "^[a-z][a-z0-9.\\-_]*$",
+      "examples": ["ai.foxtana.service.revenue-report", "ai.foxtana.flow.churn-predictor", "ai.foxtana.persona.support-agent"]
+    },
+    "meta": {
+      "type": "object",
+      "description": "Artifact metadata — name, version, author, description",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable artifact name",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "version": {
+          "type": "string",
+          "description": "Artifact version (semver)",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author name or handle"
+        },
+        "license": {
+          "type": "string",
+          "description": "SPDX license identifier",
+          "examples": ["Apache-2.0", "MIT", "proprietary"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of what this artifact does",
+          "maxLength": 500
+        },
+        "domain": {
+          "type": "string",
+          "description": "Business domain",
+          "examples": ["ai", "devops", "finance", "legal", "security"]
+        },
+        "tags": {
+          "type": "array",
+          "description": "Searchable tags for discovery",
+          "items": { "type": "string", "maxLength": 32 },
+          "maxItems": 20,
+          "uniqueItems": true
+        },
+        "labels": {
+          "type": "object",
+          "description": "Key-value labels (Kubernetes-style)",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "intention": {
+      "type": "object",
+      "description": "Behavioral contract — what this artifact aims to accomplish",
+      "properties": {
+        "objective": {
+          "type": "string",
+          "description": "Clear statement of the artifact's goal",
+          "maxLength": 1000
+        },
+        "success_criteria": {
+          "oneOf": [
+            { "type": "string", "description": "Single success criterion" },
+            { "type": "array", "items": { "type": "string" }, "description": "Multiple success criteria" }
+          ],
+          "description": "Measurable conditions for success"
+        }
+      },
+      "additionalProperties": false
+    },
+    "guardrails": {
+      "type": "object",
+      "description": "Execution boundaries — what the artifact must avoid or require",
+      "properties": {
+        "avoid": {
+          "type": "array",
+          "description": "Things to avoid during execution",
+          "items": { "type": "string" }
+        },
+        "require": {
+          "type": "array",
+          "description": "Things that must be present in output",
+          "items": { "type": "string" }
+        },
+        "max_cost_per_call": {
+          "type": "number",
+          "description": "Maximum USD cost per LLM call",
+          "minimum": 0,
+          "examples": [0.10, 1.00]
+        }
+      },
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "array",
+      "description": "What this artifact provides to the runtime",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string", "description": "Capability name" },
+          "version": { "type": "string", "description": "Capability version (semver)" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "requires": {
+      "type": "array",
+      "description": "What this artifact needs from the runtime",
+      "items": {
+        "type": "object",
+        "required": ["kind", "name"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["mcp-server", "artifact", "service"],
+            "description": "Dependency kind"
+          },
+          "name": { "type": "string", "description": "Dependency name" },
+          "version": { "type": "string", "description": "Semver constraint" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tool_policy": {
+      "type": "object",
+      "description": "Controls which tools this artifact can access",
+      "properties": {
+        "allowed": {
+          "type": "array",
+          "description": "Whitelisted tool names",
+          "items": { "type": "string" }
+        },
+        "denied": {
+          "type": "array",
+          "description": "Blacklisted tool names",
+          "items": { "type": "string" }
+        },
+        "require_approval": {
+          "type": "boolean",
+          "description": "Require human-in-the-loop approval for tool calls",
+          "default": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "execution": {
+      "type": "object",
+      "description": "Execution bindings — how the runtime should run this artifact",
+      "properties": {
+        "capability": { "type": "string", "description": "Primary capability to invoke" },
+        "inputs": {
+          "type": "object",
+          "description": "Input parameter mapping",
+          "additionalProperties": { "type": "string" }
+        },
+        "bindings": {
+          "type": "object",
+          "description": "Protocol bindings",
+          "properties": {
+            "mcp": {
+              "type": "object",
+              "properties": {
+                "server_url": { "type": "string", "format": "uri" },
+                "tools": { "type": "array", "items": { "type": "string" } }
+              },
+              "additionalProperties": false
+            },
+            "a2a": {
+              "type": "object",
+              "properties": {
+                "payload_format": { "type": "string", "const": ".jos" },
+                "agent_card": { "type": "string", "format": "uri" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "flow": {
+          "type": "array",
+          "description": "Flow invocations for kind=flow",
+          "items": {
+            "type": "object",
+            "required": ["invoke"],
+            "properties": {
+              "invoke": { "type": "string", "description": "Artifact ID to invoke" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "budget": {
+          "type": "object",
+          "description": "Execution budget caps",
+          "properties": {
+            "max_cost_usd": { "type": "number", "minimum": 0, "description": "Max USD spend" },
+            "max_tokens": { "type": "integer", "minimum": 0, "description": "Max total tokens" },
+            "max_duration": { "type": "string", "description": "Max wall-clock time (e.g. '2m', '30s')" },
+            "max_retries": { "type": "integer", "minimum": 0, "description": "Max retry attempts" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "orchestration": {
+      "type": "object",
+      "description": "Multi-step flow orchestration",
+      "properties": {
+        "definitions": {
+          "type": "object",
+          "description": "Named step definitions",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": { "type": "string", "enum": ["shell", "jos", "http"] },
+              "command": { "type": "string" },
+              "artifact": { "type": "string" },
+              "url": { "type": "string", "format": "uri" },
+              "description": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "flows": {
+          "type": "object",
+          "description": "Named flows composed of steps",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["steps"],
+            "properties": {
+              "description": { "type": "string" },
+              "steps": { "type": "array", "items": { "type": "string" } },
+              "gates": {
+                "type": "object",
+                "additionalProperties": { "type": "string" }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "model_policy": {
+      "type": "object",
+      "description": "Model requirements — runtime remaps to cheapest available",
+      "properties": {
+        "preferred": { "type": "string", "description": "Specific model key" },
+        "tier": {
+          "type": "string",
+          "enum": ["economy", "mid", "flagship", "reasoning"],
+          "description": "Model quality tier"
+        },
+        "vendor": {
+          "type": "string",
+          "enum": ["google", "openai", "anthropic", "any"],
+          "description": "Preferred vendor"
+        },
+        "fallbacks": {
+          "type": "array",
+          "description": "Ordered fallback model list",
+          "items": { "type": "string" }
+        },
+        "temperature": { "type": "number", "minimum": 0, "maximum": 2 },
+        "max_output_tokens": { "type": "integer", "minimum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "persona": {
+      "type": "object",
+      "description": "AI agent personality (for kind=persona)",
+      "properties": {
+        "language": { "type": "string", "description": "BCP-47 language tag", "examples": ["en_US", "es_MX"] },
+        "tone": { "type": "string", "description": "Communication style", "examples": ["professional", "friendly", "technical"] },
+        "system_prompt": { "type": "string", "description": "System prompt template or inline text" },
+        "max_sentences": { "type": "integer", "minimum": 1 },
+        "greeting": { "type": "string" },
+        "rules": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "ui": {
+      "type": "object",
+      "description": "UI hints — runtime OWNS rendering, artifact declares preferences",
+      "properties": {
+        "icon": { "type": "string", "description": "Emoji or URL" },
+        "color": { "type": "string", "description": "Hex color for card", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "category": { "type": "string" },
+        "card": {
+          "type": "object",
+          "properties": {
+            "layout": { "type": "string", "enum": ["compact", "detailed", "hero"] },
+            "show_metrics": { "type": "boolean" },
+            "show_cost": { "type": "boolean" },
+            "badge": { "type": "string", "examples": ["NEW", "PRO", "BETA"] }
+          },
+          "additionalProperties": false
+        },
+        "widget": {
+          "type": "object",
+          "properties": {
+            "position": { "type": "string", "enum": ["bottom-right", "bottom-left", "top-right", "top-left"] },
+            "auto_open": { "type": "boolean" },
+            "greeting": { "type": "string" },
+            "placeholder": { "type": "string" },
+            "badge_text": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "metrics": {
+      "type": "array",
+      "description": "Metrics the runtime should collect",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "help"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string", "enum": ["counter", "gauge", "histogram"] },
+          "help": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "billing": {
+      "type": "object",
+      "description": "Marketplace pricing model",
+      "properties": {
+        "model": {
+          "type": "string",
+          "enum": ["free", "usage", "subscription"],
+          "description": "Pricing model"
+        },
+        "tiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "price_usd", "quota"],
+            "properties": {
+              "name": { "type": "string" },
+              "price_usd": { "type": "number", "minimum": 0 },
+              "quota": { "type": "integer", "minimum": 0, "description": "Calls per month (0=unlimited)" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "wallet": { "type": "string", "description": "Revenue wallet address" },
+        "cost_cap_daily_usd": { "type": "number", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "security": {
+      "type": "object",
+      "description": "Scoped access control",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": ["sandbox", "standard", "privileged"],
+          "description": "Security tier"
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Required permissions",
+          "items": { "type": "string" },
+          "examples": [["file:read", "net:outbound", "llm:call"]]
+        },
+        "data_class": {
+          "type": "string",
+          "enum": ["public", "internal", "pii"],
+          "description": "Data classification level"
+        },
+        "require_auth": { "type": "boolean", "default": false },
+        "require_admin": { "type": "boolean", "default": false }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "type": "object",
+      "description": "Health probes and lifecycle hooks",
+      "properties": {
+        "health_path": { "type": "string" },
+        "ready_path": { "type": "string" },
+        "interval": { "type": "string" },
+        "on_install": { "type": "string", "description": "Artifact to invoke on install" },
+        "on_remove": { "type": "string", "description": "Artifact to invoke on removal" }
+      },
+      "additionalProperties": false
+    },
+    "integrity": {
+      "type": "object",
+      "description": "Cryptographic sealing for tamper detection",
+      "properties": {
+        "hash": {
+          "type": "string",
+          "description": "SHA-256 hash of the artifact (computed with this field empty)",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "signed_by": { "type": "string", "description": "Publisher key ID" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When the artifact was sealed" }
+      },
+      "additionalProperties": false
+    },
+    "reproducibility": {
+      "type": "object",
+      "description": "Execution determinism classification",
+      "properties": {
+        "class": {
+          "type": "string",
+          "enum": ["deterministic", "bounded", "stochastic"],
+          "description": "How reproducible are the results?"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

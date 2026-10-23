@@ -1,0 +1,17 @@
+{
+  "description": "Canonical hash over numbers that JSON writers serialize in different ways (RFC 8785 §3.2.2.3 rules). rc.8: 9007199254740993, which a double does not keep, left this vector (it is invalid, vector invalid-number-2p53-plus-1); ±2^53 are kept, so the art_ changed.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §8.1"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 0,
+  "artifact": "art_336daacd3e8f84890c5bdbdc0d8e5160c154f09d41a9b30cf5b6e203c829b091",
+  "result": {
+    "ok": true
+  }
+}

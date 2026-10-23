@@ -1,0 +1,28 @@
+{
+  "description": "The closed regex dialect (I4) rejects a repeating quantifier applied to a group that contains a quantifier or an alternation ((a+)+, (a*)*, (x|xy)*): such patterns backtrack exponentially. A ? on a group with a quantifier inside stays valid.",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "spec-deviations I4"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/guardrails/avoid/0: regex",
+      "/guardrails/avoid/1: regex",
+      "/intention/success_criteria/0/stdout_matches: regex"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/guardrails/avoid/0: regex",
+      "/guardrails/avoid/1: regex",
+      "/intention/success_criteria/0/stdout_matches: regex"
+    ]
+  },
+  "semantic": true
+}

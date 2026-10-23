@@ -1,0 +1,25 @@
+{
+  "description": "readiness rc.7 pass 5 F-21 (R5 of DIFF-rc7): the members of a definition are closed (Section 5.1); a short-form member inside a definition of a 2.0 document (done) is code 2.",
+  "promises": [
+    "P1",
+    "P9"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/orchestration/definitions/say: additional property 'done'"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/orchestration/definitions/say: additional property 'done'"
+    ],
+    "receipts": []
+  }
+}

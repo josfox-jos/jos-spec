@@ -1,0 +1,36 @@
+{
+  "description": "The effective tier is sandbox when any level of the .jos/ chain declares it; a child cannot remove it (SPEC-2.0 §6.5, §9.2). A runtime that confines the sandbox step runs the document instead (alternative).",
+  "promises": [
+    "P19",
+    "P21"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5",
+    "SPEC-2.0 §9.2"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": ".jos/manifest.jos: /security/tier: sandbox not available (SPEC-2.0 §6.5)"
+  },
+  "document": "fixtures/dirs/sandbox-parent/child.jos",
+  "alternatives": [
+    {
+      "code": 0,
+      "result": {
+        "ok": true,
+        "code": 0,
+        "receipts": [
+          {
+            "isolation": "sandbox"
+          }
+        ]
+      },
+      "claim": "sandbox"
+    }
+  ]
+}

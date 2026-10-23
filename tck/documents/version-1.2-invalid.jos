@@ -1,0 +1,33 @@
+{
+  "jos": {
+    "version": "1.2.0",
+    "kind": "atom"
+  },
+  "id": "version-1-2-invalid",
+  "meta": {
+    "name": "version-1-2-invalid",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A 1.y version other than 1.0.x is invalid",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "ok"
+    ]
+  }
+}

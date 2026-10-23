@@ -1,0 +1,41 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "requires-service-digest-unsatisfied",
+  "meta": {
+    "name": "requires-service-digest-unsatisfied",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A pinned service dependency the runtime does not provide",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "ok"
+    ]
+  },
+  "requires": [
+    {
+      "kind": "service",
+      "name": "payments",
+      "version": "^2.0.0",
+      "digest": "art_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ]
+}

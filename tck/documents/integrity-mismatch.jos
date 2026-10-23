@@ -1,0 +1,22 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "integrity",
+  "meta": {
+    "name": "integrity",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "integrity"
+  },
+  "execution": {
+    "run": [
+      "true"
+    ]
+  },
+  "integrity": {
+    "hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  }
+}

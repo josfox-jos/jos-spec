@@ -1,0 +1,44 @@
+{
+  "description": "An atom that declares execution.bindings.a2a (payload_format .jos, agent_card): both engines keep the binding in the validated document, seal it into art_ (pinned here and recomputed by the runner's independent serializer) and run the document as the contract. Covers the F1 row's format half; the agent-to-agent envelope (specs/kernel/envelope/0.1.0) has no kernel code and no vectors file yet.",
+  "promise": "P7: \"A2A is the transport; `.jos` is the contract carried over A2A\" (1.0.0, 0.0.7 §6). 2.0: `execution.bindings.a2a` kept; the agent-to-agent envelope is a kernel spec. Phase F1.",
+  "promises": [
+    "P7"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.4",
+    "PROMISES.md P7"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0",
+    "document": {
+      "execution": {
+        "bindings": {
+          "a2a": {
+            "payload_format": ".jos",
+            "agent_card": "https://agents.example/.well-known/agent.json"
+          }
+        }
+      }
+    }
+  },
+  "code": 0,
+  "artifact": "art_501513310eee39483fe20b381429a02e67b57eed41dd58d9edc46e46bdd79a34",
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "contract\n",
+      "stderr": ""
+    },
+    "receipts": [
+      {
+        "step": "a2a-contract",
+        "engine": "shell",
+        "code": 0,
+        "artifact": "art_501513310eee39483fe20b381429a02e67b57eed41dd58d9edc46e46bdd79a34",
+        "output_hash": "sha256:3dd7131bf1c92dd2a9c9eb03891f3fbaf0321ef9ef019be728d8cc29225d6928"
+      }
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "A reference with a semver range"
+  },
+  "orchestration": {
+    "definitions": {
+      "caret": {
+        "use": "rt.tool@^0.3.1"
+      },
+      "tilde": {
+        "use": "rt.tool@~1.2.0"
+      },
+      "exact": {
+        "use": "rt.tool@0.3.1",
+        "needs": [
+          "caret",
+          "tilde"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "caret",
+          "tilde",
+          "exact"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "description": "readiness rc.7 pass 5 F-17a: a 0.0.7 guardrails.timeout_ms that is not a number is code 2 at /guardrails/timeout_ms (the time limit it states is never set aside: before the fix it moved to guardrails.x-legacy-timeout_ms and the step ran without a time limit).",
+  "promises": [
+    "P3",
+    "P19",
+    "P20"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.5"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/guardrails/timeout_ms: limit.seconds: type"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/guardrails/timeout_ms: limit.seconds: type"
+    ],
+    "receipts": []
+  }
+}

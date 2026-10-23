@@ -1,0 +1,36 @@
+{
+  "description": "readiness rc.7 pass 5 F-17d: a root x- member of a 0.0.7 document is extension data kept as written (Section 2.5); only root members the 0.0.7 row does not list and that are not x- members move to x-legacy-<member>. art_ pinned.",
+  "promises": [
+    "P3",
+    "P5",
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§2.5"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "document": {
+      "x-note": {
+        "kept": "as written"
+      },
+      "x-legacy-id_jos": "legacy-0.0.7-root-x-member"
+    }
+  },
+  "code": 0,
+  "artifact": "art_06a50a72e5750a573013a144045124c33a695da72ec6f393bb0fbd9043223b4c",
+  "result": {
+    "ok": true,
+    "code": 0,
+    "steps": [
+      {
+        "step": "main_task",
+        "status": "ok",
+        "code": 0
+      }
+    ]
+  }
+}

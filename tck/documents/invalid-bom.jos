@@ -1,0 +1,47 @@
+﻿{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "hello",
+  "meta": {
+    "name": "hello",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "Print a greeting and exit cleanly",
+    "success_criteria": [
+      {
+        "exit": 0
+      },
+      {
+        "stdout_contains": "hello"
+      }
+    ]
+  },
+  "guardrails": {
+    "avoid": [
+      "rm -rf",
+      "curl",
+      "wget"
+    ],
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "hello, .jos"
+    ],
+    "on_error": "fail",
+    "env": [
+      "PATH",
+      "HOME"
+    ],
+    "cwd": "."
+  }
+}

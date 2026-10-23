@@ -1,0 +1,43 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "sandbox-dir",
+  "meta": {
+    "name": "sandbox-dir",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A folder that asks for a sandbox and has a flow"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "one": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > sandbox-dir.effect.txt"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "one"
+        ]
+      }
+    }
+  },
+  "security": {
+    "tier": "sandbox"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "widen.child",
+  "meta": {
+    "name": "widen.child",
+    "labels": {
+      "dotjos": "0.2.0",
+      "parent": "widen.root"
+    }
+  },
+  "security": {
+    "permissions": [
+      "engine:shell",
+      "net:egress:*"
+    ]
+  },
+  "orchestration": {
+    "flows": {
+      "main": {
+        "steps": []
+      }
+    }
+  }
+}

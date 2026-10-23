@@ -1,0 +1,26 @@
+{
+  "description": "A decimal literal whose value an IEEE 754 double does not keep (it reads back as 1) is invalid (code 2), never rounded silently into the hash (rc.8).",
+  "promises": [
+    "P4",
+    "P6"
+  ],
+  "spec": [
+    "SECURITY.md Section 2 item 6",
+    "SPEC-2.0 §2.1",
+    "§8.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/x-n/1: number 1.00000000000000001 is not exactly representable as an IEEE 754 double"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/x-n/1: number 1.00000000000000001 is not exactly representable as an IEEE 754 double"
+    ]
+  }
+}

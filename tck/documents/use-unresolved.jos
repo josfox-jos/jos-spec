@@ -1,0 +1,8 @@
+{
+  "jos": "2.0.0",
+  "use": "ai.example.translate@1.0.0",
+  "with": {
+    "text": "hola"
+  },
+  "as": "out"
+}

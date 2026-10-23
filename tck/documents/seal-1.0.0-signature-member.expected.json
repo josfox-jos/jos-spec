@@ -1,0 +1,19 @@
+{
+  "description": "A 1.0.0 document that carries integrity.signature is sealed as SPEC-2.0 §8.1 says (hash and signature \"\"): a hash computed over the signature is code 3 (rc.8: the 1.0.0 seal is read only without a signature member).",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §8.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "1.0.0"
+  },
+  "code": 3,
+  "result": {
+    "ok": false,
+    "code": 3,
+    "reason": "integrity: declared hash does not match the computed hash"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "orchestration_contract": {
+    "version": "0.0.7",
+    "mode": "sync"
+  },
+  "id_jos": "detect-0.0.7-before-string-jos",
+  "meta": {
+    "name": "detect-0.0.7-before-string-jos",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "detect-0.0.7-before-string-jos",
+    "success_criteria": "the step runs"
+  },
+  "guardrails": {
+    "avoid": []
+  },
+  "orchestration": {
+    "definitions": {
+      "main_task": {
+        "type": "shell",
+        "description": "step",
+        "command": "echo ok"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "main_task"
+        ]
+      }
+    }
+  },
+  "security": {
+    "type": "open",
+    "permissions": [],
+    "integrity_ref": null
+  },
+  "jos": "jos run atom"
+}

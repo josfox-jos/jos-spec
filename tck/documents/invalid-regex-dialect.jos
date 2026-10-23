@@ -1,0 +1,31 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "rx"
+  },
+  "guardrails": {
+    "avoid": [
+      "/(a)|b\\1/",
+      "/(?i)ECHO/",
+      "/x{/",
+      "/[^]zz/"
+    ]
+  },
+  "intention": {
+    "success_criteria": [
+      {
+        "stdout_matches": "^b{,3}$"
+      }
+    ]
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "b"
+    ]
+  }
+}

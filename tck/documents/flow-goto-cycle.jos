@@ -1,0 +1,41 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "goto-cycle"
+  },
+  "orchestration": {
+    "definitions": {
+      "first": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "first"
+        ]
+      },
+      "second": {
+        "engine": "shell",
+        "run": [
+          "false"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "first",
+          "second"
+        ],
+        "gates": {
+          "second": {
+            "kind": "auto",
+            "expr": "ok",
+            "on_fail": "goto:first"
+          }
+        }
+      }
+    }
+  }
+}

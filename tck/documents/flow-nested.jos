@@ -1,0 +1,71 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "outer"
+  },
+  "orchestration": {
+    "definitions": {
+      "inner": {
+        "jos": {
+          "version": "2.0.0",
+          "kind": "flow"
+        },
+        "id": "local.inner",
+        "meta": {
+          "name": "inner",
+          "version": "1.0.0"
+        },
+        "orchestration": {
+          "definitions": {
+            "one": {
+              "engine": "shell",
+              "run": [
+                "echo",
+                "one"
+              ]
+            },
+            "two": {
+              "engine": "shell",
+              "run": [
+                "echo",
+                "two"
+              ]
+            }
+          },
+          "flows": {
+            "main": {
+              "steps": [
+                "one",
+                "two"
+              ]
+            }
+          }
+        }
+      },
+      "first": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "first"
+        ]
+      },
+      "sub": {
+        "use": "local.inner@1.0.0",
+        "needs": [
+          "first"
+        ]
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "first",
+          "sub"
+        ]
+      }
+    }
+  }
+}

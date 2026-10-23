@@ -1,0 +1,16 @@
+{
+  "description": "A folder without .jos/manifest.jos is not a document: running it exits with code 2 and runs nothing.",
+  "run_document": "fixtures/dirs/no-manifest",
+  "promises": [
+    "P15"
+  ],
+  "spec": [
+    "SPEC-2.0 §9.1"
+  ],
+  "validate": null,
+  "code": 2,
+  "result": {
+    "ok": false,
+    "code": 2
+  }
+}

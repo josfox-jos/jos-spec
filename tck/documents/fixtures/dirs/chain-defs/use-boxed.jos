@@ -1,0 +1,49 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "id": "use-boxed",
+  "meta": {
+    "name": "use-boxed",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A flow that uses a sandbox definition of its chain",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 10,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "orchestration": {
+    "definitions": {
+      "one": {
+        "engine": "shell",
+        "run": [
+          "sh",
+          "-c",
+          "echo effect > use-boxed.effect.txt"
+        ]
+      },
+      "two": {
+        "use": "chaindefs.boxed@^1.0.0"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "one",
+          "two"
+        ]
+      }
+    }
+  }
+}

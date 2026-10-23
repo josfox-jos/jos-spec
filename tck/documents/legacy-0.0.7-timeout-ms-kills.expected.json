@@ -1,0 +1,40 @@
+{
+  "description": "readiness rc.7 pass 5 F-17: a 0.0.7 guardrails.timeout_ms of 1500 is guardrails.limit.seconds 1.5 of the normalized document, and the supervisor kills the 5 s step: code 124.",
+  "promises": [
+    "P3",
+    "P19",
+    "P20"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "document": {
+      "guardrails": {
+        "avoid": [],
+        "limit": {
+          "seconds": 1.5
+        }
+      }
+    }
+  },
+  "code": 124,
+  "artifact": "art_7821d39c64f45898541989b23526c56b82ff833e8a11f7df09e01aa975aac114",
+  "result": {
+    "ok": false,
+    "code": 124,
+    "steps": [
+      {
+        "step": "main_task",
+        "status": "failed",
+        "code": 124
+      }
+    ],
+    "reason": "step \"main_task\" did not pass"
+  }
+}

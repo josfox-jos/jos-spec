@@ -1,0 +1,36 @@
+{
+  "jos": {
+    "version": "2.1.0",
+    "kind": "atom"
+  },
+  "id": "version-2-1-unknown-member",
+  "meta": {
+    "name": "version-2-1-unknown-member",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A member added by a later minor version makes the document invalid for a 2.0 reader",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "ok"
+    ]
+  },
+  "sandbox_policy": {
+    "level": "strict"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "description": "A document of a major version the reader does not implement is invalid (SPEC-2.0 §2.2).",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.2"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/jos/version: unsupported version \"3.0.0\""
+    ]
+  },
+  "code": 2,
+  "result": {
+    "errors": [
+      "/jos/version: unsupported version \"3.0.0\""
+    ]
+  },
+  "artifact": null
+}

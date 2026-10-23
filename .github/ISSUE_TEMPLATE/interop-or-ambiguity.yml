@@ -1,0 +1,23 @@
+name: Interoperability problem or ambiguity
+description: Two conforming implementations disagree, or the text admits two readings
+labels: [interop]
+body:
+  - type: input
+    id: section
+    attributes:
+      label: Section of SPECIFICATION.md, SECURITY.md or CONFORMANCE.md
+    validations:
+      required: true
+  - type: textarea
+    id: document
+    attributes:
+      label: Minimal document that shows the problem
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: readings
+    attributes:
+      label: The readings or behaviors observed, and which implementation shows each
+    validations:
+      required: true

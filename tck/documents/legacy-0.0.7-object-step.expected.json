@@ -1,0 +1,22 @@
+{
+  "description": "0.0.7 document whose flow step is an object instead of a string: rejected with code 2 in both engines before anything runs (SPEC-2.0 §2.4; its normalization is scheduled for 2.1).",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/orchestration/flows/main/steps/0: type"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/orchestration/flows/main/steps/0: type"
+    ]
+  }
+}

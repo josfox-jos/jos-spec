@@ -1,0 +1,32 @@
+{
+  "description": "Patterns inside the dialect compile identically in both engines.",
+  "promises": [
+    "P4",
+    "P17"
+  ],
+  "spec": [
+    "SPEC-2.0 \u00a73.5",
+    "\u00a77.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "code": 0,
+    "ok": true,
+    "receipts": [
+      {
+        "attempt": 1,
+        "code": 0,
+        "ok": true,
+        "timeout": false,
+        "truncated": false,
+        "exit": 0
+      }
+    ]
+  },
+  "artifact": "art_b1dcdb6934446aee2df25a3c5611e790c66f0a8c4d8807e24312b2bb8705893d"
+}

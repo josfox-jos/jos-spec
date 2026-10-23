@@ -1,0 +1,48 @@
+{
+  "description": "Short-form use is normalized to orchestration.definitions.main; F1 resolves it inline, through the .jos/ chain and the library, finds nothing and reports code 5 at the step (never a silent fallback).",
+  "promises": [
+    "P10"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§5.3",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "short",
+    "document": {
+      "orchestration": {
+        "definitions": {
+          "main": {
+            "use": "ai.example.translate@1.0.0",
+            "with": {
+              "text": "hola"
+            },
+            "as": "out"
+          }
+        },
+        "flows": {
+          "main": {
+            "steps": [
+              "main"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "code": 5,
+  "artifact": "art_25b169d74cb9581247b054f81393f7b2868ecfbb000feafb8261b9a5e5fad4c7",
+  "result": {
+    "unexecutable": "unresolved use \"ai.example.translate@1.0.0\": not found inline, in the .jos/ chain or in the library",
+    "flow": "main",
+    "steps": [
+      {
+        "step": "main",
+        "status": "failed",
+        "code": 5
+      }
+    ]
+  }
+}

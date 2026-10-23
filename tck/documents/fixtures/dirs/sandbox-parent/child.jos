@@ -1,0 +1,33 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "sandbox-child",
+  "meta": {
+    "name": "sandbox-child",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A child that declares no tier inherits sandbox from its chain",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "echo",
+      "ok"
+    ]
+  }
+}

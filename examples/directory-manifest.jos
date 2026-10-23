@@ -1,0 +1,32 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "chain",
+  "meta": {
+    "name": "chain",
+    "labels": {
+      "dotjos": "0.2.0",
+      "parent": "jos.monorepo"
+    }
+  },
+  "intention": {
+    "objective": "Conformance fixture: a .jos/ level with flows, an avoid list and a time limit"
+  },
+  "guardrails": {
+    "avoid": [
+      "forbidden-word"
+    ],
+    "limit": {
+      "seconds": 7
+    }
+  },
+  "orchestration": {
+    "flows": {
+      "main": {
+        "steps": []
+      }
+    }
+  }
+}

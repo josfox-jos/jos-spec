@@ -1,0 +1,81 @@
+{
+  "description": "0.0.7 document (legacy 13-key shape, from dev-jos-4.2.0-alpha.1/examples): normalized by the legacy mapping; its 1.0.0 shell step runs through a shell (F1, rc.3; F0 reported code 5).",
+  "promises": [
+    "P3",
+    "P9"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§1.2"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "0.0.7",
+    "input_version": "0.0.7",
+    "document": {
+      "jos": {
+        "version": "2.0.0",
+        "kind": "flow"
+      },
+      "x-legacy-version": "0.0.7",
+      "x-legacy-orchestration_contract": {
+        "version": "0.0.7",
+        "mode": "sync"
+      },
+      "meta": {
+        "name": "legacy-demo",
+        "version": "1.0.0",
+        "x-legacy-type": "atom"
+      },
+      "guardrails": {
+        "avoid": [],
+        "limit": {
+          "retries": 1,
+          "seconds": 5
+        }
+      },
+      "security": {
+        "x-legacy-type": "open",
+        "permissions": [],
+        "x-legacy-integrity_ref": null
+      },
+      "x-legacy-id_jos": "atom-legacy-demo",
+      "x-legacy-x_run_params": {
+        "timeout": 5000,
+        "retry_on_failure": false
+      },
+      "x-legacy-adaptive_ai": {
+        "learning_enabled": false
+      },
+      "x-legacy-artifacts": {
+        "description": "Legacy 13-key artifact."
+      },
+      "x-legacy-jos": {
+        "open": "jos run atom",
+        "supports": [
+          "@josfox/jos"
+        ]
+      },
+      "x-legacy-$schema": "https://josfox.ai/schemas/jos-0.0.7.json",
+      "x-legacy-capabilities": [],
+      "x-legacy-files": []
+    }
+  },
+  "code": 0,
+  "artifact": "art_7529e9950642f5f1e76338b6d49ec4ccea6d92deee56028d89a6222fbd4a0c62",
+  "result": {
+    "ok": true,
+    "flow": "main",
+    "steps": [
+      {
+        "step": "greet",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "hello from v0.0.7\n",
+      "stderr": ""
+    }
+  }
+}

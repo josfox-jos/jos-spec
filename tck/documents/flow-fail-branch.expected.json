@@ -1,0 +1,47 @@
+{
+  "description": "b fails: its dependent c is skipped, the unrelated branch d still runs (SPEC-2.0 §5.4); the flow is not done (code 1).",
+  "promises": [
+    "P12",
+    "P18"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.4",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 1,
+  "result": {
+    "ok": false,
+    "reason": "step \"b\" did not pass",
+    "steps": [
+      {
+        "step": "a",
+        "status": "ok",
+        "code": 0
+      },
+      {
+        "step": "b",
+        "status": "failed",
+        "code": 1
+      },
+      {
+        "step": "c",
+        "status": "skipped",
+        "reason": "needs b"
+      },
+      {
+        "step": "d",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "d\n",
+      "stderr": ""
+    }
+  }
+}

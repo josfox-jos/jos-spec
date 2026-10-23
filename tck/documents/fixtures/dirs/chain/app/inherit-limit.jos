@@ -1,0 +1,21 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "inherit-limit"
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 30,
+      "retries": 1
+    }
+  },
+  "execution": {
+    "run": [
+      "echo",
+      "x"
+    ]
+  }
+}

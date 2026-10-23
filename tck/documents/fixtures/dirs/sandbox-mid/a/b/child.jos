@@ -1,0 +1,34 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "id": "sandbox-mid-child",
+  "meta": {
+    "name": "sandbox-mid-child",
+    "version": "1.0.0"
+  },
+  "intention": {
+    "objective": "A child below a sandbox middle level",
+    "success_criteria": [
+      {
+        "exit": 0
+      }
+    ]
+  },
+  "guardrails": {
+    "limit": {
+      "seconds": 5,
+      "output_bytes": 65536,
+      "retries": 0
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "sh",
+      "-c",
+      "echo effect > sandbox-mid-child.effect.txt"
+    ]
+  }
+}

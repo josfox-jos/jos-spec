@@ -1,0 +1,162 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "directory"
+  },
+  "id": "example.spec.release",
+  "meta": {
+    "name": "spec-release-node",
+    "version": "0.1.0",
+    "author": "JOSFOX LLC",
+    "license": "Apache-2.0",
+    "description": "The .jos node of a specification release: it holds the flows, documents, runs, ledger, authorization, templates and business notes of the effort, and the context it reads. Children of this folder may only restrict what it allows.",
+    "domain": "standards",
+    "tags": [
+      "module:flows",
+      "module:docs",
+      "module:runs",
+      "module:ledger",
+      "module:auth",
+      "module:templates",
+      "module:business",
+      "module:custom"
+    ],
+    "labels": {
+      "dotjos": "0.2.0",
+      "parent": "example.monorepo",
+      "custom": "sources",
+      "ticket": "1000001",
+      "subtype_in_ticket": "vnd.example+json",
+      "ticket_deadline": "2030-01-31",
+      "targets": "local",
+      "deadline": "2030-01-31",
+      "plan": "docs/PLAN.md",
+      "rubric": "docs/RUBRIC.md v1.0"
+    }
+  },
+  "intention": {
+    "objective": "Produce a specification release (normative text, JSON Schema, vectors, examples and registration template) that a reviewer can verify offline, with every decision recorded and every claim measured",
+    "success_criteria": [
+      "SC1 ticket: the owner answers the registration ticket before the deadline",
+      "SC2 name: one subtype in every document (specification, schema, examples, template)",
+      "SC3 compatibility: every valid 1.0.0 document validates against the 2.0 schema",
+      "SC4 superset: the 2.0 schema covers every root member of 1.0.0",
+      "SC5 pipeline: flows/review-flow.jos runs with independent reviewers and scorers",
+      "SC6 evidence: every finding has a rubric check identifier and a verified citation",
+      "SC7 repository: the specification repository passes the quality gate",
+      "SC8 vectors: tests/ holds valid and invalid vectors for every MUST",
+      "SC9 example: the specification includes this pipeline as an example",
+      "SC10 directory: the specification defines kind directory and its inheritance",
+      "SC11 published: the specification repository has the tag of the version",
+      "SC12 runtime: the command-line runtime reads 0.0.7, 1.0.0 and 2.0",
+      "SC13 examples: examples/ run without network access",
+      "SC14 template: one name, one encoding, one fragment syntax in the template",
+      "SC15 tag: the published specification and every $id cite a tag",
+      "SC16 name: the subtype is not already in the registry",
+      "SC17 security: declarative active content, injection, resource limits and privacy are covered",
+      "SC18 fragments and extension: JSON Pointer with an example",
+      "SC19 calibration: tests/seeded/ holds at least 5 packages with one known defect each",
+      "SC20 offline sources: sources/ holds the cited RFCs and the registry snapshot"
+    ]
+  },
+  "guardrails": {
+    "avoid": [
+      "writing to, pushing to or commenting on the public repository",
+      "sending mail on behalf of the owner without approval",
+      "changing the subtype of an open ticket without a written decision",
+      "breaking valid 1.0.0 documents",
+      "using a single model vendor for reviewers and responder",
+      "accepting a confidence verdict without a reproducible run",
+      "secrets or keys in any file of this folder",
+      "a scorer from the vendor of the responder",
+      "confidence reported by a model about itself: only the rubric counts"
+    ],
+    "require": [
+      "every run of the pipeline leaves runs/<run-id>/ with inputs, outputs and hashes",
+      "every change to the normative text passes schema validation before commit",
+      "the documents in sources/ are read only; corrections go to a new file",
+      "human approval at every gate marked human",
+      "local commits with the prefix feat(spec) or docs(spec)",
+      "the dated plan lives in docs/PLAN.md and is updated after every session"
+    ],
+    "max_cost_per_call": 5
+  },
+  "orchestration": {
+    "definitions": {
+      "review-flow": {
+        "type": "jos",
+        "artifact": "flows/review-flow.jos",
+        "description": "Review flow with independent reviewers, a responder and scorers"
+      },
+      "validate-schema": {
+        "type": "shell",
+        "command": "python3 -I tools/validate-jos.py --schema schema/1.0.0/jos.schema.json .jos/manifest.jos",
+        "description": "Validate this node and its flows against 1.0.0"
+      },
+      "repository-gate": {
+        "type": "shell",
+        "command": "node tools/guard-repo-jos.mjs --dir . --perfil spec --json",
+        "description": "Repository quality gate"
+      }
+    },
+    "flows": {
+      "release": {
+        "description": "Full path from the sources to the submission",
+        "steps": [
+          "validate-schema",
+          "review-flow",
+          "repository-gate"
+        ],
+        "gates": {
+          "validate-schema": "exit 0",
+          "review-flow": "confidence >= 0.99 AND fatal == 0 AND critical == 0",
+          "repository-gate": "score == 100",
+          "decide": "human"
+        }
+      }
+    }
+  },
+  "model_policy": {
+    "tier": "reasoning",
+    "vendor": "any",
+    "fallbacks": [
+      "anthropic",
+      "openai",
+      "google"
+    ]
+  },
+  "tool_policy": {
+    "allowed": [
+      "read",
+      "write:.jos/**",
+      "shell:python3",
+      "shell:node",
+      "git:commit"
+    ],
+    "denied": [
+      "git:push",
+      "mail:send",
+      "http:post"
+    ],
+    "require_approval": true
+  },
+  "security": {
+    "tier": "standard",
+    "permissions": [
+      "spec:edit",
+      "pipeline:run",
+      "run:read"
+    ],
+    "data_class": "internal",
+    "require_auth": true,
+    "require_admin": false
+  },
+  "reproducibility": {
+    "class": "bounded"
+  },
+  "integrity": {
+    "hash": "sha256:006dd020986bead26ba371d9de32ecd3e9f8d4fbc2f8ee185f3170d06258f392",
+    "signed_by": "",
+    "timestamp": "2026-10-13T00:00:00Z"
+  }
+}

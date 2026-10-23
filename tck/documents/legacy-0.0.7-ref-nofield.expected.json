@@ -1,0 +1,28 @@
+{
+  "description": "The manifest has no artifact_sha256: refused (4.1.0: TypeError, exit 1).",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/nofield/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 3,
+  "result": {
+    "reason": "integrity_ref: artifact_sha256 is not 64 lowercase hexadecimal digits",
+    "output": null,
+    "receipts": [
+      {
+        "ok": false,
+        "code": 3,
+        "reason": "integrity_ref: artifact_sha256 is not 64 lowercase hexadecimal digits"
+      }
+    ]
+  }
+}

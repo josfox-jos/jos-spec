@@ -1,0 +1,27 @@
+{
+  "description": "use resolved in the local library (--library): the highest version in range wins (1.0.0 over 0.9.0).",
+  "run_args": [
+    "--library",
+    "fixtures/library"
+  ],
+  "promises": [
+    "P10",
+    "P28"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.3"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "hi from the library\n",
+      "stderr": ""
+    }
+  }
+}

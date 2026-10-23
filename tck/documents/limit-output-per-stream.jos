@@ -1,0 +1,19 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "per-stream"
+  },
+  "guardrails": {
+    "limit": {
+      "output_bytes": 1000
+    }
+  },
+  "execution": {
+    "engine": "shell",
+    "shell": true,
+    "run": "head -c 600 /dev/zero; head -c 500 /dev/zero >&2"
+  }
+}

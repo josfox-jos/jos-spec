@@ -1,0 +1,30 @@
+{
+  "description": "use resolved inline: a definition of the same document with that id and version; the step is a jos step that re-enters run().",
+  "promises": [
+    "P10",
+    "P28"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.3"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "steps": [
+      {
+        "step": "main",
+        "status": "ok",
+        "code": 0
+      }
+    ],
+    "output": {
+      "stdout": "hi from inline\n",
+      "stderr": ""
+    }
+  }
+}

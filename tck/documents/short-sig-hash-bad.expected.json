@@ -1,0 +1,29 @@
+{
+  "description": "A wrong 1.1.0 sig.hash is an integrity mismatch: code 3.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §3.5",
+    "§7.1"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "short",
+    "input_version": "1.1.0"
+  },
+  "code": 3,
+  "result": {
+    "code": 3,
+    "receipts": [
+      {
+        "attempt": 1,
+        "code": 3,
+        "ok": false,
+        "timeout": false,
+        "truncated": false
+      }
+    ]
+  },
+  "artifact": "art_56ad79aba97553e251ff5bb9f4d75dc2d07628154284ff304daf5da78bdf6e6f"
+}

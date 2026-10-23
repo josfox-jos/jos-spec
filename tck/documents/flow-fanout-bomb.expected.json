@@ -1,0 +1,23 @@
+{
+  "description": "Nested composition 8 levels deep with 6 occurrences per level (1.6 million steps in 1 KB per file): the step count of the whole run is computed before anything executes and exceeds MAX_STEPS_PER_RUN (10,000): code 4, nothing launched.",
+  "document": "fixtures/bomb/L0.jos",
+  "promises": [
+    "P20"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.1",
+    "§7.1",
+    "Capability 0.1.0 §3"
+  ],
+  "validate": {
+    "valid": true,
+    "form": "2.0",
+    "input_version": "2.0.0"
+  },
+  "code": 4,
+  "max_duration_ms": 5000,
+  "result": {
+    "ok": false,
+    "reason": "budget: the run would execute more than 10000 steps (MAX_STEPS_PER_RUN)"
+  }
+}

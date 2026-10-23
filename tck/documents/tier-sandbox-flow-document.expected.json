@@ -1,0 +1,28 @@
+{
+  "description": "A step inherits sandbox from the flow that contains it; the runtime cannot confine it and refuses before step one, which leaves no file (SPEC-2.0 §6.5, code 5). A runtime that confines the step runs it instead (alternative).",
+  "promises": [
+    "P19"
+  ],
+  "spec": [
+    "SPEC-2.0 §6.5"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "result": {
+    "code": 5,
+    "ok": false,
+    "unexecutable": "/security/tier: sandbox not available (SPEC-2.0 §6.5)"
+  },
+  "alternatives": [
+    {
+      "code": 0,
+      "result": {
+        "ok": true,
+        "code": 0
+      },
+      "claim": "sandbox"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "description": "artifact_sha256 in uppercase hex: refused, the comparison is exact (4.1.0: mismatch).",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/upper/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "0.0.7"
+  },
+  "code": 3,
+  "result": {
+    "reason": "integrity_ref: artifact_sha256 is not 64 lowercase hexadecimal digits",
+    "output": null,
+    "receipts": [
+      {
+        "ok": false,
+        "code": 3,
+        "reason": "integrity_ref: artifact_sha256 is not 64 lowercase hexadecimal digits"
+      }
+    ]
+  }
+}

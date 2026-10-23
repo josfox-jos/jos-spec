@@ -1,0 +1,41 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "as-proto"
+  },
+  "orchestration": {
+    "definitions": {
+      "a": {
+        "engine": "shell",
+        "run": [
+          "echo",
+          "P"
+        ],
+        "as": "__proto__"
+      },
+      "b": {
+        "engine": "shell",
+        "run": [
+          "cat"
+        ],
+        "needs": [
+          "a"
+        ],
+        "with": {
+          "x": "{{ __proto__ }}"
+        }
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "a",
+          "b"
+        ]
+      }
+    }
+  }
+}

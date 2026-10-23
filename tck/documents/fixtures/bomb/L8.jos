@@ -1,0 +1,15 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "atom"
+  },
+  "meta": {
+    "name": "L8"
+  },
+  "execution": {
+    "engine": "shell",
+    "run": [
+      "true"
+    ]
+  }
+}

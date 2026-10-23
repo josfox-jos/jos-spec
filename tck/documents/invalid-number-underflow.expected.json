@@ -1,0 +1,26 @@
+{
+  "description": "A literal that underflows to 0 is invalid (code 2): its value is not the value of the double it reads as (rc.8).",
+  "promises": [
+    "P4",
+    "P6"
+  ],
+  "spec": [
+    "SECURITY.md Section 2 item 6",
+    "SPEC-2.0 §2.1",
+    "§8.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/x-n/tiny: number 1e-400 is not exactly representable as an IEEE 754 double"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/x-n/tiny: number 1e-400 is not exactly representable as an IEEE 754 double"
+    ]
+  }
+}

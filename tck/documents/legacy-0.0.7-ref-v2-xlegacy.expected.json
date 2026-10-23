@@ -1,0 +1,30 @@
+{
+  "description": "A 2.0 document with security.x-legacy-integrity_ref naming a manifest that does not match: an x- member is not interpreted (SPEC-2.0 §2.5), it runs.",
+  "promises": [
+    "P6"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.4",
+    "§7.1",
+    "PLAN-INTEGRITY-REF-0.0.7 §4.1"
+  ],
+  "document": "fixtures/legacy-ref/v2-xlegacy/ref.jos",
+  "validate": {
+    "valid": true,
+    "form": "2.0"
+  },
+  "code": 0,
+  "result": {
+    "ok": true,
+    "output": {
+      "stdout": "v2 ran\n",
+      "stderr": ""
+    }
+  },
+  "ledger_kinds": [
+    "admit",
+    "start",
+    "receipt",
+    "end"
+  ]
+}

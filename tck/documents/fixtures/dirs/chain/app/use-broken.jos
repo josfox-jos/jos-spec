@@ -1,0 +1,23 @@
+{
+  "jos": {
+    "version": "2.0.0",
+    "kind": "flow"
+  },
+  "meta": {
+    "name": "use-broken"
+  },
+  "orchestration": {
+    "definitions": {
+      "main": {
+        "use": "chain.broken@1.0.0"
+      }
+    },
+    "flows": {
+      "main": {
+        "steps": [
+          "main"
+        ]
+      }
+    }
+  }
+}

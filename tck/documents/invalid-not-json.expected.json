@@ -1,0 +1,22 @@
+{
+  "description": "A file that is not JSON is invalid (code 2).",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 §2.1"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/: document is not valid JSON"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "errors": [
+      "/: document is not valid JSON"
+    ]
+  }
+}

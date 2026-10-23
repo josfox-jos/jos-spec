@@ -1,0 +1,18 @@
+{
+  "description": "An empty argv[0] is invalid, never an uncaught exception.",
+  "promises": [
+    "P3"
+  ],
+  "spec": [
+    "SPEC-2.0 \u00a73.5",
+    "\u00a77.1"
+  ],
+  "validate": {
+    "valid": false
+  },
+  "code": 2,
+  "result": {
+    "code": 2
+  },
+  "semantic": true
+}

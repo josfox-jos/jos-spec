@@ -1,0 +1,24 @@
+{
+  "description": "One step gated twice, as `step1` and as `after-step1`: code 2 in validate and in run, with the same pointer (rc.8).",
+  "promises": [
+    "P5"
+  ],
+  "spec": [
+    "SPEC-2.0 §5.5"
+  ],
+  "validate": {
+    "valid": false,
+    "errors": [
+      "/orchestration/flows/main/gates/after-step1: the gate of step \"step1\" is declared twice (\"step1\" and \"after-step1\")"
+    ]
+  },
+  "code": 2,
+  "artifact": null,
+  "result": {
+    "code": 2,
+    "errors": [
+      "/orchestration/flows/main/gates/after-step1: the gate of step \"step1\" is declared twice (\"step1\" and \"after-step1\")"
+    ]
+  },
+  "semantic": true
+}

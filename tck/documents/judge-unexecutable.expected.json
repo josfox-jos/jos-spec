@@ -1,0 +1,20 @@
+{
+  "description": "A judge criterion needs a judge engine: valid but unexecutable in F0 (code 5), never faked.",
+  "promises": [
+    "P2",
+    "P17"
+  ],
+  "spec": [
+    "SPEC-2.0 §1.2",
+    "§3.3",
+    "§7.4"
+  ],
+  "validate": {
+    "valid": true
+  },
+  "code": 5,
+  "artifact": "art_6e4c1684fe07fb7c5672c5ecf0bee53f9ca5cad4d487c658f085042a80ada736",
+  "result": {
+    "unexecutable": "criterion 'judge' requires a judge engine (not available in this kernel)"
+  }
+}
