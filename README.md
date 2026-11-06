@@ -16,7 +16,7 @@ A `.jos` document is data. It is not executable code. Parsing or validating it M
 
 ## Try it
 
-From the root of this repository. The first two commands need only Python 3 and the `jsonschema` package. The others run the reference kernel `jos-core`, which each release candidate attaches as `josfox-jos-core-<version>.tgz` (the version and the sha256 of every attached implementation are in `tck/reference-implementations.lock.json`; the kernel is not yet on the npm registry). Download the release assets into a folder, here `assets/`. Nothing needs network access after that.
+From the root of this repository. The first two commands need only Python 3 and the `jsonschema` package. The others run the reference kernel `jos-core`, which each release candidate attaches as `josfox-jos-core-<version>.tgz` (the version and the sha256 of every attached implementation are in `tck/reference-implementations.lock.json`; the same kernel is published as `@josfox/jos-core` on npm and `jos-core` on PyPI, 2.1.0 at the time of writing). Download the release assets into a folder, here `assets/`. Nothing needs network access after that.
 
 ```
 python3 -I tck/run.py                                                                        # every valid vector validates, every invalid one fails
@@ -154,9 +154,9 @@ Schema validation does not replace the checks that [CONFORMANCE.md](CONFORMANCE.
 
 | Implementation | Where | Scope | Status |
 |---|---|---|---|
-| `jos-core`, reference kernel, JavaScript | attached to each release candidate as an npm tarball (`josfox-jos-core-<version>.tgz`, hash in `tck/reference-implementations.lock.json`); not yet on the npm registry | validate, normalize, run atoms and flows (`shell`, `jos`), `use`/`with`/`as`, templates, directories (a folder runs its `.jos/manifest.jos`), receipts and per-run ledger; 0 dependencies; no network | 2.0.0 release candidate; passes every document-level vector |
-| `jos-core`, reference kernel, Python | maintained with the JavaScript kernel | same scope; same `art_` and same results on every vector (`tck/compare-implementations.py`: 0 differences) | 2.0.0 release candidate |
-| `@josfox/jos`, command-line runtime | npm | `jos run`, `jos validate`; reads 2.0.0, 1.1.0, 1.0.0 and 0.0.7 through the reference kernel | 5.0.0 release candidate, not yet on the npm registry; the published 4.1.0 reads only the earlier 0.0.7 draft |
+| `jos-core`, reference kernel, JavaScript | attached to each release as an npm tarball (`josfox-jos-core-<version>.tgz`, hash in `tck/reference-implementations.lock.json`); published on npm as [`@josfox/jos-core`](https://www.npmjs.com/package/@josfox/jos-core), 2.1.0 | validate, normalize, run atoms and flows (`shell`, `jos`), `use`/`with`/`as`, templates, directories (a folder runs its `.jos/manifest.jos`), receipts and per-run ledger; 0 dependencies; no network | 2.0.0 measured; 2.1.0 published, implements 2.0.0 plus additive 2.1 members documented in its own CHANGELOG; passes every document-level vector |
+| `jos-core`, reference kernel, Python | maintained with the JavaScript kernel; published on PyPI as [`jos-core`](https://pypi.org/project/jos-core/), 2.1.0 | same scope; same `art_` and same results on every vector (`tck/compare-implementations.py`: 0 differences) | 2.0.0 release candidate |
+| `@josfox/jos`, command-line runtime | npm | `jos run`, `jos validate`; reads 2.0.0, 1.1.0, 1.0.0 and 0.0.7 through the reference kernel | 6.0.1 published on npm; `jos serve` exposes the same kernel over HTTP, MCP and A2A |
 | `JOSFOX.josfox-jos`, editor extension | Visual Studio Marketplace | version 1.0.0 recognizes `.jos` files (syntax colouring, snippets); its validator checks an earlier YAML shape, not this specification | published; not listed in `IANA.md` |
 
 Conformance of an implementation is claimed against `CONFORMANCE.md` with the vectors of `tests/` and `tck/documents/`.
@@ -178,3 +178,24 @@ The specification text is licensed under CC BY 4.0 and the JSON Schema, test vec
 Patents: no known patent claims on the format. The change controller's non-assertion covenant is in `LICENSE-SPEC.md` (decided 2026-10-15).
 
 Security reports: jos@josfox.cloud.
+
+## Implementations and related repositories (informative)
+
+This section is informative and is not part of the specification.
+
+**The open standard**
+- [Community start page: install, first document, paths for every reader](https://github.com/josfox-jos/jos)
+- [Landing page source for jos.mx](https://github.com/josfox-jos/jos.mx)
+- [Draft 0.0.7, the historical predecessor of this specification](https://github.com/josfox-ai/jos-format-spec)
+- [A2A protocol fork for the `.jos` binding](https://github.com/josfox-ai/A2A.jos)
+- [A2A JavaScript SDK fork for the `.jos` binding](https://github.com/josfox-ai/.jos-a2a-js)
+
+**Products by the change controller (JOSFOX LLC)**
+- [JOSFOX AI deep-link helper](https://github.com/josfox-ai/josfoxai-deep-link)
+- [Reserved deep-link name under josfox-jos](https://github.com/josfox-jos/josfoxai-deep-link)
+
+## Public platform documentation — expanded ecosystem
+
+For readers of `josfox-jos/jos-spec`, distribution status per platform is documented in one public hub; its existence does not imply a downloadable artifact or verified host compatibility.
+
+- For readers of `josfox-jos/jos-spec`, [jos-omni](https://github.com/josfox-ai/jos-omni) provides distribution documentation hub.
